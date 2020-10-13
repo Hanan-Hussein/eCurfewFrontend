@@ -1,0 +1,39 @@
+* {
+  margin-top: 30px;
+}
+
+.pdf {
+  margin: 6px;
+  color: red;
+  border: 1px solid #333333;
+}
+
+.excel {
+  margin: 6px;
+  color: green;
+  border: 1px solid #333333;
+}
+
+table.dataTable thead th {
+  color: #fff;
+  background-color: #0EADD4;
+  
+}
+table[style]{
+  width: 100% !important;
+}
+table table-custom dt-responsive dataTable no-footer{
+  margin-left: 0px !important;
+  
+}
+
+/* table.datatable td:nth-child(even) { background-color: yellow; } */
+
+input[type=radio], input[type=checkbox] {
+  margin-top: 0;
+}
+
+
+div[style*="box-sizing: content-box;width: 1061px;padding-right: 0px;"]  { 
+  width: 100% !important;
+ }

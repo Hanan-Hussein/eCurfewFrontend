@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-lg-4"></div>
+  <div class="col-lg-8">
+    <button mat-raised-button class="delete pull-right"
+            (click)="deleteConfirm()">{{deleteLabel}}</button>
+    <button mat-raised-button class="decline pull-right"
+            (click)="declineConfirm()"><span *ngIf="declineLabel.length > 0"><i class="fa fa-times" aria-hidden="true"></i></span> {{declineLabel}}</button>
+    <button mat-raised-button (click)="approveConfirm()" class="approve pull-right"><span *ngIf="approveLabel.length > 0"><i class="fa fa-check" aria-hidden="true"></i></span> {{approveLabel}}</button>
+    <a routerLink="/{{addLink}}" [skipLocationChange]="false" mat-raised-button
+       class="add pull-right"><span *ngIf="addLabel.length > 0"><i class="fa fa-plus" aria-hidden="true"></i></span> {{addLabel}}</a>
+    <a routerLink="/{{approveLink}}" [skipLocationChange]="false" mat-raised-button
+       class="approve pull-right"><span *ngIf="approveLinkLabel.length > 0"><i class="fa fa-check" aria-hidden="true"></i></span> {{approveLinkLabel}}</a>
+  </div>
+</div>

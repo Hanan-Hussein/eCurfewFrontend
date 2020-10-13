@@ -1,0 +1,59 @@
+<div class="page page-core">
+  <div class="container w-420 p-35 mt-40 text-center opt-form">
+    <img src="assets/gcomlogo.png" style="height:20%;"/>
+    
+    <section>
+      <h2 class="trynot text-login">Enter OTP</h2>
+      <h6 class="trynotr text-login">Your OTP will expire in one minute</h6>
+      <h6 class="trynotr text-login">(1 min)</h6>
+      <form (ngSubmit)="onVerify(otpForm)" #otpForm="ngForm" role="form"
+            class="form-validation">
+        <div class="form-group col-md-12">
+          <label for="email">Otp  <span class="my_span"> *</span></label>
+          <input type="password" class="form-control" [(ngModel)]="model.otp" name="otp"
+                 required="required" pattern="^[0-9]{6}$" id="no-paste" #otp="ngModel">
+          <div *ngIf="(otp.dirty || otp.touched) && otp.invalid" class="text-danger">
+                  <span class="invalid-input" *ngIf="otp.errors.required">
+                    One Time Password (OTP) is required
+                  </span>
+            <span class="invalid-input" *ngIf="otp.errors.pattern">
+                    Enter the 6 digit code sent to your email
+                  </span>
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <button [disabled]="!otpForm.form.valid" class="save-button btn-block" mat-stroked-button type="submit">
+            Continue
+          </button>
+        </div>
+        <div class="form-group col-md-12">
+          <button type="button" (click)="resendOtp()" mat-stroked-button class="resend-button btn-block">
+            Resend OTP
+          </button>
+          <a routerLink="/login" class="trynot pull-left to-login">Back to Login?</a> 
+        </div>
+        <br>
+        <div class="form-group col-md-12 text-left">
+          <p><span class="custom_span">For Help Call:</span> 072993440</p>
+        </div>
+      </form>
+      <br>
+      <br>
+      <br>
+    </section>
+  </div>
+</div>
+<div class="footer">
+  <div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+      <div class="row">
+        <div class="col">Contact Us</div>
+        <div class="col">Privacy</div>
+        <div class="col">Legal</div>
+      </div>
+    </div>
+    <div class="col-sm-4"></div>
+  </div>
+</div>
+

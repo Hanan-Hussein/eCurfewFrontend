@@ -1,0 +1,30 @@
+<div>
+  <div class="page page-dashboard">
+    <section class="tile">
+      <div class="info-title">
+        <h2>Roles</h2>
+      </div>
+      <div class="tile-body">
+        <app-functionality-buttons [addLabel]="'New Role'"
+                                   [addLink]="'home/user-management/roles/create-role'"
+                                   [approveLinkLabel]="'Approve'"
+                                   [approveLink]="'home/user-management/roles/approve-role'"
+                                   [deleteLabel]="'Delete'"
+                                   [endpoint]="'role'"></app-functionality-buttons>
+        <app-custom-datatable
+          [endpoint]="endpoint"
+          [hasCheckBox]="hasCheckBox"
+          [cols]="cols"
+          [idColumn]="idColumn"
+          [hasShowEntries]="true"
+          [fileName]="'Roles'"
+          [canExport]="true"
+          [filterParams]="'Roles'"
+          [isFilterPresent]="true"
+          [params]="params"
+          [routeView]="routeView"
+        ></app-custom-datatable>
+      </div>
+    </section>
+  </div>
+</div>

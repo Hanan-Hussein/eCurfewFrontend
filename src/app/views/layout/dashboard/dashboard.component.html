@@ -1,0 +1,331 @@
+<div class="animated fadeIn">
+  <!-- start of original mock ups -->
+  <div class="row ">
+    <div class="col">
+      <h3 class="text-left"  style="color: #764F9D;">OverView</h3>
+    </div>
+    
+  <select class='select-option' >
+    <option value="kenya">Kenya</option>
+     <option class='option'  [value]="Kenya">kenya</option>
+     <option class='option'  [value]="Uganda">Uganda</option>
+     <option class='option'  [value]="Tanzania">Tanzania</option>
+     <option class='option'  [value]="Nigeria">Nigeria</option>
+  </select>
+  </div>
+
+  
+    <div class="row">
+      <div class="col-sm-6 col-lg-3">
+        <div class="card text-white bg-info">
+          <div class="card-body pb-0">
+            <div class="text-value">Ksh7,000.00</div>
+            <div>Total Collections</div>
+          </div>
+          <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+            <canvas baseChart class="chart"
+            [datasets]="lineChart2Data"
+            [labels]="lineChart2Labels"
+            [options]="lineChart2Options"
+            [colors]="lineChart2Colours"
+            [legend]="lineChart2Legend"
+            [chartType]="lineChart2Type"></canvas>
+          </div>
+        </div>
+      </div><!--/.col-->
+      <div class="col-sm-6 col-lg-3">
+        <div class="card text-white bg-primary">
+          <div class="card-body pb-0">
+            <div class="btn-group float-right" dropdown>
+            </div>
+            <div class="text-value">Ksh50,000.00</div>
+            <div>Total TopUps </div>
+          </div>
+          <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+            <canvas baseChart class="chart"
+                    [datasets]="lineChart1Data"
+                    [labels]="lineChart1Labels"
+                    [options]="lineChart1Options"
+                    [colors]="lineChart1Colours"
+                    [legend]="lineChart1Legend"
+                    [chartType]="lineChart1Type"></canvas>
+          </div>
+        </div>
+      </div><!--/.col-->
+      <div class="col-sm-6 col-lg-3">
+        <div class="card text-white bg-warning">
+          <div class="card-body pb-0">
+            <div class="btn-group float-right" dropdown>
+            </div>
+            <div class="text-value">ksh35,000.00</div>
+            <div>Mno Mirror Accounts</div>
+          </div>
+          <div class="chart-wrapper mt-3" style="height:70px;">
+            <canvas baseChart class="chart"
+            [datasets]="lineChart3Data"
+            [labels]="lineChart3Labels"
+            [options]="lineChart3Options"
+            [colors]="lineChart3Colours"
+            [legend]="lineChart3Legend"
+            [chartType]="lineChart3Type"></canvas>
+          </div>
+        </div>
+      </div><!--/.col-->
+      <div class="col-sm-6 col-lg-3">
+        <div class="card text-white bg-danger">
+          <div class="card-body pb-0">
+            <div class="btn-group float-right" dropdown>
+            </div>
+            <div class="text-value">ksh37,000.00</div>
+            <div>Msf Accounts</div>
+          </div>
+          <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+            <canvas baseChart class="chart"
+            [datasets]="barChart1Data"
+            [labels]="barChart1Labels"
+            [options]="barChart1Options"
+            [colors]="barChart1Colours"
+            [legend]="barChart1Legend"
+            [chartType]="barChart1Type"></canvas>
+          </div>
+        </div>
+      </div><!--/.col-->
+    </div><!--/.row-->  
+
+<!-- start of second row of cards -->
+    <div class="row">
+      <div class="col-sm-6 col-lg-3">
+        <div class="card text-white bg-info">
+          <div class="card-body pb-0">
+            <div class="text-value">Ksh10,000.00</div>
+            <div>Msf Accounts</div>
+          </div>
+          <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+            <canvas baseChart class="chart"
+            [datasets]="lineChart2Data"
+            [labels]="lineChart2Labels"
+            [options]="lineChart2Options"
+            [colors]="lineChart2Colours"
+            [legend]="lineChart2Legend"
+            [chartType]="lineChart2Type"></canvas>
+          </div>
+        </div>
+      </div><!--/.col-->
+      <div class="col-sm-6 col-lg-3">
+        <div class="card text-white bg-primary">
+          <div class="card-body pb-0">
+            <div class="btn-group float-right" dropdown>
+            </div>
+            <div class="text-value">Ksh50,000.00</div>
+            <div>Total TopUps </div>
+          </div>
+          <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+            <canvas baseChart class="chart"
+                    [datasets]="lineChart1Data"
+                    [labels]="lineChart1Labels"
+                    [options]="lineChart1Options"
+                    [colors]="lineChart1Colours"
+                    [legend]="lineChart1Legend"
+                    [chartType]="lineChart1Type"></canvas>
+          </div>
+        </div>
+      </div><!--/.col-->
+      <div class="col-sm-6 col-lg-3">
+        <div class="card text-white bg-warning">
+          <div class="card-body pb-0">
+            <div class="btn-group float-right" dropdown>
+            </div>
+            <div class="text-value">ksh35,000.00</div>
+            <div>Mno Mirror Accounts</div>
+          </div>
+          <div class="chart-wrapper mt-3" style="height:70px;">
+            <canvas baseChart class="chart"
+            [datasets]="lineChart3Data"
+            [labels]="lineChart3Labels"
+            [options]="lineChart3Options"
+            [colors]="lineChart3Colours"
+            [legend]="lineChart3Legend"
+            [chartType]="lineChart3Type"></canvas>
+          </div>
+        </div>
+      </div><!--/.col-->
+      <div class="col-sm-6 col-lg-3">
+        <div class="card text-white bg-danger">
+          <div class="card-body pb-0">
+            <div class="btn-group float-right" dropdown>
+            </div>
+            <div class="text-value">ksh18,000.00</div>
+            <div>Merchant Accounts</div>
+          </div>
+          <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+            <canvas baseChart class="chart"
+            [datasets]="barChart1Data"
+            [labels]="barChart1Labels"
+            [options]="barChart1Options"
+            [colors]="barChart1Colours"
+            [legend]="barChart1Legend"
+            [chartType]="barChart1Type"></canvas>
+          </div>
+        </div>
+      </div><!--/.col-->
+    </div><!--/.row--> 
+   <!--end of second row of cards  -->
+
+<!-- start of samms designs -->
+<!-- <div class="row">
+  <div class="col-sm-4 cards">
+    <div class="text-right">
+      <br>
+      <br>
+      <h6>Ksh7,000.00</h6>
+      <h3>Total Collections </h3>
+    </div>
+    <div class="text-nowrap">
+      <img src="../../../../assets/img/money-bag-with-dollar-symbol.svg" width="50px" class="rounded" alt="...">
+    </div>
+  </div>
+
+  <div class="col-sm-4 cards">
+
+    <div class="text-right">
+      <br>
+      <br>
+      <h6>Ksh 50,000.00</h6>
+      <h3>Total TopUps </h3>
+    </div>
+    <div class="text-nowrap">
+      <img src="../../../../assets/img/money (5).svg" width="50px" class="rounded" alt="...">
+    </div>
+  </div>
+  <div class="col-sm-4 cards">
+
+    <div class="text-right">
+      <br>
+      <br>
+      <h6>ksh35,000.00</h6>
+      <h3>Mno Mirror Accounts </h3>
+    </div>
+    <div class="text-nowrap">
+      <img src="../../../../assets/img/wallet-filled-money-tool.svg" width="50px" class="rounded" alt="...">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4 cards">
+
+    <div class="text-right">
+      <br>
+      <br>
+      <h6>ksh37,000.00</h6>
+      <h3>Msf Accounts </h3>
+    </div>
+    <div class="text-nowrap">
+      <img src="../../../../assets/img/percent (1).svg" width="50px" class="rounded" alt="...">
+    </div>
+  </div>
+
+  <div class="col-sm-4 cards">
+    <div class="text-right">
+      <br>
+      <br>
+      <h6>Ksh 39,000.00</h6>
+      <h3>Expense Accounts </h3>
+    </div>
+    <div class="text-nowrap">
+      <img src="../../../../assets/img/percent (1).svg" width="50px" class="rounded" alt="...">
+    </div>
+
+  </div>
+
+
+  <div class="col-sm-4 cards">
+
+    <div class="text-right">
+      <br>
+      <br>
+      <h6> Ksh 40,000.00</h6>
+      <h3>Merchant Accounts</h3>
+    </div>
+    <div class="text-nowrap">
+      <img src="../../../../assets/img/percent (1).svg" width="50px" class="rounded" alt="...">
+    </div>
+  </div>
+
+
+</div> -->
+
+<!-- three cards below -->
+
+<div class="row" *ngFor="let cards of dashboardData">
+  <div class="col-sm-4 yellow-card">
+
+    <div class="text-right">
+      <br>
+      <br>
+      <h6 class="my-title">{{cards?.numberOfCustomerRegistrationsToday}}</h6>
+      <div>Number Of Customer Registrations Today</div>
+    </div>
+   
+  </div>
+
+  <div class="col-sm-4 blue-card">
+    <div class="text-right">
+      <br>
+      <br>
+      <h6 class="my-title">{{cards?.totalNumberOfConsumptionsToDate}}</h6>
+      <div>Total Number Of Consumptions To Date </div>
+    </div>
+    
+
+  </div>
+
+
+  <div class="col-sm-4 grey-card">
+
+    <div class="text-right">
+      <br>
+      <br>
+      <h6 class="my-title">{{cards?.totalAmountOfTopUpsToDate | currency}}</h6>
+      <div>Total Amnt Top Ups To Date</div>
+      
+    </div>
+   
+  </div>
+
+
+</div>
+
+<h3   style="color: #764F9D;">Performance Reports</h3>
+<!-- start chartjs  -->
+<div class="row" style="background-color: white;" >
+  <div><h3 class="text-center" style="color: black;">Statistics</h3></div>
+  <br>
+  <br>
+  <br>
+<div class="col" style="display: block;">
+  <canvas baseChart  height="250"
+    [datasets]="lineChartData"
+    [labels]="lineChartLabels"
+    [colors]="lineChartColors"
+    [legend]="lineChartLegend"
+    [chartType]="lineChartType"
+    [plugins]="lineChartPlugins">
+  </canvas>
+</div>
+<div class="col" >
+  <h3 style="color: black;">Graph colours</h3>
+  <div  style="background-color: black; width: 400; height:auto; ">
+    <br>
+    <h3><span class="dot1"> </span> Total Number Of TopUps</h3>
+    <h3><span class="dot2"> </span> Total Collections</h3>
+    <h3><span class="dot3"> </span> Total Top ups</h3>
+    <br>
+  </div>
+
+</div>
+</div>
+<!-- end chart js -->
+<br>
+<br>
+<!-- end of original mock up designs -->
+</div>

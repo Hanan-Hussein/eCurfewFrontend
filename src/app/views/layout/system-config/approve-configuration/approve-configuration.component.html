@@ -1,0 +1,25 @@
+<div class="page">
+  <section class="tile">
+    <div class="info-title">
+      <h2>Approve Configurations</h2>
+    </div>
+    <div class="tile-body">
+      <app-functionality-buttons [approveLabel]="'Approve'"
+                                 [declineLabel]="'Decline'"
+                                 [endpoint]="endpoint"></app-functionality-buttons>
+      <app-custom-datatable
+        [endpoint]="endpoint"
+        [routeView]="routeView"
+        [hasCheckBox]="hasCheckBox"
+        [cols]="cols"
+        [idColumn]="idColumn"
+        [params]="params"
+        [hasShowEntries]="true"
+        [fileName]="'Currencies'"
+        [canExport]="true"
+        [filterParams]="''"
+        [isFilterPresent]="true"
+      ></app-custom-datatable>
+    </div>
+  </section>
+</div>

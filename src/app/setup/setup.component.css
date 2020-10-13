@@ -1,0 +1,58 @@
+.log-form {
+  margin-top: 74px;
+  background: #036B36 0 0 no-repeat padding-box;
+  border-radius: 5px;
+  opacity: 0.97;
+
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+input {
+  background-color: #EAF0F1;
+  font-size: 14px;
+  color: #000000;
+}
+
+.select-field {
+  background-color: #EAF0F1;
+  font-size: 14px;
+  color: #000000;
+}
+
+.setup-btn {
+  margin-bottom: 2%;
+}
+
+.form-control.ng-touched.ng-invalid {
+  border-left: 4px solid #F3B431;
+}
+
+.setup-group {
+  margin-bottom: 3%;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #000000;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #000000;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #000000;
+}
+
+.forgot-pass {
+  margin-bottom: 8px;
+}
+
+.login-name {
+  text-align: center;
+  color: #ffffff;
+}

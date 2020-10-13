@@ -1,0 +1,56 @@
+<div [@routerTransition]>
+    <div class="page page-dashboard">
+        <section class="tile">
+            <div class="tile-body">
+              <app-back-component></app-back-component>
+                <app-viewentity [viewparam]="viewparam" [title]="'My Profile Details '"
+                                [subtitle]="model.fullName"></app-viewentity>
+                <div class="clearfix"></div>
+                <hr/>
+                <h4>Change Password</h4>
+                <hr/>
+                <form [formGroup]="profileForm" (ngSubmit)="changePass()">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Old Password<span class="my_span"> *</span></label>
+                            <input type="password" [(ngModel)]="change.oldPassword" formControlName="oldPassword"
+                                   name="oldPassword" class="form-control"/>
+                            <span class="help-block text-danger"
+                                  *ngIf="profileForm.get('oldPassword').touched && profileForm.get('oldPassword').hasError('required')">
+                          Current Password is required</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>New Password<span class="my_span"> *</span></label>
+                            <input type="password" [(ngModel)]="confirmPassword" formControlName="confirmPassword"
+                                   name="confirmPassword" class="form-control"/>
+                            <span class="help-block text-danger"
+                                  *ngIf="profileForm.get('confirmPassword').touched && profileForm.get('confirmPassword').hasError('required')">
+                          New Password is required</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Confirm Password<span class="my_span"> *</span></label>
+                            <input type="password" [(ngModel)]="change.newPassword" formControlName="newPassword"
+                                   name="newPassword" class="form-control"/>
+                            <span class="help-block text-danger"
+                                  *ngIf="profileForm.get('newPassword').touched && profileForm.get('newPassword').hasError('required')">
+                          Password Confirmation is required.</span>
+                            <span class="help-block text-danger"
+                                  *ngIf="profileForm.get('newPassword').hasError('mismatchedPasswords')">Passwords do not match</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12 pull-right">
+                            <button [disabled]="!profileForm.valid" type="submit" class="btn btn-success">Change
+                                Password
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>

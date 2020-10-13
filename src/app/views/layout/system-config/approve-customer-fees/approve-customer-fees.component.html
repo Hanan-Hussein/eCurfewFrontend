@@ -1,0 +1,30 @@
+
+<div>
+    <div class="page page-dashboard">
+      <section class="tile">
+        <div class="info-title">
+          <h2>customer-fees & charges</h2>
+        </div>
+        <div class="tile-body">
+          <app-functionality-buttons [addLabel]="'New customer-fees'"
+                                     [addLink]="'home/system-config/customer-fees-charges/create-provider'"
+                                     [approveLabel]="'Approve'"
+                                     [declineLabel]="'Decline'"
+                                     [endpoint]="'customer-charge'"></app-functionality-buttons>
+          <app-custom-datatable
+            [endpoint]="endpoint"
+            [hasCheckBox]="hasCheckBox"
+            [cols]="cols"
+            [idColumn]="idColumn"
+            [hasShowEntries]="true"
+            [fileName]="'customer-fees charges'"
+            [canExport]="true"
+            [filterParams]="'Name'"
+            [isFilterPresent]="true"
+            [params]="params"
+            [routeView]="routeView"
+          ></app-custom-datatable>
+        </div>
+      </section>
+    </div>
+  </div>

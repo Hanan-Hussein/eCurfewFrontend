@@ -1,0 +1,32 @@
+<div>
+    <div class="page page-dashboard">
+      <section class="tile">
+        <div class="info-title">
+          <app-back-component></app-back-component>
+          <h2>Payment Provider Charges </h2>
+        </div>
+        <div class="tile-body">
+          <app-functionality-buttons [addLabel]="'New Provider Charge'"
+                                     [addLink]="'home/system-config/providers-charges/create-provider'"
+                                     [approveLabel]="'Approve'"
+                                     [declineLabel]="'Decline'"
+                                     [endpoint]="'provider-charge'"></app-functionality-buttons>
+          <app-custom-datatable
+            [endpoint]="endpoint"
+            [hasCheckBox]="hasCheckBox"
+            [cols]="cols"
+            [idColumn]="idColumn"
+            [hasShowEntries]="true"
+            [fileName]="'Payment Providers Charges'"
+            [canExport]="true"
+            [filterParams]="'Name'"
+            [isFilterPresent]="true"
+            [params]="params"
+            [routeView]="routeView"
+          ></app-custom-datatable>
+        </div>
+      </section>
+    </div>
+  </div>
+  
+  

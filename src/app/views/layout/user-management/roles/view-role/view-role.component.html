@@ -1,0 +1,82 @@
+<div class="page">
+  <section class="tile">
+    <div class="info-title">
+      <app-refresh-component [pageUrl]="'/home/user-management/roles'"></app-refresh-component>
+      <h2>Role</h2>
+    </div>
+      <div class="tile-body">
+        <form role="form" #rolesForm="ngForm" (submit)="updateRoles()">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>Role Name <span class="my_span"> *</span> </label>
+              <input type="text" name="roleName" pattern="^(?=.*[A-z0-9].*[A-z0-9])[0-9A-z-'.\s]{6,}$"
+                     [(ngModel)]="model.roleName" class="form-control" [readOnly]="isReadOnly"
+                     required #rolename="ngModel">
+              <div *ngIf="(rolename.dirty || rolename.touched) && rolename.invalid" class="text-danger">
+                  <span class="invalid-input" *ngIf="rolename.errors.required">
+                    Role Name is required.
+                  </span>
+                <span class="invalid-input" *ngIf="rolename.errors.pattern">
+                    Role Name must be a valid name with at least 6 characters
+                  </span>
+              </div>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label>Role Description <span class="my_span"> *</span> </label>
+              <input type="text" name="description" pattern="^(?=.*[A-z0-9].*[A-z0-9])[0-9A-z-'.\s]{6,}$"
+                     [(ngModel)]="model.description" class="form-control" [readOnly]="isReadOnly"
+                     #description="ngModel" required>
+              <div *ngIf="(description.dirty || description.touched) && description.invalid" class="text-danger">
+                  <span class="invalid-input" *ngIf="description.errors.required">
+                    Group description is required.
+                  </span>
+                <span class="invalid-input" *ngIf="description.errors.pattern">
+                    Group description must be a valid name with at least 6 characters
+                  </span>
+              </div>
+            </div>
+
+            <div class="sub-title col-md-12">
+              <h3>Permissions</h3>
+            </div>
+
+            <div class="col-md-6" *ngFor="let ent of entities">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title custom-font"><strong>{{ent.entityName}}</strong>
+                  </h3>
+                </div>
+                <div class="panel-body">
+                  <div class="col-sm-4" *ngFor="let permi of ent.permissions">
+                    <div class="checkbox">
+                      <input type="checkbox" value="{{permi.entityPermissionId}}"
+                             [(ngModel)]="permi.checked" [name]="permi.permission"/>
+                      <label>{{permi.permission}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 pull-right">
+              <button type="button" *ngIf="!isUpdate" (click)="enableUpdate()" mat-stroked-button
+                      class="enable-update pull-right">
+                Enable Update
+              </button>
+              <button *ngIf="isUpdate" [disabled]="rolesForm.form.invalid" type="submit" mat-stroked-button
+                      class="update-button pull-right">
+                Update
+              </button>
+              <button type="button" *ngIf="isUpdate" (click)="disableUpdate()" mat-stroked-button
+                      class="disable-update county-disable pull-right">
+                Disable Update
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>

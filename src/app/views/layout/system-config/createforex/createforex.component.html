@@ -1,0 +1,67 @@
+
+<div class="page">
+    <section class="tile">
+        <div class="info-title">
+            <app-back-component></app-back-component>
+            <h2>Add Forex</h2>
+        </div>
+        <div class="tile-body">
+            <form (ngSubmit)="onCreateForm(createForm)" #createForm="ngForm" role="form">
+                <div class="row">
+                    
+    
+
+                    <div class="form-group col-md-6">
+                        <label>Default Currency<span class="my_span"> *</span></label>
+                            <select class="form-control"  [(ngModel)]="model.baseCurrency" name="baseCurrency" required #baseCurrency="ngModel">
+                              <option *ngFor="let countri of currencies" value={{countri.symbol}}>{{countri.name}}</option>
+                            </select>
+                            <div *ngIf="(baseCurrency.dirty || baseCurrency.touched) && baseCurrency.invalid"
+                                 class="text-danger">
+                                <span class="invalid-input" *ngIf="baseCurrency.errors.required">
+                                    Default Currency is required
+                                </span>
+                            </div>
+                          </div>
+
+              
+                   
+
+                    <div class="form-group col-md-6">
+                        <label>No of gaming credits per 1 currency amount <span class="my_span"> *</span></label>
+                        <input type="number"  name="exchangeRate"
+                            [(ngModel)]="model.exchangeRate" class="form-control" required #exchangeRate="ngModel">
+                        <div *ngIf="(exchangeRate.dirty || exchangeRate.touched) && exchangeRate.invalid" class="text-danger">
+                            <span class="invalid-input" *ngIf="exchangeRate.errors.required">
+                                Exchange Rate is required.
+                            </span>
+                            
+                        </div>
+                    </div>
+
+
+                    
+
+                    <div class="col-md-12 pull-right">
+                        <button style="margin:5px;" [disabled]="!createForm.form.valid" type="submit" mat-stroked-button
+                            class="save-button pull-right">Save
+                        </button>
+                        <button type="button" *ngIf="!isUpdate && isView" (click)="enableUpdate()" mat-stroked-button
+                            class="enable-update pull-right">
+                            Enable Update
+                        </button>
+                        <button *ngIf="isUpdate && isView" [disabled]="createForm.form.invalid" type="submit"
+                            mat-stroked-button class="update-button pull-right">
+                            Update
+                        </button>
+                        <button type="button" *ngIf="isUpdate && isView" (click)="disableUpdate()" mat-stroked-button
+                            class="disable-update county-disable pull-right">
+                            Disable Update
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </section>
+</div>

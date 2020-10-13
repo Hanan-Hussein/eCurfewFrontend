@@ -1,0 +1,87 @@
+<div class="page">
+    <section class="tile">
+        <div class="info-title">
+            <app-back-component></app-back-component>
+            <h2>Add staggered provider charge</h2>
+        </div>
+        <div class="tile-body">
+            <form (ngSubmit)="onCreateForm(createForm)" #createForm="ngForm" role="form">
+                <div class="row">
+                    
+
+                    <div class="form-group col-md-6">
+                        <label>staggered provider charge<span class="my_span"> *</span></label>
+                        <select class="form-control" [(ngModel)]="model.chargeId" name="chargeId" required
+                            #chargeId="ngModel">
+                            <option *ngFor="let countri of paymentProviderscharge" value={{countri.id}}>{{countri.paymentProviderChargeType}}</option>
+                        </select>
+                        <div *ngIf="(chargeId.dirty || chargeId.touched) && chargeId.invalid" class="text-danger">
+                            <span class="invalid-input" *ngIf="chargeId.errors.required">
+                                staggered provider charge is required
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group col-md-6">
+                        <label>From<span class="my_span"> *</span></label>
+                        <input type="number"  [readOnly]="isReadOnly"
+                            name="from" [(ngModel)]="model.from" class="form-control" required="required"
+                            #from="ngModel">
+                        <div *ngIf="(from.dirty || from.touched) && from.invalid" class="text-danger">
+                            <span class="invalid-input" *ngIf="from.errors.required">
+                                from is required.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>To<span class="my_span"> *</span></label>
+                        <input type="number"  [readOnly]="isReadOnly"
+                            name="to" [(ngModel)]="model.to" class="form-control" required="required"
+                            #to="ngModel">
+                        <div *ngIf="(to.dirty || to.touched) && to.invalid" class="text-danger">
+                            <span class="invalid-input" *ngIf="to.errors.required">
+                                to is required.
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label>Value<span class="my_span"> *</span></label>
+                        <input type="number"  [readOnly]="isReadOnly"
+                            name="value" [(ngModel)]="model.value" class="form-control" required="required"
+                            #value="ngModel">
+                        <div *ngIf="(value.dirty || value.touched) && value.invalid" class="text-danger">
+                            <span class="invalid-input" *ngIf="value.errors.required">
+                                value is required.
+                            </span>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="col-md-12 pull-right">
+                        <button style="margin:5px;" [disabled]="!createForm.form.valid" type="submit" mat-stroked-button
+                            class="save-button pull-right">Save
+                        </button>
+                        <button type="button" *ngIf="!isUpdate && isView" (click)="enableUpdate()" mat-stroked-button
+                            class="enable-update pull-right">
+                            Enable Update
+                        </button>
+                        <button *ngIf="isUpdate && isView" [disabled]="createForm.form.invalid" type="submit"
+                            mat-stroked-button class="update-button pull-right">
+                            Update
+                        </button>
+                        <button type="button" *ngIf="isUpdate && isView" (click)="disableUpdate()" mat-stroked-button
+                            class="disable-update county-disable pull-right">
+                            Disable Update
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </section>
+</div>

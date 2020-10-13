@@ -1,0 +1,33 @@
+<div>
+    <div class="page page-dashboard">
+      <section class="tile">
+        <div class="info-title">
+          <h2>Provider staggered charges</h2>
+        </div>
+        <div class="tile-body">
+          <app-functionality-buttons [addLabel]="'New Provider staggered charges'"
+                                     [addLink]="'home/system-config/provider-staggered-charge/create-provider'"
+                                     [approveLinkLabel]="'Approve'"
+                                     [approveLink]="'home/system-config/provider-staggered-charge/approve-provider'"
+                                     [deleteLabel]="'Delete'"
+                                     [endpoint]="'provider-staggered-charge'"></app-functionality-buttons>
+          <app-custom-datatable
+            [endpoint]="endpoint"
+            [hasCheckBox]="hasCheckBox"
+            [cols]="cols"
+            [idColumn]="idColumn"
+            [hasShowEntries]="true"
+            [fileName]="'Provider staggered charges'"
+            [canExport]="true"
+            [filterParams]="'Name'"
+            [isFilterPresent]="true"
+            [params]="params"
+            [routeView]="routeView"
+          ></app-custom-datatable>
+        </div>
+      </section>
+    </div>
+  </div>
+  
+  
+  

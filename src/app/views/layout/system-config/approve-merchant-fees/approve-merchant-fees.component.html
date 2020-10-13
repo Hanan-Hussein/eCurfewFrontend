@@ -1,0 +1,29 @@
+<div>
+    <div class="page page-dashboard">
+      <section class="tile">
+        <div class="info-title">
+          <h2>merchant-fees & charges</h2>
+        </div>
+        <div class="tile-body">
+          <app-functionality-buttons [addLabel]="'New merchant-fees'"
+                                     [addLink]="'home/system-config/merchant-fees-charges/create-provider'"
+                                     [approveLabel]="'Approve'"
+                                     [declineLabel]="'Decline'"
+                                     [endpoint]="'merchant-charge'"></app-functionality-buttons>
+          <app-custom-datatable
+            [endpoint]="endpoint"
+            [hasCheckBox]="hasCheckBox"
+            [cols]="cols"
+            [idColumn]="idColumn"
+            [hasShowEntries]="true"
+            [fileName]="'merchant-fees charges'"
+            [canExport]="true"
+            [filterParams]="'Name'"
+            [isFilterPresent]="true"
+            [params]="params"
+            [routeView]="routeView"
+          ></app-custom-datatable>
+        </div>
+      </section>
+    </div>
+  </div>

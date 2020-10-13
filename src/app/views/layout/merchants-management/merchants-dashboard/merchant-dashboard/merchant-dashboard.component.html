@@ -1,0 +1,77 @@
+
+<div class="text-right">
+<select class='select-option' (change)="onChange($event.target.value)">
+  <option value="0">Select Merchant</option>
+   <option class='option'  *ngFor='let option of allmerchantNames; let i = index'
+   [value]="i">{{option.merchant.accountName}}</option>
+</select>
+</div>
+
+<div class="row" *ngFor="let cards of finalDataToDisplay">
+  <div class="col-sm-4 yellow-card">
+
+    <div class="text-right">
+      <br>
+      <br>
+      <h6 class="my-title">{{cards?.totalNumberOfTopUpsToDate}}</h6>
+      <h3 class="my-title">Total Number Of TopUps</h3>
+    </div>
+   
+  </div>
+
+  <div class="col-sm-4 blue-card">
+    <div class="text-right">
+      <br>
+      <br>
+      <h6 class="my-title">{{cards?.totalMerchantIncomeToDate | currency}}</h6>
+      <h3 class="my-title">Total Collections </h3>
+    </div>
+    
+
+  </div>
+
+
+  <div class="col-sm-4 grey-card">
+
+    <div class="text-right">
+      <br>
+      <br>
+      <h6 class="my-title">{{cards?.totalAmountOfTopUpsToDate | currency}}</h6>
+      <h3 class="my-title">Total Top ups</h3>
+      
+    </div>
+   
+  </div>
+
+
+</div>
+<h3  *ngFor="let cards of finalDataToDisplay" style="color: #764F9D;">Performance Reports</h3>
+<!-- start chartjs  -->
+<div class="row" style="background-color: white;" *ngFor="let cards of finalDataToDisplay">
+  <div><h3 class="text-center" style="color: black;">Statistics</h3></div>
+  <br>
+  <br>
+  <br>
+<div class="col" style="display: block;">
+  <canvas baseChart  height="250"
+    [datasets]="lineChartData"
+    [labels]="lineChartLabels"
+    [colors]="lineChartColors"
+    [legend]="lineChartLegend"
+    [chartType]="lineChartType"
+    [plugins]="lineChartPlugins">
+  </canvas>
+</div>
+<div class="col" >
+  <h3 style="color: black;">Graph colours</h3>
+  <div  style="background-color: black; width: 400; height:auto; ">
+    <br>
+    <h3><span class="dot1"> </span> Total Number Of TopUps</h3>
+    <h3><span class="dot2"> </span> Total Collections</h3>
+    <h3><span class="dot3"> </span> Total Top ups</h3>
+    <br>
+  </div>
+
+</div>
+</div>
+<!-- end chart js -->

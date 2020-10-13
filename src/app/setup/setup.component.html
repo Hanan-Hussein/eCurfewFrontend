@@ -1,0 +1,108 @@
+<div class="page page-core">
+  <div class="container w-420 p-35 mt-40 text-center log-form">
+    <section>
+      <h2 class="text-white-50 text-md-center text-monospace">User Setup</h2>
+      <form (ngSubmit)="onSetupUser(setupForm)" #setupForm="ngForm" role="form"
+            class="form-validation">
+
+        <div class="row">
+          <div class="form-group setup-group col-md-4">
+            <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" placeholder="First Name"
+                   name="firstName" [(ngModel)]="firstName" class="form-control" required="required" #firstname="ngModel">
+            <div *ngIf="(firstname.dirty || firstname.touched) && firstname.invalid" class="text-danger">
+                  <span class="invalid-input" *ngIf="firstname.errors.required">
+                    First Name is required.
+                  </span>
+              <span class="invalid-input" *ngIf="firstname.errors.pattern">
+                    First Name must be a valid name with at least 3 characters
+                  </span>
+            </div>
+          </div>
+
+          <div class="form-group setup-group col-md-4">
+            <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" placeholder="Last Name"
+                   name="lastName" [(ngModel)]="lastName" class="form-control" required #lastname="ngModel">
+            <div *ngIf="(lastname.dirty || lastname.touched) && lastname.invalid" class="text-danger">
+                  <span class="invalid-input" *ngIf="lastname.errors.required">
+                    Last Name is required.
+                  </span>
+              <span class="invalid-input" *ngIf="lastname.errors.pattern">
+                    Last Name must be a valid name with at least 3 characters
+                  </span>
+            </div>
+          </div>
+
+          <div class="form-group setup-group col-md-4">
+            <input [(ngModel)]="model.email" type="email" name="email" class="form-control" required placeholder="Email"
+                   pattern="([A-Za-z0-9_\-\.]+)@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$" #email="ngModel">
+            <div *ngIf="(email.dirty || email.touched) && email.invalid"
+                 class="text-danger">
+                  <span class="invalid-input" *ngIf="email.errors.required">
+                    Email Address is required.
+                  </span>
+              <span class="invalid-input" *ngIf="email.errors.pattern">
+                    Email Address must be a valid email
+                  </span>
+            </div>
+          </div>
+
+          <div class="form-group setup-group col-md-4">
+            <input type="tel" pattern="^[2][5][4][0-9]{9}$" maxlength="13" [(ngModel)]="model.phoneNumber"
+                   name="msisdn" class="form-control" placeholder="Phone Number" required #phoneNumber="ngModel"/>
+            <div *ngIf="(phoneNumber.dirty || phoneNumber.touched) && phoneNumber.invalid"
+                 class="text-danger">
+                  <span class="invalid-input" *ngIf="phoneNumber.errors.required">
+                    Phone Number is required.
+                  </span>
+              <span class="invalid-input" *ngIf="phoneNumber.errors.pattern">
+                    Please enter a valid Kenyan phone number beginning with 254
+                  </span>
+            </div>
+          </div>
+
+          <div class="form-group setup-group col-md-4">
+            <select [(ngModel)]="model.genderId" name="gender" class="select-field form-control" #genderId="ngModel"
+                    required>
+              <option [ngValue]="undefined" disabled hidden>Select Gender</option>
+              <option *ngFor="let gen of gender" value="{{gen.genderId}}" >{{gen.gender}}</option>
+            </select>
+            <div *ngIf="(genderId.dirty || genderId.touched) && genderId.invalid"
+                 class="text-danger">
+                  <span class="invalid-input" *ngIf="genderId.errors.required">
+                    Gender is required.
+                  </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div widget class="card">
+              <div class="card-header col-md-12">
+                <h3 class="sub-title">User Workgroups</h3>
+              </div>
+              <div class="card-body widget-body row m-20">
+                <div class="col-sm-4" *ngFor="let role of systemRoles">
+                  <div class="checkbox">
+                    <input type="checkbox" value="{{role.groupId}}" [(ngModel)]="role.checked" [name]="role.groupName"/>
+                    <label>{{role.groupName}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 pull-right">
+            <button [disabled]="!setupForm.form.valid" type="submit" mat-stroked-button
+                    class="setup-btn save-button pull-right">Save
+            </button>
+          </div>
+        </div>
+
+<!--        <div class="form-group">-->
+<!--          <button [disabled]="!setupForm.form.valid" class="save-button btn-block" mat-stroked-button type="submit">-->
+<!--            Login-->
+<!--          </button>-->
+<!--        </div>-->
+      </form>
+    </section>
+  </div>
+</div>

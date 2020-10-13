@@ -1,0 +1,29 @@
+<div class="page">
+  <section class="tile">
+    <div class="info-title">
+      <h2>Customers</h2>
+    </div>
+    <div class="tile-body">
+      <app-functionality-buttons 
+      [approveLinkLabel]="'Approve'"
+      [approveLink]="'home/customers/customers/approve-customer'"
+      [deleteLabel]="'Delete'"
+      [endpoint]="'customer'"></app-functionality-buttons>
+
+      <app-custom-datatable
+        [endpoint]="endpoint"
+        [routeView]="routeView"
+        [hasCheckBox]="hasCheckBox"
+        [cols]="cols"
+        [idColumn]="idColumn"
+        [params]="params"
+        [hasShowEntries]="true"
+        [fileName]="'Customers'"
+        [canExport]="true"
+        [filterParams]="''"
+        [isFilterPresent]="true"
+      ></app-custom-datatable>
+    </div>
+  </section>
+</div>
+ 

@@ -1,0 +1,10 @@
+* {
+  /* margin-top: -5px; */
+  margin-left: 2px;
+}
+
+.filterButton {
+  background-color: #FC0810;
+  color: #ffffff;
+  /* margin-top: 20px; */
+}

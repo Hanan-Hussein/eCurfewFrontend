@@ -1,0 +1,32 @@
+<div>
+  <div class="page page-dashboard">
+    <section class="tile">
+      <div class="info-title">
+        <app-back-component></app-back-component>
+        <h2>Approve Users</h2>
+      </div>
+      <div class="tile-body">
+        <app-functionality-buttons [addLabel]="'New User'"
+                                   [addLink]="'home/user-management/users/create-user'"
+                                   [approveLabel]="'Approve'"
+                                   [declineLabel]="'Decline'"
+                                   [endpoint]="'user'"></app-functionality-buttons>
+        <app-custom-datatable
+          [endpoint]="endpoint"
+          [hasCheckBox]="hasCheckBox"
+          [cols]="cols"
+          [idColumn]="idColumn"
+          [hasShowEntries]="true"
+          [fileName]="'Users'"
+          [canExport]="true"
+          [filterParams]="'Full Name, Phone Number, Email'"
+          [isFilterPresent]="true"
+          [params]="params"
+          [routeView]="routeView"
+        ></app-custom-datatable>
+      </div>
+    </section>
+  </div>
+</div>
+
+

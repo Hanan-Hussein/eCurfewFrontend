@@ -1,0 +1,177 @@
+<div class="page">
+  <section class="tile">
+    <div class="info-title">
+      <app-refresh-component [pageUrl]="'home/user-management/users'"></app-refresh-component>
+      <h2>User</h2>
+    </div>
+    <div class="tile-body">
+      <div class="row">
+        <div class="col-lg-6"></div>
+        <div class="col-lg-6">
+          <button class="btn btn-sm btn-danger text-white pull-right btn-ef btn-ef-3 btn-ef-3c mb-10 mr-10 btn-deac"
+                  (click)="open(content, deactivateLabel)" *ngIf="model.status=='2'">{{deactivateLabel}}</button>
+          <button class="btn btn-sm btn-danger text-white pull-right btn-ef btn-ef-3 btn-ef-3c mb-10 mr-10 btn-deac"
+                  (click)="open(content, lockLabel)" *ngIf="model.status=='2'">{{lockLabel}}</button>
+          <button class="btn btn-sm btn-info text-white pull-right btn-ef btn-ef-3 btn-ef-3c mb-10 mr-10"
+                  (click)="open(content, unlockLabel)" *ngIf="model.status=='6'">{{unlockLabel}}</button>
+          <button class="btn btn-sm btn-primary text-white pull-right btn-ef btn-ef-3 btn-ef-3c mb-10 mr-10"
+                  (click)="open(content, activateLabel)" *ngIf="model.status=='Inactive'">{{activateLabel}}</button>
+          <button class="btn btn-sm btn-primary text-white pull-right btn-ef btn-ef-3 btn-ef-3c mb-10 mr-10"
+                  (click)="open(content, resetLabel)" *ngIf="model.actionStatus=='Approved'">{{resetLabel}}</button>
+          <ng-template #content let-c="close" let-d="dismiss">
+            <form (ngSubmit)="approve(checkerForm)" #checkerForm="ngForm" role="form">
+              <div class="modal-header">
+                <h4 class="modal-title">{{checkerActions.action}} Actions</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <fieldset class="form-group">
+                  <label>Notes</label>
+                  <textarea name="notes" class="form-control" maxlength="500" required="" rows="3"
+                            [(ngModel)]="checkerActions.notes"></textarea>
+                </fieldset>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+                <button type="submit" [disabled]="!checkerForm.form.valid"
+                        class="btn btn-success">{{checkerActions.action}}</button>
+              </div>
+            </form>
+          </ng-template>
+        </div>
+      </div>
+      <form (ngSubmit)="onUpdate(createForm)" #createForm="ngForm" role="form">
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="sub-title">User Details</h3>
+          </div>
+          <div class="form-group col-md-4">
+            <label>First Name<span class="my_span"> *</span></label>
+            <input type="text" name="firstName" [(ngModel)]="firstName" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
+                   class="form-control" required="required" [readOnly]="isReadOnly" #firstname="ngModel">
+            <div *ngIf="(firstname.dirty || firstname.touched) && firstname.invalid" class="text-danger">
+                  <span class="invalid-input" *ngIf="firstname.errors.required">
+                    First Name is required.
+                  </span>
+              <span class="invalid-input" *ngIf="firstname.errors.pattern">
+                    First Name must be a valid name with at least 3 characters
+                  </span>
+            </div>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label>Last Name <span class="my_span"> *</span></label>
+            <input type="text" name="lastName" [(ngModel)]="lastName" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
+                   class="form-control" required [readOnly]="isReadOnly" #lastname="ngModel">
+            <div *ngIf="(lastname.dirty || lastname.touched) && lastname.invalid" class="text-danger">
+                  <span class="invalid-input" *ngIf="lastname.errors.required">
+                    Last Name is required.
+                  </span>
+              <span class="invalid-input" *ngIf="lastname.errors.pattern">
+                    Last Name must be a valid name with at least 3 characters
+                  </span>
+            </div>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label>Email Address<span class="my_span"> *</span></label>
+            <input [(ngModel)]="model.email" type="email" name="email" class="form-control" required [readOnly]="isReadOnly"
+                   pattern="([A-Za-z0-9_\-\.]+)@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$" #email="ngModel">
+            <div *ngIf="(email.dirty || email.touched) && email.invalid"
+                 class="text-danger">
+                  <span class="invalid-input" *ngIf="email.errors.required">
+                    Email Address is required.
+                  </span>
+              <span class="invalid-input" *ngIf="email.errors.pattern">
+                    Email Address must be a valid email
+                  </span>
+            </div>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label>Phone Number<span class="my_span"> *</span></label>
+            <input type="tel" pattern="^[2][5][4][0-9]{9}$" maxlength="13" [(ngModel)]="model.phoneNumber"
+                   name="msisdn" class="form-control" required #phoneNumber="ngModel" [readOnly]="isReadOnly"/>
+            <div *ngIf="(phoneNumber.dirty || phoneNumber.touched) && phoneNumber.invalid"
+                 class="text-danger">
+                  <span class="invalid-input" *ngIf="phoneNumber.errors.required">
+                    Phone Number is required.
+                  </span>
+              <span class="invalid-input" *ngIf="phoneNumber.errors.pattern">
+                    Please enter a valid Kenyan phone number beginning with 254
+                  </span>
+            </div>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label>Gender<span class="my_span"> *</span></label>
+            <select [(ngModel)]="model.genderId" name="gender" class="form-control" #genderId="ngModel"
+                    required>
+              <option *ngFor="let gen of gender" value="{{gen.genderId}}">{{gen.gender}}</option>
+            </select>
+            <div *ngIf="(genderId.dirty || genderId.touched) && genderId.invalid"
+                 class="text-danger">
+                  <span class="invalid-input" *ngIf="genderId.errors.required">
+                    Gender is required.
+                  </span>
+            </div>
+          </div>
+
+
+<!--          <div class="form-group col-md-4">-->
+<!--            <label>User Type</label>-->
+<!--            <select [(ngModel)]="model.userTypeId" name="userTypeId" class="form-control"  #userTypeId="ngModel"-->
+<!--                    required>-->
+<!--              <option *ngFor="let type of userType" value="{{type.typeId}}">{{type.userType}}</option>-->
+<!--            </select>-->
+<!--            <div *ngIf="(userTypeId.dirty || userTypeId.touched) && userTypeId.invalid"-->
+<!--                 class="text-danger">-->
+<!--                  <span class="invalid-input" *ngIf="userTypeId.errors.required">-->
+<!--                    User Type is required.-->
+<!--                  </span>-->
+<!--            </div>-->
+<!--          </div>-->
+
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-12">
+            <div widget class="card">
+              <div class="card-header col-md-12">
+                <h3 class="sub-title">User Workgroups</h3>
+              </div>
+              <div class="card-body widget-body row m-20">
+                <div class="col-sm-4" *ngFor="let role of systemRoles">
+                  <div class="checkbox">
+                    <input type="checkbox" value="{{role.groupId}}" [(ngModel)]="role.checked" [name]="role.groupName"/>
+                    <label>{{role.groupName}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 pull-right">
+            <button type="button" *ngIf="!isUpdate" (click)="enableUpdate()" mat-stroked-button
+                    class="enable-update pull-right">
+              Enable Update
+            </button>
+            <button *ngIf="isUpdate" [disabled]="createForm.form.invalid" type="submit" mat-stroked-button
+                    class="update-button pull-right">
+              Update
+            </button>
+            <button type="button" *ngIf="isUpdate" (click)="disableUpdate()" mat-stroked-button
+                    class="disable-update county-disable pull-right">
+              Disable Update
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </section>
+</div>
+
+

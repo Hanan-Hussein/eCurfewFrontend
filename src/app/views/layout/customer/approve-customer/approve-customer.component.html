@@ -1,0 +1,32 @@
+<div>
+    <div class="page page-dashboard">
+      <section class="tile">
+        <div class="info-title">
+          <app-back-component></app-back-component>
+          <h2>Customers</h2>
+        </div>
+        <div class="tile-body">
+          <app-functionality-buttons [addLabel]="'New Customer'"
+                                     [addLink]="'home/customers/customers/create-customer'"
+                                     [approveLabel]="'Approve'"
+                                     [declineLabel]="'Decline'"
+                                     [endpoint]="'customer'"></app-functionality-buttons>
+          <app-custom-datatable
+            [endpoint]="endpoint"
+            [hasCheckBox]="hasCheckBox"
+            [cols]="cols"
+            [idColumn]="idColumn"
+            [hasShowEntries]="true"
+            [fileName]="'Customers'"
+            [canExport]="true"
+            [filterParams]="'Full Name, Phone Number, Email'"
+            [isFilterPresent]="true"
+            [params]="params"
+            [routeView]="routeView"
+          ></app-custom-datatable>
+        </div>
+      </section>
+    </div>
+  </div>
+  
+  

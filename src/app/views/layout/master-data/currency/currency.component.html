@@ -1,0 +1,28 @@
+<div class="page">
+  <section class="tile">
+    <div class="info-title">
+      <h2>System Currencies</h2>
+    </div>
+    <div class="tile-body">
+      <app-functionality-buttons [addLabel]="'Add Currency'"
+                                 [addLink]="'home/master-data/add-currency'"
+                                 [deleteLabel]="'Delete'"
+                                 [approveLinkLabel]="'Approve'"
+                                 [approveLink]="'home/master-data/approve-currency'"
+                                 [endpoint]="endpoint"></app-functionality-buttons>
+      <app-custom-datatable
+        [endpoint]="endpoint"
+        [routeView]="routeView"
+        [hasCheckBox]="hasCheckBox"
+        [cols]="cols"
+        [idColumn]="idColumn"
+        [params]="params"
+        [hasShowEntries]="true"
+        [fileName]="'Currencies'"
+        [canExport]="true"
+        [filterParams]="''"
+        [isFilterPresent]="true"
+      ></app-custom-datatable>
+    </div>
+  </section>
+</div>

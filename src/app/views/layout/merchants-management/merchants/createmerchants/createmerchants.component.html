@@ -1,0 +1,270 @@
+<div class="page">
+  <section class="tile">
+    <div class="info-title">
+      <app-back-component></app-back-component>
+      <h2>Add Merchant</h2>
+    </div>
+    <div class="tile-body">
+      <form (ngSubmit)="onCreateForm(createForm)" #createForm="ngForm" role="form">
+        <h4>Merchant Details</h4>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>Merchant Name<span class="my_span"> *</span></label>
+            <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly" name="name"
+              [(ngModel)]="model.name" class="form-control" required="required" #name="ngModel">
+            <div *ngIf="(name.dirty || name.touched) && name.invalid" class="text-danger">
+              <span class="invalid-input" *ngIf="name.errors.required">
+                Merchant Name is required.
+              </span>
+              <span class="invalid-input" *ngIf="name.errors.pattern">
+                Merchant Name must be a valid name with at least 3 characters
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+          <label>Country<span class="my_span"> *</span></label>
+              <select class="form-control"  [(ngModel)]="model.country" name="country" required #country="ngModel">
+                <option *ngFor="let countri of countries" value={{countri.name}}>{{countri.name}}</option>
+              </select>
+              <div *ngIf="(country.dirty || country.touched) && country.invalid"
+                   class="text-danger">
+                  <span class="invalid-input" *ngIf="country.errors.required">
+                    country is required
+                  </span>
+              </div>
+            </div>
+
+          <div class="form-group col-md-6">
+            <label>Phone Number<span class="my_span"> *</span></label>
+            <input type="tel" pattern="^[2][5][4][0-9]{9}$" maxlength="13" [(ngModel)]="model.phone" name="phone"
+              class="form-control" required #phone="ngModel" [readOnly]="isReadOnly" />
+            <div *ngIf="(phone.dirty || phone.touched) && phone.invalid" class="text-danger">
+              <span class="invalid-input" *ngIf="phone.errors.required">
+                Phone Number is required.
+              </span>
+              <span class="invalid-input" *ngIf="phone.errors.pattern">
+                Please enter a valid Kenyan phone number begining with 254....
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>Email Address<span class="my_span"> *</span></label>
+            <input [(ngModel)]="model.email" type="email" name="email" class="form-control" required [readOnly]="isReadOnly"
+              pattern="([A-Za-z0-9_\-\.]+)@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$" #email="ngModel">
+            <div *ngIf="(email.dirty || email.touched) && email.invalid" class="text-danger">
+              <span class="invalid-input" *ngIf="email.errors.required">
+                Email Address is required.
+              </span>
+              <span class="invalid-input" *ngIf="email.errors.pattern">
+                Email Address must be a valid email
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-12" >
+            <hr />
+            <h4>Bank Details</h4>
+          </div>
+
+          <!-- <div class="form-group col-md-6">
+            <label>Bank Name </label>
+            <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" name="bankName" [(ngModel)]="model.bankName"
+              class="form-control" required #bankName="ngModel" [readOnly]="isReadOnly" >
+            <div *ngIf="(bankName.dirty || bankName.touched) && bankName.invalid" class="text-danger">
+              <span class="invalid-input" *ngIf="bankName.errors.required">
+                Bank Name is required.
+              </span>
+              <span class="invalid-input" *ngIf="bankName.errors.pattern">
+                Bank Name must be a valid name with at least 3 characters
+              </span>
+            </div>
+          </div> -->
+          <div class="form-group col-md-6">
+            <label>Bank Name<span class="my_span"> *</span></label>
+                <select class="form-control"  [(ngModel)]="model.bankName" name="bankName" required #bankName="ngModel">
+                  <option *ngFor="let bank of banks" value={{bank.name}}>{{bank.name}}</option>
+                </select>
+                <div *ngIf="(bankName.dirty || bankName.touched) && bankName.invalid"
+                     class="text-danger">
+                    <span class="invalid-input" *ngIf="bankName.errors.required">
+                      Bank Name is required
+                    </span>
+                </div>
+              </div>
+
+
+          <!-- <div class="form-group col-md-6">
+            <label>Swift Code </label>
+            <input type="number" name="swiftCode" [(ngModel)]="model.swiftCode" class="form-control" required
+              #swiftCode="ngModel" [readOnly]="isReadOnly">
+            <div *ngIf="(swiftCode.dirty || swiftCode.touched) && swiftCode.invalid" class="text-danger">
+              <span class="invalid-input" *ngIf="swiftCode.errors.required">
+                swiftCode is required.
+              </span>
+
+            </div>
+          </div> -->
+
+
+          <div class="form-group col-md-6">
+            <label>Swift Code<span class="my_span"> *</span></label>
+                <select class="form-control"  [(ngModel)]="model.swiftCode" name="swiftCode" required #swiftCode="ngModel">
+                  <option *ngFor="let bank of banks" value={{bank.swiftCode}}>{{bank.swiftCode}}</option>
+                </select>
+                <div *ngIf="(swiftCode.dirty || swiftCode.touched) && swiftCode.invalid"
+                     class="text-danger">
+                    <span class="invalid-input" *ngIf="swiftCode.errors.required">
+                      Swift Code is required
+                    </span>
+                </div>
+              </div>
+
+
+
+          <div class="form-group col-md-6">
+            <label>Account Name <span class="my_span"> *</span></label>
+            <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" name="accountName" [readOnly]="isReadOnly"
+              [(ngModel)]="model.accountName" class="form-control" required #accountName="ngModel">
+            <div *ngIf="(accountName.dirty || accountName.touched) && accountName.invalid" class="text-danger">
+              <span class="invalid-input" *ngIf="accountName.errors.required">
+                Account Name is required.
+              </span>
+              <span class="invalid-input" *ngIf="accountName.errors.pattern">
+                Account Name must be a valid name with at least 3 characters
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>Account Number<span class="my_span"> *</span> </label>
+            <input type="number" name="accountNumber" [(ngModel)]="model.accountNumber" class="form-control" required
+              #accountNumber="ngModel" [readOnly]="isReadOnly" >
+            <div *ngIf="(accountNumber.dirty || accountNumber.touched) && accountNumber.invalid" class="text-danger">
+              <span class="invalid-input" *ngIf="accountNumber.errors.required">
+                Account Number is required.
+              </span>
+
+            </div>
+          </div>
+
+          <!-- <div class="form-group col-md-6">
+            <label>Bank Branch </label>
+            <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" name="bankBranch" [readOnly]="isReadOnly"
+              [(ngModel)]="model.bankBranch" class="form-control" required #bankBranch="ngModel">
+            <div *ngIf="(bankBranch.dirty || bankBranch.touched) && bankBranch.invalid" class="text-danger">
+              <span class="invalid-input" *ngIf="bankBranch.errors.required">
+                Bank Branch is required.
+              </span>
+              <span class="invalid-input" *ngIf="bankBranch.errors.pattern">
+                Bank Branch must be a valid name with at least 3 characters
+              </span>
+            </div>
+          </div> -->
+
+
+          <div class="form-group col-md-6">
+            <label>Bank Branch<span class="my_span"> *</span></label>
+                <select class="form-control"  [(ngModel)]="model.bankBranch" name="bankBranch" required #bankBranch="ngModel">
+                  <option *ngFor="let banche of branches" value={{banche.name}}>{{banche.name}}</option>
+                </select>
+                <div *ngIf="(bankBranch.dirty || bankBranch.touched) && bankBranch.invalid"
+                     class="text-danger">
+                    <span class="invalid-input" *ngIf="bankBranch.errors.required">
+                      Bank Branch is required
+                    </span>
+                </div>
+              </div>
+            
+              <div class="form-group col-md-6">
+                <label>Country<span class="my_span"> *</span></label>
+                    <select class="form-control"  [(ngModel)]="model.country" name="country" required #country="ngModel">
+                      <option *ngFor="let countri of countries" value={{countri.name}}>{{countri.name}}</option>
+                    </select>
+                    <div *ngIf="(country.dirty || country.touched) && country.invalid"
+                         class="text-danger">
+                        <span class="invalid-input" *ngIf="country.errors.required">
+                          country is required
+                        </span>
+                    </div>
+                  </div>
+
+          <div class="col-md-12" >
+            <hr />
+            <h4>Contact Person</h4>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>Contact Person Name<span class="my_span"> *</span></label>
+            <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
+              name="contactPersonName" [(ngModel)]="model.contactPersonName" class="form-control" required="required"
+              #contactPersonName="ngModel">
+            <div *ngIf="(contactPersonName.dirty || contactPersonName.touched) && contactPersonName.invalid"
+              class="text-danger">
+              <span class="invalid-input" *ngIf="contactPersonName.errors.required">
+                Contact Person Name is required.
+              </span>
+              <span class="invalid-input" *ngIf="contactPersonName.errors.pattern">
+                Contact Person Name must be a valid name with at least 3 characters
+              </span>
+            </div>
+          </div>
+
+
+          <div class="form-group col-md-6">
+            <label>Contact Person Phone<span class="my_span"> *</span></label>
+            <input type="tel" pattern="^[2][5][4][0-9]{9}$" maxlength="13" [(ngModel)]="model.contactPersonPhone"
+              name="contactPersonPhone" class="form-control" required #contactPersonPhone="ngModel"  [readOnly]="isReadOnly"/>
+            <div *ngIf="(contactPersonPhone.dirty || contactPersonPhone.touched) && contactPersonPhone.invalid"
+              class="text-danger">
+              <span class="invalid-input" *ngIf="contactPersonPhone.errors.required">
+                Contact Person Phone is required.
+              </span>
+              <span class="invalid-input" *ngIf="contactPersonPhone.errors.pattern">
+                Please enter a valid Kenyan Phone begining with 254....
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>contact Person EmailAddress<span class="my_span"> *</span></label>
+            <input [(ngModel)]="model.contactEmailAddress" type="contactEmailAddress" name="contactEmailAddress"
+              class="form-control" required [readOnly]="isReadOnly"
+              pattern="([A-Za-z0-9_\-\.]+)@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$"
+              #contactEmailAddress="ngModel">
+            <div *ngIf="(contactEmailAddress.dirty || contactEmailAddress.touched) && contactEmailAddress.invalid"
+              class="text-danger">
+              <span class="invalid-input" *ngIf="contactEmailAddress.errors.required">
+                contact Person EmailAddress is required.
+              </span>
+              <span class="invalid-input" *ngIf="contactEmailAddress.errors.pattern">
+                contact Person EmailAddress must be a valid email
+              </span>
+            </div>
+          </div>
+
+
+          <div class="col-md-12 pull-right">
+            <button style="margin:5px;" [disabled]="!createForm.form.valid" type="submit" mat-stroked-button
+              class="save-button pull-right">Save
+            </button>
+            <button type="button" *ngIf="!isUpdate && isView" (click)="enableUpdate()" mat-stroked-button
+              class="enable-update pull-right">
+              Enable Update
+            </button>
+            <button *ngIf="isUpdate && isView" [disabled]="createForm.form.invalid" type="submit" mat-stroked-button
+              class="update-button pull-right">
+              Update
+            </button>
+            <button type="button" *ngIf="isUpdate && isView" (click)="disableUpdate()" mat-stroked-button
+              class="disable-update county-disable pull-right">
+              Disable Update
+            </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </section>
+</div>

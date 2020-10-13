@@ -1,0 +1,27 @@
+<div class="page">
+  <section class="tile">
+    <div class="info-title">
+      <h2>Approve Countries</h2>
+    </div>
+    <div class="tile-body">
+      <app-functionality-buttons [addLabel]="'Add Country'"
+                                 [addLink]="'home/master-data/add-country'"
+                                 [approveLabel]="'Approve'"
+                                 [declineLabel]="'Decline'"
+                                 [endpoint]="endpoint"></app-functionality-buttons>
+      <app-custom-datatable
+        [endpoint]="endpoint"
+        [routeView]="routeView"
+        [hasCheckBox]="hasCheckBox"
+        [cols]="cols"
+        [idColumn]="idColumn"
+        [params]="params"
+        [hasShowEntries]="true"
+        [fileName]="'Countries'"
+        [canExport]="true"
+        [filterParams]="''"
+        [isFilterPresent]="true"
+      ></app-custom-datatable>
+    </div>
+  </section>
+</div>

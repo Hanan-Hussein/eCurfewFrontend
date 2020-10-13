@@ -1,0 +1,32 @@
+<div>
+    <div class="page page-dashboard">
+      <section class="tile">
+        <div class="info-title">
+          <app-back-component></app-back-component>
+          <h2>Payment Providers</h2>
+        </div>
+        <div class="tile-body">
+          <app-functionality-buttons [addLabel]="'New Payment Provider'"
+                                     [addLink]="'home/system-config/providers/create-provider'"
+                                     [approveLabel]="'Approve'"
+                                     [declineLabel]="'Decline'"
+                                     [endpoint]="'payment-provider'"></app-functionality-buttons>
+          <app-custom-datatable
+            [endpoint]="endpoint"
+            [hasCheckBox]="hasCheckBox"
+            [cols]="cols"
+            [idColumn]="idColumn"
+            [hasShowEntries]="true"
+            [fileName]="'Payment Providers'"
+            [canExport]="true"
+            [filterParams]="'Name'"
+            [isFilterPresent]="true"
+            [params]="params"
+            [routeView]="routeView"
+          ></app-custom-datatable>
+        </div>
+      </section>
+    </div>
+  </div>
+  
+  

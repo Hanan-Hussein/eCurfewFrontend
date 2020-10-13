@@ -1,0 +1,31 @@
+<div>
+  <div class="page page-dashboard">
+    <section class="tile">
+      <div class="info-title">
+        <app-back-component></app-back-component>
+        <h2>Approve Workgroups</h2>
+      </div>
+      <div class="tile-body">
+        <app-functionality-buttons [addLabel]="'New Workgroup'"
+                                   [addLink]="'home/user-management/workgroups/create-workgroup'"
+                                   [approveLabel]="'Approve'"
+                                   [declineLabel]="'Decline'"
+                                   [endpoint]="'workgroup'"></app-functionality-buttons>
+        <app-custom-datatable
+          [endpoint]="endpoint"
+          [hasCheckBox]="hasCheckBox"
+          [cols]="cols"
+          [idColumn]="idColumn"
+          [hasShowEntries]="true"
+          [fileName]="'Workgroups'"
+          [canExport]="true"
+          [filterParams]="'Workgroup'"
+          [isFilterPresent]="true"
+          [params]="params"
+          [routeView]="routeView"
+        ></app-custom-datatable>
+      </div>
+    </section>
+  </div>
+</div>
+
