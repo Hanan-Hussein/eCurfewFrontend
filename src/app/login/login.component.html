@@ -1,6 +1,6 @@
 <div class="page page-core">
   <div class="container w-420 p-35 mt-40 text-center log-form">
-    <img src="assets/gcomlogo.png" style="height:20%;"/>
+    <img src="assets/new-fortis-logo-login.png" style="height:20%;"/>
     
     <section>
       <br>
@@ -8,7 +8,7 @@
       <form (ngSubmit)="onLoggedin(loginForm)" #loginForm="ngForm" role="form"
             class="form-validation">
         <div class="form-group">
-          <label for="email"> Email  <span class="my_span"> *</span></label>
+          <label for="email"> Email<span class="my_span"> *</span></label>
           <input type="email" id="email" class="form-control" [(ngModel)]="model.email" name="email"
                  pattern="([A-Za-z0-9_\-\.]+)@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$"
                  required="required" placeholder="Email" #email="ngModel">

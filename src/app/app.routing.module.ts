@@ -6,8 +6,16 @@ import {P404Component} from './views/error/404.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'landingPage',
     pathMatch: 'full',
+  },
+  {
+    path: 'landingPage',
+    loadChildren:() => import('./landing-page/landing-page.module').then(m=>m.LandingPageModule)
+  },
+  {
+    path:'biometrics',
+    loadChildren:()=>import('./biometrics/biometrics.module').then(m=>m.BiometricsPageModule)
   },
   {
     path: 'login',

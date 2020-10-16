@@ -1,0 +1,63 @@
+<div class="page page-core">
+    <div class="container w-420 p-35 mt-40 text-center log-form">
+      <img src="assets/new-fortis-logo-login.png" style="height:20%;"/>
+      
+      <section>
+        <br>
+        <h4 class="trynot text-login">Login with Biometrics</h4>
+        <button class="save-button btn-block" mat-stroked-button (click)="scanFingerPrint()">
+            Scan FingerPrint
+        </button>
+        <form (ngSubmit)="onLoggedin(loginForm)" #loginForm="ngForm" role="form"
+              class="form-validation">
+          <div class="form-group">
+            <label for="email"> UserName  <span class="my_span"> *</span></label>
+            <input type="email" id="email" class="form-control" [(ngModel)]="model.email" name="email"
+                   pattern="([A-Za-z0-9_\-\.]+)@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$"
+                   required="required" placeholder="Email" #email="ngModel">
+            <div *ngIf="(email.dirty || email.touched) && email.invalid" class="text-danger">
+                    <span class="invalid-input" *ngIf="email.errors.required">
+                      Email Address is required.
+                    </span>
+              <span class="invalid-input" *ngIf="email.errors.pattern">
+                      Email must be a valid email address
+                    </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password" >FingerPrint <span class="my_span"> *</span></label>
+            <ng-container *ngIf="scanned">
+            <img [src]="imageSource" class="responsive">
+            <img src="../../assets/checked.png"class="responsive">
+            <p>{{fingerprint.message}}</p>
+            </ng-container>
+          </div>
+          <div class="form-group">
+            
+            <button [disabled]="!loginForm.form.valid" class="save-button btn-block" mat-stroked-button type="submit">
+              Login
+            </button>
+          </div>
+          <div class="form-group col-md-12 text-center">
+            <p><span class="custom_span">For Help Call:</span> 072993440</p>
+          </div>
+        </form>
+        <br>
+        <br>
+      </section>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <div class="row">
+          <div class="col">Contact Us</div>
+          <div class="col">Privacy</div>
+          <div class="col">Legal</div>
+        </div>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+  </div>
+  
