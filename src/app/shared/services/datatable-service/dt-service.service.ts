@@ -23,7 +23,7 @@ export class DtServiceService {
   exportToPdf(id: string, name: string) {
 
     const data = document.getElementById(id);
-    
+
     html2canvas(data).then(canvas => {
       const pdf = new jspdf('p', 'mm', 'a4');
       pdf.save(name + '.pdf'); // Generated PDF
