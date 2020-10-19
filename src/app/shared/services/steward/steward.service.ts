@@ -1,19 +1,19 @@
-import { Injectable } from "@angular/core";
-import { Meta } from "@angular/platform-browser";
+import { Injectable } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
   HttpParams,
-} from "@angular/common/http";
-import { Observable, of } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { GlobalParams } from "../globalparams";
-import { ResponseWrapper } from "../../../entities/wrappers/response-wrapper";
-import { DataTableWrapper } from "../../../entities/wrappers/data-table-wrapper";
+} from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { GlobalParams } from '../globalparams';
+import { ResponseWrapper } from '../../../entities/wrappers/response-wrapper';
+import { DataTableWrapper } from '../../../entities/wrappers/data-table-wrapper';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class StewardService<T, E> {
   private headers: HttpHeaders;
@@ -24,6 +24,7 @@ export class StewardService<T, E> {
   private headersFormdataNoToken: HttpHeaders;
   private headersMultipart: HttpHeaders;
   token: string;
+  private headersSendToken: HttpHeaders;
 
   constructor(
     private http: HttpClient,
@@ -32,38 +33,43 @@ export class StewardService<T, E> {
   ) {
     // const csrf = this.meta.getTag('name=_csrf').content;
 
-    this.token = localStorage.getItem("access_token");
+    this.token = localStorage.getItem('access_token');
 
     this.headers = new HttpHeaders({
-      "Content-Type": "application/json; charset=utf-8",
+      'Content-Type': 'application/json; charset=utf-8',
       // 'X-CSRF-TOKEN': csrf
-      Authorization: "Bearer " + localStorage.getItem("access_token"),
+      Authorization: 'Bearer ' + localStorage.getItem('access_token'),
     });
 
     this.headersNoToken = new HttpHeaders({
-      "Content-Type": "application/json; charset=utf-8",
+      'Content-Type': 'application/json; charset=utf-8',
       // 'X-CSRF-TOKEN': csrf
     });
     this.headersLogin = new HttpHeaders({
-      "Content-type": "application/x-www-form-urlencoded; charset=utf-8",
+      'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
       // 'X-CSRF-TOKEN': csrf
-      Authorization: "Basic " + btoa("common_module_client:secret"),
+      Authorization: 'Basic ' + btoa('client:secret'),
     });
     this.headersPlain = new HttpHeaders({
-      "Content-type": "application/x-www-form-urlencoded; charset=utf-8",
+      'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
       // 'X-CSRF-TOKEN': csrf
-      Authorization: "Bearer " + localStorage.getItem("access_token"),
+      Authorization: 'Bearer ' + localStorage.getItem('access_token'),
     });
 
     this.headersFormdata = new HttpHeaders({
       // 'X-CSRF-TOKEN': csrf
-      Authorization: "Bearer " + localStorage.getItem("access_token"),
+      Authorization: 'Bearer ' + localStorage.getItem('access_token'),
     });
 
     this.headersMultipart = new HttpHeaders({
-      "Content-type": "multipart/form-data; charset=utf-8",
+      'Content-type': 'multipart/form-data; charset=utf-8',
       // 'X-CSRF-TOKEN': csrf
-      Authorization: "Bearer " + localStorage.getItem("access_token"),
+      Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+    });
+    this.headersSendToken = new HttpHeaders({
+      'Content-type': 'application/json; charset=utf-8',
+      // 'X-CSRF-TOKEN': csrf
+      Authorization: 'Basic ' + btoa('client:secret'),
     });
   }
 
@@ -90,6 +96,14 @@ export class StewardService<T, E> {
     return this.http
       .post(this.globalParam.baseUrl + endpoint, data, {
         headers: this.headersLogin,
+      })
+      .pipe(catchError(this.handleError<any>()));
+  }
+
+  sendToken(endpoint: string, data: T): Observable<any> {
+    return this.http
+      .post(this.globalParam.baseUrl + endpoint, data, {
+        headers: this.headersSendToken,
       })
       .pipe(catchError(this.handleError<any>()));
   }
@@ -208,7 +222,7 @@ export class StewardService<T, E> {
 
   delete(endpoint: string, data: T): Observable<ResponseWrapper<E>> {
     return this.http
-      .request("delete", this.globalParam.baseUrl + endpoint, {
+      .request('delete', this.globalParam.baseUrl + endpoint, {
         headers: this.headers,
         body: JSON.stringify(data),
       })
@@ -283,7 +297,7 @@ export class StewardService<T, E> {
     if (isCheckBoxEnable) {
       columOptions = {
         orderable: !isCheckBoxEnable,
-        className: "select-checkbox",
+        className: 'select-checkbox',
         targets: 0,
         checkboxes: {
           selectRow: isCheckBoxEnable,
@@ -292,7 +306,7 @@ export class StewardService<T, E> {
     }
 
     dtOptions = {
-      pagingType: "full_numbers",
+      pagingType: 'full_numbers',
       serverSide: true,
       processing: true,
       responsive: true,
@@ -324,18 +338,18 @@ export class StewardService<T, E> {
         event: string,
         callback: (e: Event, settings: any, json: any) => void
       ) => {
-        
+
       },
       // preDrawCallback: preCallBack,
       rowCallback: (row: Node, data: T[], index: number) => {
-        $("td", row).unbind("click");
-        $("td", row).bind("click", () => {
+        $('td', row).unbind('click');
+        $('td', row).bind('click', () => {
           //                    console.debug("Testing click event");
         });
-        $(row).attr("data-id", data[idField]);
+        $(row).attr('data-id', data[idField]);
         return row;
       },
-      dom: "Bfrtip",
+      dom: 'Bfrtip',
       // USED TO REMOVE THE SEARCH INPUT.
       bFilter: false,
       // USED FOR HORIZONTAL SCROLLING.
@@ -343,9 +357,9 @@ export class StewardService<T, E> {
       buttons: [],
       columnDefs: [columOptions],
       select: {
-        style: "multi",
+        style: 'multi',
       },
-      order: [[1, "asc"]],
+      order: [[1, 'asc']],
     };
     return dtOptions;
   }
@@ -366,16 +380,16 @@ export class StewardService<T, E> {
       httpParams = httpParams.append(key, value);
     });
     dtOptions = {
-      pagingType: "full_numbers",
+      pagingType: 'full_numbers',
       pageLength: 10,
       serverSide: true,
       processing: true,
       responsive: {
         breakpoints: [
-          { name: "desktop", width: Infinity },
-          { name: "tablet", width: 1024 },
-          { name: "fablet", width: 768 },
-          { name: "phone", width: 480 },
+          { name: 'desktop', width: Infinity },
+          { name: 'tablet', width: 1024 },
+          { name: 'fablet', width: 768 },
+          { name: 'phone', width: 480 },
         ],
       },
       // select: true,
@@ -405,15 +419,15 @@ export class StewardService<T, E> {
         event: string,
         callback: (e: Event, settings: any, json: any) => void
       ) => {
-       
+
       },
       //            preDrawCallback: preCallBack,
       rowCallback: (row: Node, data: T[], index: number) => {
-     
-        $(row).attr("data-id", data[idField]);
+
+        $(row).attr('data-id', data[idField]);
         return row;
       },
-      dom: "Bfrtip",
+      dom: 'Bfrtip',
       // USED TO REMOVE THE SEARCH INPUT.
       bFilter: false,
       // USED FOR HORIZONTAL SCROLLING.
@@ -422,7 +436,7 @@ export class StewardService<T, E> {
       columnDefs: [
         {
           orderable: false,
-          className: "select-checkbox",
+          className: 'select-checkbox',
           targets: 0,
           checkboxes: {
             selectRow: true,
@@ -430,10 +444,10 @@ export class StewardService<T, E> {
         },
       ],
       select: {
-        style: "multi",
+        style: 'multi',
         // selector: 'td:first-child'
       },
-      order: [[1, "asc"]],
+      order: [[1, 'asc']],
     };
     return dtOptions;
   }
@@ -445,24 +459,24 @@ export class StewardService<T, E> {
     dtParams: any,
     httpParams: HttpParams
   ): HttpParams {
-    let ss: boolean = httpParams.has("sort");
+    let ss: boolean = httpParams.has('sort');
 
     httpParams = httpParams.append(
-      "page",
-      "" + dtParams.start / dtParams.length
+      'page',
+      '' + dtParams.start / dtParams.length
     );
     if (!dtParams.needle) {
-      httpParams = httpParams.append("needle", dtParams.search.value);
+      httpParams = httpParams.append('needle', dtParams.search.value);
     }
 
     if (dtParams.order.length > 0) {
       if (ss) {
-        httpParams = httpParams.append("sort", httpParams.get("sort"));
+        httpParams = httpParams.append('sort', httpParams.get('sort'));
       } else {
         httpParams = httpParams.append(
-          "sort",
+          'sort',
           dtParams.columns[dtParams.order[0].column].data +
-            "," +
+            ',' +
             dtParams.order[0].dir
         );
       }
@@ -471,13 +485,13 @@ export class StewardService<T, E> {
     Object.keys(dtParams).forEach((key) => {
       // tslint:disable-next-line:triple-equals
       if (
-        key != "length" &&
-        key != "start" &&
-        key != "search" &&
-        key != "sort" &&
+        key != 'length' &&
+        key != 'start' &&
+        key != 'search' &&
+        key != 'sort' &&
         // tslint:disable-next-line:triple-equals
-        key != "order" &&
-        key != "columns"
+        key != 'order' &&
+        key != 'columns'
       ) {
         httpParams = httpParams.append(key, dtParams[key]);
       }
@@ -498,7 +512,7 @@ export class StewardService<T, E> {
       if (error.status == 500) {
         res.code = error.status;
         res.message =
-          "Sorry internal server error occured please try again later";
+          'Sorry internal server error occured please try again later';
       } else {
         res.code = error.status;
         res.message = error.error.message;
