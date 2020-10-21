@@ -8,7 +8,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class CustomerComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'customer';
+  endpoint = 'fortis/rest/v2/entities/fortis_CustomerDetails';
   routeView = 'home/customers/customers/{0}/view-customer';
   hasCheckBox = true;
   idColumn = 'id';
@@ -27,41 +27,33 @@ export class CustomerComponent implements OnInit {
       data: 'id'
     });
     this.cols.push({
-      title: 'Name',
-      data: 'name'
+      title: ' First Name',
+      data: 'firstName'
     });
     this.cols.push({
-      title: 'Credit Balance',
-      data: 'creditBalance'
+      title: 'Other Names',
+      data: 'otherNames'
     });
     this.cols.push({
-      title: 'Total Bought Credits',
-      data: 'totalBoughtCredit'
+      title: 'Employee Number',
+      data: 'employeeNumber'
     });
     this.cols.push({
-      title: 'merchant',
-      data: 'merchant.name'
+      title: 'Id Number',
+      data: 'idNumber'
     });
     this.cols.push({
-      title: 'Phone Number',
-      data: 'customerMobile'
+      title: 'Email Address',
+      data: 'emailAddress'
     });
     this.cols.push({
-      title: 'Email',
-      data: 'email'
+      title: 'Occupation',
+      data: 'occupation'
     });
+
     this.cols.push({
-      title: 'Country',
-      data: 'country'
-    });
-    this.cols.push({
-      title: 'Date Created',
-      data: 'creationDate',
-      isDate: true
-    });
-    this.cols.push({
-      title: 'Status',
-      data: 'actionStatus'
+      title: 'Current Address',
+      data: 'currentAddress'
     });
     this.cols.push({
       data: 'id',

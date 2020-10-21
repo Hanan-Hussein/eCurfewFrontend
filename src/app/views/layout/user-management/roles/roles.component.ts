@@ -8,7 +8,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class RolesComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'role';
+  endpoint = 'fortis/rest/v2/entities/sec$Role';
   hasCheckBox = true;
   idColumn = 'roleId';
   params: Map<any, string>;
@@ -17,38 +17,37 @@ export class RolesComponent implements OnInit {
   constructor() {
     this.cols = [];
     this.params = new Map();
-    this.params.set('sort', 'roleId,desc');
+    this.params.set('sort', 'id,desc');
   }
 
   ngOnInit() {
     this.cols.push({
       isCheckBox: true,
       title: '',
-      data: 'roleId',
+      data: 'id',
     });
     this.cols.push({
       title: 'Role Name',
-      data: 'roleName'
+      data: 'name'
     });
     this.cols.push({
-      title: 'Description',
-      data: 'description',
+      title: 'Security Scope',
+      data: 'securityScope',
     });
     this.cols.push({
-      title: 'Date Created',
-      data: 'creationDate',
-      isDate: true
+      title: 'Type',
+      data: 'type',
     });
+
     this.cols.push({
-      title: 'Status',
-      data: 'actionStatus'
+      title: 'Local Security Scope',
+      data: 'locSecurityScope',
     });
     this.cols.push({
       title: 'View',
-      data: 'roleId',
+      data: 'id',
       isViewMore: true
     });
-
   }
 
 }

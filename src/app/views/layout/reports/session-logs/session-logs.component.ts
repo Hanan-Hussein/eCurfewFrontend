@@ -1,17 +1,15 @@
-// @ts-ignore
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {DatatableColumns} from '../../../../entities/datatable/datatable-columns';
 
-// @ts-ignore
 @Component({
-  selector: 'app-audit-logs',
-  templateUrl: './audit-logs.component.html',
-  styleUrls: ['./audit-logs.component.scss']
+  selector: 'app-session-logs',
+  templateUrl: './session-logs.component.html',
+  styleUrls: ['./session-logs.component.scss']
 })
-export class AuditLogsComponent implements OnInit {
+export class SessionLogsComponent implements OnInit {
 
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/sec$EntityLog';
+  endpoint = 'fortis/rest/v2/entities/sec$SessionLogEntry';
   hasCheckBox = false;
   idColumn = 'id';
   params: Map<any, string>;
@@ -26,27 +24,26 @@ export class AuditLogsComponent implements OnInit {
 
   ngOnInit() {
     this.cols.push({
-      title: 'Activity Type',
-      data: 'type'
+      title: 'Last Action',
+      data: 'lastAction'
     });
     this.cols.push({
       title: 'Occurence Time',
-      data: 'eventTs',
+      data: 'startedTs',
       isDate: true
     });
- 
     this.cols.push({
-      title: 'Entity',
-      data: 'entity'
+      title: 'Ip address',
+      data: 'address'
     });
-    this.cols.push({
-      title: 'IP Address',
-      data: 'ipAddress'
-    });
-    this.cols.push({
-      title: 'User',
-      data: 'id.fullName'
-    });
+    // this.cols.push({
+    //   title: 'Client Info',
+    //   data: 'clientInfo'
+    // });
+    // this.cols.push({
+    //   title: 'User',
+    //   data: 'userId.fullName'
+    // });
 
     this.cols.push({
       title: 'View More',

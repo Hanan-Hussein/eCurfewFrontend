@@ -241,7 +241,13 @@ export class StewardService<T, E> {
       .get(this.globalParam.baseUrl + endpoint, options)
       .pipe(catchError(this.handleError<any>()));
   }
-
+getToken(endpoint:string){
+  const token = localStorage.getItem('access_token');
+  const headers = {
+    Authorization: 'Bearer ' + token
+  }
+  return this.http.get(this.globalParam.baseUrl + endpoint, {headers: headers});
+}
   getNoToken(
     endpoint: string,
     data?: Map<string, string>
@@ -317,7 +323,7 @@ export class StewardService<T, E> {
         }
         const options = {
           // REVERT TO HEADERS.
-          headers: this.headersNoToken,
+          headers: this.headersFormdata,
           params: this.parseDataTableParams(dTParams, httpParams),
         };
         this.http
@@ -325,11 +331,12 @@ export class StewardService<T, E> {
             this.globalParam.baseUrl + endpoint,
             options
           )
-          .subscribe((resp) => {
+          .subscribe((resp:any) => {
             callback({
-              recordsTotal: resp.data.totalElements,
-              recordsFiltered: resp.data.totalElements,
-              data: resp.data.content,
+              recordsTotal: resp.length,
+              recordsFiltered: resp.length,
+              // data: resp.data.content,
+              data:resp
             });
           });
       },

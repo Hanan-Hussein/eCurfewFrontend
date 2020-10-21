@@ -45,7 +45,7 @@ export const navItems: INavData[] = [
     // icon: 'fa fa-building',
     children: [
       {
-        name: 'View customers',
+        name: 'customers',
         url: '/home/customers/customers',
         // icon: 'fa fa-caret-right'
       },
@@ -62,6 +62,11 @@ export const navItems: INavData[] = [
       {
         name: 'Audit Trails',
         url: '/home/reports/audit-logs',
+        // icon: 'fa fa-caret-right'
+      },
+      {
+        name: 'Session Trails',
+        url: '/home/reports/session-logs',
         // icon: 'fa fa-caret-right'
       },
     ],

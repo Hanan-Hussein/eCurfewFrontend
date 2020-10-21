@@ -36,10 +36,11 @@ import { IncomeReportsComponent } from './income-reports/income-reports.componen
 import { TopUpRequestsComponent } from './top-up-requests/top-up-requests.component';
 import { AccountingEntriesComponent } from './accounting-entries/accounting-entries.component';
 import { ConsumptionReportComponent } from './consumption-report/consumption-report.component';
+import { SessionLogsComponent } from './session-logs/session-logs.component';
 
 
 @NgModule({
-  declarations: [AuditLogsComponent, IncomeReportsComponent, TopUpRequestsComponent, AccountingEntriesComponent, ConsumptionReportComponent],
+  declarations: [AuditLogsComponent, IncomeReportsComponent, TopUpRequestsComponent, AccountingEntriesComponent, ConsumptionReportComponent, SessionLogsComponent],
   imports: [
     CommonModule,
     ReportsRoutingModule,

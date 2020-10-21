@@ -6,8 +6,8 @@ import {Injectable} from '@angular/core';
 export class GlobalParams {
 
   // baseUrl = 'http://localhost:8069/api/v1/';
-  // baseUrl = 'http://192.168.1.142:6110/api/v1/';
-  baseUrl = 'http://localhost:8080/';
+  baseUrl = 'http://41.215.130.247:6160/';
+  // baseUrl = 'http://localhost:8080/';
 
   emailPattern = '([A-Za-z0-9_\\-\\.]+)@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,3})$';
   phonePattern = '^[2][5][4][0-9]{9}$';
