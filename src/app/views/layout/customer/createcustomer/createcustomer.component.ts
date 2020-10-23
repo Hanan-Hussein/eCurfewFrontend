@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { CustomerModel } from '../../../../entities/customer-model';
 import { StewardService } from '../../../../shared/services/steward/steward.service';
 import { Notify } from '../../../../shared/class/notify';
@@ -14,6 +14,7 @@ import { Notify } from '../../../../shared/class/notify';
   styleUrls: ['./createcustomer.component.css']
 })
 export class CreatecustomerComponent implements OnInit, OnDestroy {
+  // isLinear = true;
   model: CustomerModel;
   subscription: Subscription;
   isUpdate: boolean;
@@ -21,8 +22,12 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
   disabled = false;
   isView = false;
   countries= [];
+  isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
 
   constructor(
+    private _formBuilder: FormBuilder,
     private stewardService: StewardService<any, any>,
     private notify: Notify,
     protected router: Router,
@@ -40,12 +45,18 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
         this.isReadOnly = true;
       }
     });
-    this.subscription.add( 
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+    this.subscription.add(
       this.stewardService.get('countries').subscribe((response) => {
         if (response.code === 200) {
           this.countries = response.data.content;
-         
-          
+
+
         } else {
           this.notify.showWarning(response.message);
         }
@@ -64,7 +75,7 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
         }
       })
     );
-   
+
 
   }
 
@@ -89,7 +100,7 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
     const inst = this;
     if (this.isUpdate) {
       this.stewardService.put('customer', this.model).subscribe((response) => {
-        
+
         if (response.code === 200) {
           inst.notify.showSuccess(response.message);
           this.router.navigate(['home/customers/customers']);
@@ -97,12 +108,12 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
           inst.notify.showWarning(response.message);
         }
       }, error => {
-       
+
         inst.notify.showWarning(error.error.message);
       });
     } else {
       this.stewardService.post('customer', this.model).subscribe((response) => {
-        
+
         if (response.code === 201) {
           inst.notify.showSuccess(response.message);
           this.router.navigate(['home/customers/customers']);
@@ -110,13 +121,13 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
           inst.notify.showWarning(response.message);
         }
       }, error => {
-        
+
         inst.notify.showWarning(error.error.message);
       });
     }
 
   }
-  
+
 
 }
 

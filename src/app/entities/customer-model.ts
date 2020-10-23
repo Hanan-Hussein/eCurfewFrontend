@@ -6,5 +6,11 @@ export class CustomerModel {
   merchantId: number;
   country: string;
   customerMobile:any;
+  firstName:string;
+  idNumber:string;
+  mobileNumber:string;
+  surname:string;
+  file:File;
+  // surname:string;
 
 }

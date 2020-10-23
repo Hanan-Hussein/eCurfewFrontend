@@ -39,6 +39,7 @@ import {DeleteDialogComponent} from '../util/functionality-buttons/delete-dialog
 import {DeclineDialogComponent} from '../util/functionality-buttons/decline-dialog/decline-dialog.component';
 import {ApproveDialogComponent} from '../util/functionality-buttons/approve-dialog/approve-dialog.component';
 import {FormWizardModule} from 'angular2-wizard/dist';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import {ExpandMode, NgxTreeSelectModule} from 'ngx-tree-select';
 import {PageHeaderModule} from '../../../shared/modules/page-header/page-header.module';
 import {UfsExportService} from '../util/ufs-export.service';
@@ -72,6 +73,7 @@ import {UserProfileComponent} from './user-profile/user-profile.component';
     DataTablesModule,
     UtilModule,
     MatFormFieldModule,
+    NgxMatFileInputModule,
     MatInputModule,
     MatSelectModule,
     MatStepperModule,

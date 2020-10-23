@@ -1,108 +1,77 @@
-<div class="page">
-    <section class="tile">
-        <div class="info-title">
-            <app-back-component></app-back-component>
-            <h2>Add Customer</h2>
+<div class="tile-body">
+<form (ngSubmit)="onCreateForm(createForm)" #createForm="ngForm" role="form">
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step>
+    <h4>Search Customer</h4>
+    <div class="row">
+      <div class="form-group col-md-6">
+          <label>Id<span class="my_span"> *</span></label>
+          <input type="text" pattern="^[2][5][4][0-9]{9}$" maxlength="8" [(ngModel)]="model.idNumber" [readOnly]="isReadOnly"
+              name="idNumber"  class="form-control" required="required"
+              #name="ngModel">
+          <div *ngIf="(name.dirty || name.touched) && name.invalid" class="text-danger">
+              <span class="invalid-input" *ngIf="name.errors.required">
+                  Id Number is required.
+              </span>
+              <span class="invalid-input" *ngIf="name.errors.pattern">
+                  Id Number must be a valid name with at least 8 numbers
+              </span>
+          </div>
+      </div>
+
+        <div class="form-group col-md-6">
+            <label>First Name<span class="my_span"> *</span></label>
+            <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
+                name="firstName" [(ngModel)]="model.firstName" class="form-control" required="required"
+                #name="ngModel">
+            <div *ngIf="(name.dirty || name.touched) && name.invalid" class="text-danger">
+                <span class="invalid-input" *ngIf="name.errors.required">
+                    First Name is required.
+                </span>
+                <span class="invalid-input" *ngIf="name.errors.pattern">
+                    First Name must be a valid name with at least 3 characters
+                </span>
+            </div>
         </div>
-        <div class="tile-body">
-            <form (ngSubmit)="onCreateForm(createForm)" #createForm="ngForm" role="form">
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label>Customer Name<span class="my_span"> *</span></label>
-                        <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
-                            name="name" [(ngModel)]="model.name" class="form-control" required="required"
-                            #name="ngModel">
-                        <div *ngIf="(name.dirty || name.touched) && name.invalid" class="text-danger">
-                            <span class="invalid-input" *ngIf="name.errors.required">
-                                Customer Name is required.
-                            </span>
-                            <span class="invalid-input" *ngIf="name.errors.pattern">
-                                Customer Name must be a valid name with at least 3 characters
-                            </span>
-                        </div>
-                    </div>
-
-    
-
-                    <div class="form-group col-md-6">
-                        <label>Country<span class="my_span"> *</span></label>
-                            <select class="form-control"  [(ngModel)]="model.country" name="country" required #country="ngModel">
-                              <option *ngFor="let countri of countries" value={{countri.name}}>{{countri.name}}</option>
-                            </select>
-                            <div *ngIf="(country.dirty || country.touched) && country.invalid"
-                                 class="text-danger">
-                                <span class="invalid-input" *ngIf="country.errors.required">
-                                  country is required
-                                </span>
-                            </div>
-                          </div>
-
-                    <div class="form-group col-md-6">
-                        <label>Phone Number<span class="my_span"> *</span></label>
-                        <input type="tel" pattern="^[2][5][4][0-9]{9}$" maxlength="13" [(ngModel)]="model.customerMobile" [readOnly]="isReadOnly"
-                            name="customerMobile" class="form-control" required #customerMobile="ngModel" />
-                        <div *ngIf="(customerMobile.dirty || customerMobile.touched) && customerMobile.invalid" class="text-danger">
-                            <span class="invalid-input" *ngIf="customerMobile.errors.required">
-                                customerMobile Number is required.
-                            </span>
-                            <span class="invalid-input" *ngIf="customerMobile.errors.pattern">
-                                Please enter a valid Kenyan customerMobile number begining with 254....
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label>Email Address<span class="my_span"> *</span></label>
-                        <input [(ngModel)]="model.email" type="email" name="email" class="form-control" required [readOnly]="isReadOnly"
-                            pattern="([A-Za-z0-9_\-\.]+)@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$"
-                            #email="ngModel">
-                        <div *ngIf="(email.dirty || email.touched) && email.invalid" class="text-danger">
-                            <span class="invalid-input" *ngIf="email.errors.required">
-                                Email Address is required.
-                            </span>
-                            <span class="invalid-input" *ngIf="email.errors.pattern">
-                                Email Address must be a valid email
-                            </span>
-                        </div>
-                    </div>
-
-                   
-
-                    <div class="form-group col-md-6">
-                        <label>merchant <span class="my_span"> *</span></label>
-                        <input type="number"  name="merchantId" [readOnly]="isReadOnly"
-                            [(ngModel)]="model.merchantId" class="form-control" required #merchantId="ngModel">
-                        <div *ngIf="(merchantId.dirty || merchantId.touched) && merchantId.invalid" class="text-danger">
-                            <span class="invalid-input" *ngIf="merchantId.errors.required">
-                                merchantId is required.
-                            </span>
-                            
-                        </div>
-                    </div>
 
 
-                    
+      </div>
+      <h4 style="padding-top: 5px;">Personal Information</h4>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>Phone Number<span class="my_span"> *</span></label>
+          <input type="tel" pattern="^[2][5][4][0-9]{9}$" maxlength="13" [(ngModel)]="model.mobileNumber" [readOnly]="isReadOnly"
+              name="mobileNumber" class="form-control" required #mobileNumber="ngModel" />
+          <div *ngIf="(mobileNumber.dirty || mobileNumber.touched) && mobileNumber.invalid" class="text-danger">
+              <span class="invalid-input" *ngIf="mobileNumber.errors.required">
+                mobile Number is required.
+              </span>
+              <span class="invalid-input" *ngIf="mobileNumber.errors.pattern">
+                  Please enter a valid Kenyan Mobile number beginning with 254....
+              </span>
+          </div>
+      </div>
 
-                    <div class="col-md-12 pull-right">
-                        <button style="margin:5px;" [disabled]="!createForm.form.valid" type="submit" mat-stroked-button
-                            class="save-button pull-right">Save
-                        </button>
-                        <button type="button" *ngIf="!isUpdate && isView" (click)="enableUpdate()" mat-stroked-button
-                            class="enable-update pull-right">
-                            Enable Update
-                        </button>
-                        <button *ngIf="isUpdate && isView" [disabled]="createForm.form.invalid" type="submit"
-                            mat-stroked-button class="update-button pull-right">
-                            Update
-                        </button>
-                        <button type="button" *ngIf="isUpdate && isView" (click)="disableUpdate()" mat-stroked-button
-                            class="disable-update county-disable pull-right">
-                            Disable Update
-                        </button>
-                    </div>
-
-                </div>
-            </form>
+      <div class="form-group col-md-6">
+        <label>Sur Name<span class="my_span"> *</span></label>
+        <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
+            name="surname" [(ngModel)]="model.surname" class="form-control" required="required"
+            #surname="ngModel">
+        <div *ngIf="(surname.dirty || surname.touched) && surname.invalid" class="text-danger">
+            <span class="invalid-input" *ngIf="surname.errors.required">
+                SurName is required.
+            </span>
+            <span class="invalid-input" *ngIf="name.errors.pattern">
+              SurName must be a valid name with at least 3 characters
+            </span>
         </div>
-    </section>
+    </div>
+
+      </div>
+
+  </mat-step>
+
+</mat-horizontal-stepper>
+</form>
 </div>
