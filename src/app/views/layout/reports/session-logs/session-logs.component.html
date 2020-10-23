@@ -1,17 +1,9 @@
 <div class="page">
   <section class="tile">
     <div class="info-title">
-      <h2>Customers</h2>
+      <h2>Session Logs</h2>
     </div>
     <div class="tile-body">
-      <app-functionality-buttons
-      [addLabel]="'New Customer'"
-      [addLink]="'home/customers/customers/create-customer'"
-      [approveLinkLabel]="'Approve'"
-      [approveLink]="'home/customers/customers/approve-customer'"
-      [deleteLabel]="'Delete'"
-      [endpoint]="'customer'"></app-functionality-buttons>
-
       <app-custom-datatable
         [endpoint]="endpoint"
         [routeView]="routeView"
@@ -20,7 +12,7 @@
         [idColumn]="idColumn"
         [params]="params"
         [hasShowEntries]="true"
-        [fileName]="'Customers'"
+        [fileName]="'Auditlogs'"
         [canExport]="true"
         [filterParams]="''"
         [isFilterPresent]="true"

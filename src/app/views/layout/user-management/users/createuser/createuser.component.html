@@ -6,8 +6,25 @@
     </div>
     <div class="tile-body">
       <form (ngSubmit)="onCreateUser(createForm)" #createForm="ngForm" role="form">
+        <h5 style="color: blue;">User Bio Data</h5>
         <div class="row">
-          <div class="form-group col-md-4">
+
+        <div class="form-group col-md-4">
+          <label>Gender<span class="my_span"> *</span></label>
+          <select [(ngModel)]="model.genderId" name="gender" class="form-control" #genderId="ngModel"
+                  required>
+            <option *ngFor="let gen of gender" value="{{gen.genderId}}">{{gen.gender}}</option>
+          </select>
+          <div *ngIf="(genderId.dirty || genderId.touched) && genderId.invalid"
+               class="text-danger">
+                <span class="invalid-input" *ngIf="genderId.errors.required">
+                  Gender is required.
+                </span>
+          </div>
+        </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
             <label>First Name<span class="my_span"> *</span></label>
             <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
                    name="firstName" [(ngModel)]="firstName" class="form-control" required="required" #firstname="ngModel">
@@ -21,7 +38,7 @@
             </div>
           </div>
 
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-6">
             <label>Last Name<span class="my_span"> *</span> </label>
             <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
                    name="lastName" [(ngModel)]="lastName" class="form-control" required #lastname="ngModel">
@@ -34,8 +51,44 @@
                   </span>
             </div>
           </div>
+          <div class="form-group col-md-6">
+            <label>Designation<span class="my_span"> *</span> </label>
+            <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
+                   name="designation" [(ngModel)]="lastName" class="form-control" required #designation="ngModel">
+            <div *ngIf="(designation.dirty || designation.touched) && designation.invalid" class="text-danger">
+                  <span class="invalid-input" *ngIf="designation.errors.required">
+                    Designation is required.
+                  </span>
+              <span class="invalid-input" *ngIf="lastname.errors.pattern">
+                Designation must be a valid name with at least 3 characters
+                  </span>
+            </div>
+          </div>
 
-          <div class="form-group col-md-4">
+
+          <div class="form-group col-md-6">
+            <label>National Id <span class="my_span"> *</span> </label>
+            <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{8,}$"
+                   name="national_id" [(ngModel)]="lastName" class="form-control" required #designation="ngModel">
+            <div *ngIf="(designation.dirty || designation.touched) && designation.invalid" class="text-danger">
+                  <span class="invalid-input" *ngIf="designation.errors.required">
+                    Designation is required.
+                  </span>
+              <span class="invalid-input" *ngIf="lastname.errors.pattern">
+                National must be a valid name with at least 8 characters
+                  </span>
+            </div>
+          </div>
+
+
+
+
+
+        </div>
+        <h5 style="padding-top: 13px; color: blue;">Contact Details</h5>
+
+        <div class="row">
+          <div class="form-group col-md-6">
             <label>Email Address<span class="my_span"> *</span></label>
             <input [(ngModel)]="model.email" type="email" name="email" class="form-control" required
                    pattern="([A-Za-z0-9_\-\.]+)@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$" #email="ngModel">
@@ -50,7 +103,7 @@
             </div>
           </div>
 
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-6">
             <label>Phone Number<span class="my_span"> *</span></label>
             <input type="tel" pattern="^[2][5][4][0-9]{9}$" maxlength="13" [(ngModel)]="model.phoneNumber"
                    name="msisdn" class="form-control" required #phoneNumber="ngModel"/>
@@ -64,36 +117,6 @@
                   </span>
             </div>
           </div>
-
-          <div class="form-group col-md-4">
-            <label>Gender<span class="my_span"> *</span></label>
-            <select [(ngModel)]="model.genderId" name="gender" class="form-control" #genderId="ngModel"
-                    required>
-              <option *ngFor="let gen of gender" value="{{gen.genderId}}">{{gen.gender}}</option>
-            </select>
-            <div *ngIf="(genderId.dirty || genderId.touched) && genderId.invalid"
-                 class="text-danger">
-                  <span class="invalid-input" *ngIf="genderId.errors.required">
-                    Gender is required.
-                  </span>
-            </div>
-          </div>
-
-
-          <div class="form-group col-md-4">
-            <label>User Type<span class="my_span"> *</span></label>
-            <select [(ngModel)]="model.userTypeId" name="userTypeId" class="form-control" #userTypeId="ngModel"
-                    required>
-              <option *ngFor="let type of userType" value="{{type.typeId}}">{{type.userType}}</option>
-            </select>
-            <div *ngIf="(userTypeId.dirty || userTypeId.touched) && userTypeId.invalid"
-                 class="text-danger">
-                  <span class="invalid-input" *ngIf="userTypeId.errors.required">
-                    User Type is required.
-                  </span>
-            </div>
-          </div>
-
         </div>
 
         <div class="row">

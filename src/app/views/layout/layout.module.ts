@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {LayoutRoutingModule} from './layout-routing.module';
 import {UtilModule} from './util/util.module';
 import { MatNativeDateModule } from '@angular/material/core';
+import { UserManagementModule } from './user-management/user-management.module';
 
 @NgModule({
   declarations: [],
@@ -10,6 +11,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     CommonModule,
     LayoutRoutingModule,
     UtilModule,
+    UserManagementModule,
     MatNativeDateModule
   ]
 })

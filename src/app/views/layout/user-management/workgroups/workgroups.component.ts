@@ -8,44 +8,48 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class WorkgroupsComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'workgroup';
+  endpoint = 'fortis/rest/v2/entities/sec$Group';
   hasCheckBox = true;
-  idColumn = 'groupId';
+  idColumn = 'id';
   params: Map<any, string>;
   routeView = '/home/user-management/workgroups/{0}/view-workgroup';
 
   constructor() {
     this.cols = [];
     this.params = new Map();
-    this.params.set('sort', 'groupId,desc');
+    this.params.set('sort', 'id,desc');
   }
 
   ngOnInit() {
     this.cols.push({
       isCheckBox: true,
       title: '',
-      data: 'groupId',
+      data: 'id',
+    });
+    this.cols.push({
+      title: 'Id',
+      data: 'id'
     });
     this.cols.push({
       title: 'Workgroup',
-      data: 'groupName'
+      data: 'name'
     });
+    // this.cols.push({
+    //   title: 'Description',
+    //   data: 'description',
+    // });
+    // this.cols.push({
+    //   title: 'Date Created',
+    //   data: 'createdOn',
+    //   isDate: true
+    // });
     this.cols.push({
-      title: 'Description',
-      data: 'description',
-    });
-    this.cols.push({
-      title: 'Date Created',
-      data: 'createdOn',
-      isDate: true
-    });
-    this.cols.push({
-      title: 'Status',
-      data: 'actionStatus'
+      title: 'Version',
+      data: 'version'
     });
     this.cols.push({
       title: 'View',
-      data: 'groupId',
+      data: 'id',
       isViewMore: true
     });
   }
