@@ -74,11 +74,11 @@ export class SetupComponent implements OnInit, OnDestroy {
         this.workgroups.push(res.groupId);
       }
     });
-    this.model.workgroupIds = this.workgroups;
+    this.model.workgroup_id = this.workgroups;
     this.model.fullName = this.firstName + ' ' + this.lastName;
     this.model.userTypeId = 0;
     const inst = this;
-    if (this.model.workgroupIds.length < 1) {
+    if (this.model.workgroup_id.length < 1) {
       inst.notify.showWarning('You have not selected any workgroups yet');
     } else {
       this.model.tenantIds = JSON.parse(localStorage.getItem('tenantId'));
@@ -91,7 +91,7 @@ export class SetupComponent implements OnInit, OnDestroy {
           inst.notify.showWarning(response.message);
         }
       }, error => {
-        
+
         inst.notify.showWarning(error.error.message);
       });
     }

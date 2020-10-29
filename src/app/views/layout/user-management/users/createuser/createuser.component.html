@@ -5,29 +5,45 @@
       <h2>User</h2>
     </div>
     <div class="tile-body">
-      <form (ngSubmit)="onCreateUser(createForm)" #createForm="ngForm" role="form">
-        <h5 style="color: blue;">User Bio Data</h5>
+      <form [formGroup]="user" (ngSubmit) = "upload(form)" #form="ngForm" role="form">
         <div class="row">
+          <div class="form-group col-md-6">
+            <label>Profile Picture</label>
+            <input type="file" class="form-control"(change)="fileChange($event)" #fileInput formControlName="file" accept=" .png , .jpg , .gif" required ="required" name="file">
+            </div>
 
-        <div class="form-group col-md-4">
-          <label>Gender<span class="my_span"> *</span></label>
-          <select [(ngModel)]="model.genderId" name="gender" class="form-control" #genderId="ngModel"
-                  required>
-            <option *ngFor="let gen of gender" value="{{gen.genderId}}">{{gen.gender}}</option>
-          </select>
-          <div *ngIf="(genderId.dirty || genderId.touched) && genderId.invalid"
-               class="text-danger">
-                <span class="invalid-input" *ngIf="genderId.errors.required">
-                  Gender is required.
-                </span>
-          </div>
+          <button style="margin:20px;"  type="submit" mat-stroked-button
+            class="save-button pull-right">upload
+    </button>
+
+
         </div>
+
+      </form>
+      <form (ngSubmit)="onCreateUser(createForm)" #createForm="ngForm" role="form">
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>Gender<span class="my_span"> *</span></label>
+              <select  name="gender" class="form-control" name="gender" [(ngModel)]="model.gender"
+              required>
+                required>
+             <option *ngFor="let gen of gender" value="{{gen.word}}">{{gen.word}}</option>
+            </select>
+            <!-- <div *ngIf="(gender.dirty || gender.touched) && gender.invalid"
+            class="text-danger">
+             <span class="invalid-input" *ngIf="gender.errors.required">
+               Gender is required.
+             </span>
+       </div> -->
+            </div>
         </div>
+        <h5 style="color: blue;">User Bio Data</h5>
         <div class="row">
           <div class="form-group col-md-6">
             <label>First Name<span class="my_span"> *</span></label>
             <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
-                   name="firstName" [(ngModel)]="firstName" class="form-control" required="required" #firstname="ngModel">
+                   name="firstName" [(ngModel)]="model.firstName" class="form-control" required="required" #firstname="ngModel">
             <div *ngIf="(firstname.dirty || firstname.touched) && firstname.invalid" class="text-danger">
                   <span class="invalid-input" *ngIf="firstname.errors.required">
                     First Name is required.
@@ -41,7 +57,7 @@
           <div class="form-group col-md-6">
             <label>Last Name<span class="my_span"> *</span> </label>
             <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
-                   name="lastName" [(ngModel)]="lastName" class="form-control" required #lastname="ngModel">
+                   name="lastName" [(ngModel)]="model.lastName" class="form-control" required #lastname="ngModel">
             <div *ngIf="(lastname.dirty || lastname.touched) && lastname.invalid" class="text-danger">
                   <span class="invalid-input" *ngIf="lastname.errors.required">
                     Last Name is required.
@@ -54,7 +70,7 @@
           <div class="form-group col-md-6">
             <label>Designation<span class="my_span"> *</span> </label>
             <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
-                   name="designation" [(ngModel)]="lastName" class="form-control" required #designation="ngModel">
+                   name="position" [(ngModel)]="model.position" class="form-control" required #designation="ngModel">
             <div *ngIf="(designation.dirty || designation.touched) && designation.invalid" class="text-danger">
                   <span class="invalid-input" *ngIf="designation.errors.required">
                     Designation is required.
@@ -68,15 +84,13 @@
 
           <div class="form-group col-md-6">
             <label>National Id <span class="my_span"> *</span> </label>
-            <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{8,}$"
-                   name="national_id" [(ngModel)]="lastName" class="form-control" required #designation="ngModel">
-            <div *ngIf="(designation.dirty || designation.touched) && designation.invalid" class="text-danger">
-                  <span class="invalid-input" *ngIf="designation.errors.required">
-                    Designation is required.
+            <input type="text"
+                   name="national_id" [(ngModel)]="model.nationalId" class="form-control" required #national_id="ngModel">
+            <div *ngIf="(national_id.dirty || national_id.touched) && national_id.invalid" class="text-danger">
+                  <span class="invalid-input" *ngIf="national_id.errors.required">
+                    National ID is required.
                   </span>
-              <span class="invalid-input" *ngIf="lastname.errors.pattern">
-                National must be a valid name with at least 8 characters
-                  </span>
+
             </div>
           </div>
 

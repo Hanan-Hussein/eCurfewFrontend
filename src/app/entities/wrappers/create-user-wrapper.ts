@@ -4,6 +4,11 @@ export class CreateUserWrapper {
     userId: number;
     fullName: string;
     phoneNumber: string;
+    firstName: string;
+    lastName: string;
+    position:string;
+    nationalId:string;
+    file:File;
     email: string;
     // userType: string;
     userTypeId: number;
@@ -12,13 +17,17 @@ export class CreateUserWrapper {
     status: string;
     roleMaps: Array<RoleMaps>;
     passwordStatus: string;
-    genderId: number;
-    gender: {gender: string};
-    workgroupIds: number[];
+    gender: string;
+    workgroup_id: number[];
     groupId:  number[];
     tenantIds: number;
     actionStatus: string;
+    profilePhoto: Profile;
     userType: {userType: string};
+
 }
 
 
+export class Profile {
+  id: string;
+}

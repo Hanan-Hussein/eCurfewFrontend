@@ -152,12 +152,12 @@ export class ViewUserComponent implements OnInit, OnDestroy {
         this.workgroups.push(res.groupId);
       }
     });
-    this.model.workgroupIds = this.workgroups;
+    this.model.workgroup_id = this.workgroups;
     this.model.fullName = this.firstName + ' ' + this.lastName;
     const inst = this;
 
 
-    if (this.model.workgroupIds.length < 1) {
+    if (this.model.workgroup_id.length < 1) {
       inst.notify.showWarning('You have not selected any workgroups yet');
     } else {
       this.model.tenantIds = JSON.parse(localStorage.getItem('tenantId'));

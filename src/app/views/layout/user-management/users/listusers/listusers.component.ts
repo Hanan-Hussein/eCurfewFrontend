@@ -39,8 +39,12 @@ export class ListusersComponent implements OnInit {
       data: 'id',
     });
     this.cols.push({
-      title: 'Name',
-      data: 'name'
+      title: 'First Name',
+      data: 'firstName'
+    });
+    this.cols.push({
+      title: 'Last Name',
+      data: 'lastName'
     });
     this.cols.push({
       title: 'Email',

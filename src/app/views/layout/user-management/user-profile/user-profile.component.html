@@ -13,33 +13,33 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Old Password<span class="my_span"> *</span></label>
-                            <input type="password" [(ngModel)]="change.oldPassword" formControlName="oldPassword"
-                                   name="oldPassword" class="form-control"/>
+                            <input type="password"  formControlName="oldPass"
+                                   name="oldPass" class="form-control"/>
                             <span class="help-block text-danger"
-                                  *ngIf="profileForm.get('oldPassword').touched && profileForm.get('oldPassword').hasError('required')">
+                                  *ngIf="profileForm.get('oldPass').touched && profileForm.get('oldPass').hasError('required')">
                           Current Password is required</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>New Password<span class="my_span"> *</span></label>
-                            <input type="password" [(ngModel)]="confirmPassword" formControlName="confirmPassword"
-                                   name="confirmPassword" class="form-control"/>
+                            <input type="password"  formControlName="newPassword"
+                                   name="newPassword" class="form-control"/>
                             <span class="help-block text-danger"
-                                  *ngIf="profileForm.get('confirmPassword').touched && profileForm.get('confirmPassword').hasError('required')">
+                                  *ngIf="profileForm.get('newPassword').touched && profileForm.get('newPassword').hasError('required')">
                           New Password is required</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Confirm Password<span class="my_span"> *</span></label>
-                            <input type="password" [(ngModel)]="change.newPassword" formControlName="newPassword"
-                                   name="newPassword" class="form-control"/>
+                            <input type="password"  formControlName="confirmPassword"
+                                   name="confirmPassword" class="form-control"/>
                             <span class="help-block text-danger"
-                                  *ngIf="profileForm.get('newPassword').touched && profileForm.get('newPassword').hasError('required')">
+                                  *ngIf="profileForm.get('confirmPassword').touched && profileForm.get('confirmPassword').hasError('required')">
                           Password Confirmation is required.</span>
                             <span class="help-block text-danger"
-                                  *ngIf="profileForm.get('newPassword').hasError('mismatchedPasswords')">Passwords do not match</span>
+                                  *ngIf="profileForm.get('confirmPassword').hasError('mismatchedPasswords')">Passwords do not match</span>
                         </div>
                     </div>
                     <div class="row">
