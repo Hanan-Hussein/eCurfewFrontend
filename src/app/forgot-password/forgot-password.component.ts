@@ -26,12 +26,12 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   resetPass(form: NgForm) {
-    
-    const params = new URLSearchParams();
-    params.append('email', this.model.email);
-    this.stewardService.postNoToken('reset-password?' + params.toString(), {}).subscribe(response => {
+
+    // const params = new URLSearchParams();
+    // params.append('username', this.model.username);
+    this.stewardService.postNoToken('fortis/rest/forgot/password',this.model ).subscribe(response => {
         if (response.code === 200) {
-          
+
           this.snackBar.open(response.message, 'Notification', {
             duration: 5000,
             panelClass: 'snackbar-success',

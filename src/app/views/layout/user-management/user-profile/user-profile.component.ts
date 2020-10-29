@@ -5,7 +5,7 @@ import {Users} from '../../../../entities/users-model';
 import {StewardService} from '../../../../shared/services/steward/steward.service';
 import {Notify} from '../../../../shared/class/notify';
 import {ResponseWrapper} from '../../../../entities/wrappers/response-wrapper';
-import {ChangepassWrapper} from '../../../../entities/wrappers/change-pass-wrapper';
+import {ChangepassWrapper, PasswordWrapper} from '../../../../entities/wrappers/change-pass-wrapper';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {LocalStorage} from '@ngx-pwa/local-storage';
 
@@ -31,42 +31,26 @@ export class UserProfileComponent implements OnInit {
 
     ngOnInit() {
         this.profileForm = this.formBuilder.group({
-            'oldPassword': ['', Validators.compose([Validators.required])],
-            'newPassword': ['', Validators.compose([Validators.required])],
-            'confirmPassword': ['', Validators.compose([Validators.required])],
-        }, {validator: matchingPasswords('confirmPassword', 'newPassword')});
-
-        this.response = JSON.parse(localStorage.getItem('userData'));
-        this.model = this.response.data.userDetails;
+            oldPass: ['', Validators.compose([Validators.required])],
+            newPassword: ['', Validators.compose([Validators.required])],
+            confirmPassword: ['', Validators.compose([Validators.required])],
+        }, {validator: matchingPasswords('newPassword','confirmPassword')});
 
 
-        this.viewparam.push({
-            value: this.model.userId,
-            label: 'User Id',
-            order: 1,
-        });
-        this.viewparam.push({
-            value: this.model.fullName,
-            label: 'Full Names',
-            order: 2,
-        });
-        this.viewparam.push({
-            value: this.model.username,
-            label: 'Email',
-            order: 3,
-        });
-        this.viewparam.push({
-            value: this.model.gender,
-            label: 'Gender',
-            order: 4,
-        });
 
-        this.change.email = this.model.username;
-    }
-
+      }
     changePass(): void {
         const inst = this;
-        this.stewardService.postFormData('change-password', this.change).subscribe((response) => {
+        console.log('>>>>>>>>>>>>>>',this.profileForm.value);
+        console.log(">---------------------.",this.change)
+        this.change=this.profileForm.value;
+
+        this.change.changePasswordWrapper.oldPass=this.profileForm.value.oldPass;
+console.log(this.change.changePasswordWrapper.oldPass=this.profileForm.value.oldPass);
+        // console.log("============>>>>>>", this.change.changePasswordWrapper.oldPass=this.profileForm.value.oldPass
+        //     );
+
+        this.stewardService.postFormData('fortis/rest/v2/services/fortis_ChangePasswordService/ChangePassword',  this.change).subscribe((response) => {
             if (response.code === 200) {
                 inst.notify.showSuccess(response.message);
                 // form.resetForm();

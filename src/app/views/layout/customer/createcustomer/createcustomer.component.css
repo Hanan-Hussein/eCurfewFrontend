@@ -9,3 +9,6 @@ label {
     font-weight:unset;
     /* color: #404040; */
 }
+.mat-stepper-horizontal, .mat-stepper-vertical {
+  background-color: #ffffff;
+}
