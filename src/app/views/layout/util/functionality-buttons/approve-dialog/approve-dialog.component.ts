@@ -1,7 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {NgForm} from '@angular/forms';
-import {CheckerActions} from '../../../../../entities/wrappers/checker-actions';
 import {StewardService} from '../../../../../shared/services/steward/steward.service';
 import {Notify} from '../../../../../shared/class/notify';
 import {ResponseWrapper} from '../../../../../entities/wrappers/response-wrapper';
@@ -13,7 +12,7 @@ import {ResponseWrapper} from '../../../../../entities/wrappers/response-wrapper
 })
 export class ApproveDialogComponent {
 
-  checkerActions: CheckerActions;
+  checkerActions: any;
   selectedIds: Array<any>;
   approveLabel = 'Approve';
   endpoint: string;
@@ -25,14 +24,18 @@ export class ApproveDialogComponent {
     protected notify: Notify,
   ) {
     this.checkerActions = data.checkerActions;
-    this.checkerActions.action = 'Approve';
+    // this.checkerActions.action = 'Approve';
     this.selectedIds = data.selectedIds;
     this.endpoint = data.endpoint;
     this.approveLabel = data.approveLabel;
   }
 
   processAction(form: NgForm) {
-    this.stewardService.put(this.endpoint + '/' + this.checkerActions.action.toLowerCase() + '-actions', this.checkerActions).subscribe((response) => {
+    // this.checkerActions.details = this.checkerActions;
+
+    // console.log('>>>>>>>>>>>>>>>>>>>', this.checkerActions.details);
+
+    this.stewardService.post(this.endpoint, {details: this.checkerActions}).subscribe((response) => {
       this.processResponse(form, response);
     });
   }

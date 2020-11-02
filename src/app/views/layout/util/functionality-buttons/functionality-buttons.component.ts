@@ -69,7 +69,7 @@ export class FunctionalityButtonsComponent {
     });
 
   }
-
+7
   approveConfirm(): void {
     const ids: Array<any> = [];
     if (this.selectedIds.length === 0) {

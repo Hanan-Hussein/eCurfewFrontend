@@ -8,7 +8,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class ApproveCustomerComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'customer';
+  endpoint = 'fortis/rest/v2/entities/fortis_CustomerDetails?actionStatus=Unapproved';
   routeView = 'home/customers/customers/{0}/view-customer';
   hasCheckBox = true;
   idColumn = 'id';
@@ -28,46 +28,24 @@ export class ApproveCustomerComponent implements OnInit {
       data: 'id'
     });
     this.cols.push({
-      title: 'Name',
-      data: 'name'
+      title: ' First Name',
+      data: 'firstName'
     });
     this.cols.push({
-      title: 'Credit Balance',
-      data: 'creditBalance'
+      title: 'Employee Number',
+      data: 'employeeNumber'
     });
     this.cols.push({
-      title: 'Total Bought Credits',
-      data: 'totalBoughtCredit'
+      title: 'Id Number',
+      data: 'idNumber'
     });
     this.cols.push({
-      title: 'merchant',
-      data: 'merchant.name'
+      title: 'Email Address',
+      data: 'emailAddress'
     });
     this.cols.push({
-      title: 'Phone Number',
-      data: 'customerMobile'
-    });
-    this.cols.push({
-      title: 'Email',
-      data: 'email'
-    });
-    this.cols.push({
-      title: 'Country',
-      data: 'country'
-    });
-    this.cols.push({
-      title: 'Date Created',
-      data: 'creationDate',
-      isDate: true
-    });
-    this.cols.push({
-      title: 'Status',
+      title: 'Action Status',
       data: 'actionStatus'
-    });
-    this.cols.push({
-      data: 'id',
-      title: 'View',
-      isViewMore: true,
     });
   }
 

@@ -9,8 +9,9 @@
           <app-functionality-buttons [addLabel]="'New Customer'"
                                      [addLink]="'home/customers/customers/create-customer'"
                                      [approveLabel]="'Approve'"
+                                     [approveLink]="'fortis/rest/v2/services/fortis_MakerCheckerService/approveCustomer'"
                                      [declineLabel]="'Decline'"
-                                     [endpoint]="'customer'"></app-functionality-buttons>
+                                     [endpoint]="'fortis/rest/v2/services/fortis_MakerCheckerService/approveCustomer'"></app-functionality-buttons>
           <app-custom-datatable
             [endpoint]="endpoint"
             [hasCheckBox]="hasCheckBox"
@@ -28,5 +29,4 @@
       </section>
     </div>
   </div>
-  
-  
+
