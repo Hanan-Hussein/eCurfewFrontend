@@ -124,6 +124,75 @@
               </span>
           </div> -->
         </div>
+        <div class="form-group col-md-6">
+          <label>Current Address<span class="my_span"> *</span></label>
+          <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
+              name="currentAddress" formControlName="currentAddress" class="form-control" required="required"
+              >
+        </div>
+        <div class="form-group col-md-6">
+          <label>Next of Kin Name<span class="my_span"> *</span></label>
+          <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
+              name="nextofkinname" formControlName="nextofkinname" class="form-control" required="required"
+              >
+        </div>
+        <div class="form-group col-md-6">
+          <label>Next of Kin Relationship<span class="my_span"> *</span></label>
+          <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
+              name="nextofkinrelationship" formControlName="nextofkinrelationship" class="form-control" required="required"
+              >
+        </div>
+        <div class="form-group col-md-6">
+          <label>Next of Kin Mobile Number<span class="my_span"> *</span></label>
+          <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
+              name="nextofkinmobileNumber" formControlName="nextofkinmobileNumber" class="form-control" required="required"
+              >
+        </div>
+        <div class="form-group col-md-6">
+          <label>Next of Kin Address<span class="my_span"> *</span></label>
+          <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
+              name="nextofkinaddress" formControlName="nextofkinaddress" class="form-control" required="required"
+              >
+        </div>
+        <div class="form-group col-md-6">
+          <label>Next of Kin Occupation<span class="my_span"> *</span></label>
+          <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
+              name="nextofkinoccupation" formControlName="nextofkinoccupation" class="form-control" required="required"
+              >
+        </div>
+
+
+
+        <div class="form-group col-md-6">
+          <label>Customer Status</label>
+          <select formControlName="status"  name="status" placeholder="Select Customer Status"  class="form-control " required>
+              <option *ngFor="let status of customerStatus" value="{{status.id}}">{{status.description}}</option>
+          </select>
+
+      </div>
+      <div class="form-group col-md-6">
+        <label>Sector</label>
+        <select formControlName="sectors"  name="sectors" placeholder="Select Customer Sector"  class="form-control " required>
+            <option *ngFor="let sect of sectors" value="{{sect.id}}">{{sect.description}}</option>
+        </select>
+
+    </div>
+
+        <div class="form-group col-md-6">
+          <label>Select industry</label>
+          <select formControlName="ids"  name="ids" placeholder="Select Industry"  class="form-control " required>
+              <option *ngFor="let ind of industries" value="{{ind.id}}">{{ind.description}}</option>
+          </select>
+
+      </div>
+      <div class="form-group col-md-6">
+        <label>Account Officer</label>
+        <select formControlName="account_officer"  name="account_officer" placeholder="Account Officer"  class="form-control " required>
+            <option *ngFor="let acc of accOfficer" value="{{acc.id}}">{{acc.description}}</option>
+        </select>
+
+    </div>
+
 
       </div>
       <div style="float: right;">

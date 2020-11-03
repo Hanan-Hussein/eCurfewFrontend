@@ -9,6 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {AgmCoreModule} from '@agm/core';
 import { ApproveCustomerComponent } from './approve-customer/approve-customer.component';
 import { CreatecustomerComponent } from './createcustomer/createcustomer.component';
+import {ViewCustomerComponent} from './view-customer/view-customer.component';
 
 import { DeleteDialogComponent } from '../util/functionality-buttons/delete-dialog/delete-dialog.component';
 import { ApproveDialogComponent } from '../util/functionality-buttons/approve-dialog/approve-dialog.component';
@@ -40,7 +41,8 @@ import { CdkTableModule } from '@angular/cdk/table';
 @NgModule({
   declarations: [
     CustomerComponent,
-      ApproveCustomerComponent, 
+      ApproveCustomerComponent,
+      ViewCustomerComponent,
       CreatecustomerComponent],
   imports: [
     CommonModule,

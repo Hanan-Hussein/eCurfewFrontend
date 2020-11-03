@@ -22,7 +22,7 @@ export class BiometricsComponent implements OnInit {
   fingerprint:any;
   imageSource;
   scanned=false;
- 
+
 
   constructor(
     public router: Router,
@@ -51,7 +51,7 @@ export class BiometricsComponent implements OnInit {
     params.append('grant_type', 'password'); // oauth/token // process-login
 
     this.stewardService.postLogin('oauth/token', params.toString()).subscribe((response) => {
-   
+
         if (response.code === 400) {
           this.notify.showWarning(response.message);
         } else if (response.code === 410) {

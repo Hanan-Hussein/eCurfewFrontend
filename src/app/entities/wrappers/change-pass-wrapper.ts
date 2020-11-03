@@ -3,13 +3,10 @@ export class ChangepassWrapper {
     // username: string;
     // newPassword: string;
     changePasswordWrapper:PasswordWrapper;
-    // changePasswordWrapper: {
-    //   oldPass: string;
-    //   newPassword: string;
-    // };
-constructor(){
-  this.changePasswordWrapper = new PasswordWrapper();
-}
+    
+// constructor(){
+//   this.changePasswordWrapper = new PasswordWrapper();
+// }
 
 
 }

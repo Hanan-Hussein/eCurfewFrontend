@@ -11,6 +11,7 @@ import { catchError } from 'rxjs/operators';
 import { GlobalParams } from '../globalparams';
 import { ResponseWrapper } from '../../../entities/wrappers/response-wrapper';
 import { DataTableWrapper } from '../../../entities/wrappers/data-table-wrapper';
+import { MasterDataResponseWrapper } from '../../../entities/wrappers/masterdata-wrapper';
 
 @Injectable({
   providedIn: 'root',
@@ -233,6 +234,18 @@ export class StewardService<T, E> {
     endpoint: string,
     data?: Map<string, string>
   ): Observable<ResponseWrapper<E>> {
+    const options = {
+      headers: this.headers,
+      params: this.getHttpParams(data),
+    };
+    return this.http
+      .get(this.globalParam.baseUrl + endpoint, options)
+      .pipe(catchError(this.handleError<any>()));
+  }
+  getMasterData(
+    endpoint: string,
+    data?: Map<string, string>
+  ): Observable<MasterDataResponseWrapper<E>> {
     const options = {
       headers: this.headers,
       params: this.getHttpParams(data),

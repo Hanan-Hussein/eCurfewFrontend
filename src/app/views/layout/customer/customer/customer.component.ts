@@ -31,8 +31,8 @@ export class CustomerComponent implements OnInit {
       data: 'firstName'
     });
     this.cols.push({
-      title: 'Other Names',
-      data: 'otherNames'
+      title: 'SurName',
+      data: 'surname'
     });
     this.cols.push({
       title: 'Employee Number',

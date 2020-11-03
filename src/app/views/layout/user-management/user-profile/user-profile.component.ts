@@ -43,14 +43,14 @@ export class UserProfileComponent implements OnInit {
         const inst = this;
         console.log('>>>>>>>>>>>>>>',this.profileForm.value);
         console.log(">---------------------.",this.change)
-        this.change=this.profileForm.value;
+        this.change.changePasswordWrapper=this.profileForm.value;
 
         this.change.changePasswordWrapper.oldPass=this.profileForm.value.oldPass;
-console.log(this.change.changePasswordWrapper.oldPass=this.profileForm.value.oldPass);
-        // console.log("============>>>>>>", this.change.changePasswordWrapper.oldPass=this.profileForm.value.oldPass
-        //     );
+        this.change.changePasswordWrapper.newPassword=this.profileForm.value.newPassword;
+        // console.log(this.change.changePasswordWrapper.oldPass=this.profileForm.value.oldPass);
 
-        this.stewardService.postFormData('fortis/rest/v2/services/fortis_ChangePasswordService/ChangePassword',  this.change).subscribe((response) => {
+
+        this.stewardService.post('fortis/rest/v2/services/fortis_ChangePasswordService/ChangePassword',  this.change).subscribe((response) => {
             if (response.code === 200) {
                 inst.notify.showSuccess(response.message);
                 // form.resetForm();

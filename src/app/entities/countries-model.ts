@@ -1,4 +1,5 @@
 export class CountriesModel {
+  description:string;
   name: string;
   code: string;
   action: string;

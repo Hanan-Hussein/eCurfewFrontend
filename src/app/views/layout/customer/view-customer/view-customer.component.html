@@ -7,41 +7,201 @@
     <div class="tile-body">
       <div class="row">
         <div class="col-md-12">
-          <form [formGroup]="customerForm" (ngSubmit)="onUpdate()">
-
-            <!--          Customer Information-->
+          <form  (ngSubmit)="onUpdate()">
             <div class="row">
-              <div class="form-group col-md-4">
-                <label>Customer Name</label>
-                <input type="text" formControlName="name"
-                       name="name" class="form-control"
-                       required [readOnly]="isReadOnly">
-                <div *ngIf="(f.name.dirty || f.name.touched) && f.name.invalid" class="text-danger">
-                  <span class="invalid-input" *ngIf="f.name.errors.required">
-                    Customer Name is required.
-                  </span>
-                </div>
+              <div class="col-md-12">
+                <h3 class="sub-title">User Details</h3>
               </div>
               <div class="form-group col-md-4">
-                <label>Phone Number</label>
-                <input type="text" formControlName="phoneNumber"
-                       name="phoneNumber" class="form-control"
-                       required [readOnly]="isReadOnly">
-                <div *ngIf="(f.phoneNumber.dirty || f.phoneNumber.touched) && f.phoneNumber.invalid" class="text-danger">
-                  <span class="invalid-input" *ngIf="f.phoneNumber.errors.required">
-                    Phone Number is required.
-                  </span>
+                <label>First Name<span class="my_span"> *</span></label>
+                <input type="text" name="firstName" [(ngModel)]="model.firstName" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
+                       class="form-control" required="required" [readOnly]="isReadOnly" #firstname="ngModel">
+                <div *ngIf="(firstname.dirty || firstname.touched) && firstname.invalid" class="text-danger">
+                      <span class="invalid-input" *ngIf="firstname.errors.required">
+                        First Name is required.
+                      </span>
+                  <span class="invalid-input" *ngIf="firstname.errors.pattern">
+                        First Name must be a valid name with at least 3 characters
+                      </span>
                 </div>
               </div>
 
-              <div class="form-group col-md-12">
-                <label>Location</label>
-                <agm-map [latitude]="lat" [longitude]="lng">
-                  <agm-marker  [latitude]="lat" [longitude]="lng"></agm-marker>
-                </agm-map>
+              <div class="form-group col-md-4">
+                <label>SurName <span class="my_span"> *</span></label>
+                <input type="text" name="surname" [(ngModel)]="model.surname" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
+                       class="form-control" required [readOnly]="isReadOnly" #surname="ngModel">
+                <div *ngIf="(surname.dirty || surname.touched) && surname.invalid" class="text-danger">
+                      <span class="invalid-input" *ngIf="surname.errors.required">
+                        Last Name is required.
+                      </span>
+                  <span class="invalid-input" *ngIf="surname.errors.pattern">
+                        SurName must be a valid name with at least 3 characters
+                      </span>
+                </div>
               </div>
+
+              <div class="form-group col-md-4">
+                <label>Email Address<span class="my_span"> *</span></label>
+                <input [(ngModel)]="model.emailAddress" type="emailAddress" name="email" class="form-control" required [readOnly]="isReadOnly"
+                       pattern="([A-Za-z0-9_\-\.]+)@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$" #emailAddress="ngModel">
+                <div *ngIf="(emailAddress.dirty || emailAddress.touched) && emailAddress.invalid"
+                     class="text-danger">
+                      <span class="invalid-input" *ngIf="emailAddress.errors.required">
+                        Email Address is required.
+                      </span>
+                  <span class="invalid-input" *ngIf="emailAddress.errors.pattern">
+                        Email Address must be a valid email
+                      </span>
+                </div>
+              </div>
+
+              <div class="form-group col-md-4">
+                <label>Phone Number<span class="my_span"> *</span></label>
+                <input type="tel" pattern="^[2][5][4][0-9]{9}$" maxlength="13" [(ngModel)]="model.mobileNumber"
+                       name="msisdn" class="form-control" required #mobileNumber="ngModel" [readOnly]="isReadOnly"/>
+                <div *ngIf="(mobileNumber.dirty || mobileNumber.touched) && mobileNumber.invalid"
+                     class="text-danger">
+                      <span class="invalid-input" *ngIf="mobileNumber.errors.required">
+                        Phone Number is required.
+                      </span>
+                  <span class="invalid-input" *ngIf="mobileNumber.errors.pattern">
+                        Please enter a valid Kenyan phone number beginning with 254
+                      </span>
+                </div>
+              </div>
+              <div class="form-group col-md-4">
+                <label> Id Number <span class="my_span"> *</span></label>
+                <input type="text" name="idNumber" [(ngModel)]="model.idNumber"
+                       class="form-control" required="required" [readOnly]="isReadOnly" #idNumber="ngModel">
+                <!-- <div *ngIf="(idNumber.dirty || idNumber.touched) && idNumber.invalid" class="text-danger">
+                      <span class="invalid-input" *ngIf="idNumber.errors.required">
+                        National Id is required.
+                      </span>
+                  <span class="invalid-input" *ngIf="idNumber.errors.pattern">
+                    National Id must be a valid Number with at least 3 characters
+                      </span>
+                </div> -->
+              </div>
+              <div class="form-group col-md-4">
+                <label>Employee Number <span class="my_span"> *</span></label>
+                <input type="text" name="employeeNumber" [(ngModel)]="model.employeeNumber"
+                       class="form-control" required [readOnly]="isReadOnly" #employeeNumber="ngModel">
+                <div *ngIf="(employeeNumber.dirty || employeeNumber.touched) && employeeNumber.invalid" class="text-danger">
+                      <span class="invalid-input" *ngIf="employeeNumber.errors.required">
+                        Employee Number is required.
+                      </span>
+                  <!-- <span class="invalid-input" *ngIf="surname.errors.pattern">
+                        SurName must be a valid name with at least 3 characters
+                      </span> -->
+                </div>
+              </div>
+              <div class="form-group col-md-4">
+                <label>Kra Pin <span class="my_span"> *</span></label>
+                <input type="text" name="kraPin" [(ngModel)]="model.kraPin"
+                       class="form-control" required [readOnly]="isReadOnly" #kraPin="ngModel">
+                <div *ngIf="(kraPin.dirty || kraPin.touched) && kraPin.invalid" class="text-danger">
+                      <span class="invalid-input" *ngIf="kraPin.errors.required">
+                        Kra Pin is required.
+                      </span>
+                </div>
+              </div>
+              <div class="form-group col-md-4">
+                <label>Occupation <span class="my_span"> *</span></label>
+                <input type="text" name="occupation" [(ngModel)]="model.occupation" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
+                       class="form-control" required [readOnly]="isReadOnly" #occupation="ngModel">
+                <div *ngIf="(occupation.dirty || occupation.touched) && occupation.invalid" class="text-danger">
+                      <span class="invalid-input" *ngIf="occupation.errors.required">
+                        Occupation is required.
+                      </span>
+                  <span class="invalid-input" *ngIf="occupation.errors.pattern">
+                    Occupation must be a valid name with at least 3 characters
+                      </span>
+                </div>
+              </div>
+              <div class="form-group col-md-4">
+                <label>Current Address <span class="my_span"> *</span></label>
+                <input type="text" name="currentAddress" [(ngModel)]="model.currentAddress" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
+                       class="form-control" required [readOnly]="isReadOnly" #currentAddress="ngModel">
+                <div *ngIf="(currentAddress.dirty || currentAddress.touched) && currentAddress.invalid" class="text-danger">
+                      <span class="invalid-input" *ngIf="currentAddress.errors.required">
+                        CurrentAddress is required.
+                      </span>
+                  <span class="invalid-input" *ngIf="currentAddress.errors.pattern">
+                    CurrentAddress must be a valid name with at least 3 characters
+                      </span>
+                </div>
+              </div>
+              <div class="form-group col-md-4">
+                <label>Next of Kin Name  <span class="my_span"> *</span></label>
+                <input type="text" name="nextofkinname" [(ngModel)]="model.nextofkinname" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
+                       class="form-control" required [readOnly]="isReadOnly" #nextofkinname="ngModel">
+                <div *ngIf="(nextofkinname.dirty || nextofkinname.touched) && nextofkinname.invalid" class="text-danger">
+                      <span class="invalid-input" *ngIf="nextofkinname.errors.required">
+                        Next of Kin Name is required.
+                      </span>
+                  <span class="invalid-input" *ngIf="nextofkinname.errors.pattern">
+                    Next Of Kin Name must be a valid name with at least 3 characters
+                      </span>
+                </div>
+              </div>
+              <div class="form-group col-md-4">
+                <label>Next of Kin Relationship  <span class="my_span"> *</span></label>
+                <input type="text" name="nextofkinrelationship" [(ngModel)]="model.nextofkinrelationship" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
+                       class="form-control" required [readOnly]="isReadOnly" #nextofkinrelationship="ngModel">
+                <div *ngIf="(nextofkinrelationship.dirty || nextofkinrelationship.touched) && nextofkinrelationship.invalid" class="text-danger">
+                      <span class="invalid-input" *ngIf="nextofkinrelationship.errors.required">
+                        Next of Kin Relationship is required.
+                      </span>
+                  <span class="invalid-input" *ngIf="nextofkinrelationship.errors.pattern">
+                    Next of Kin Relationship  must be a valid name with at least 3 characters
+                      </span>
+                </div>
+              </div>
+
+              <div class="form-group col-md-4">
+                <label>Next of Kin Phone Number<span class="my_span"> *</span></label>
+                <input type="tel" pattern="^[2][5][4][0-9]{9}$" maxlength="13" [(ngModel)]="model.nextofkinmobileNumber"
+                       name="msisdn" class="form-control" required #nextofkinmobileNumber="ngModel" [readOnly]="isReadOnly"/>
+                <div *ngIf="(nextofkinmobileNumber.dirty || nextofkinmobileNumber.touched) && nextofkinmobileNumber.invalid"
+                     class="text-danger">
+                      <span class="invalid-input" *ngIf="nextofkinmobileNumber.errors.required">
+                        Next Of Kin Phone Number is required.
+                      </span>
+                  <span class="invalid-input" *ngIf="nextofkinmobileNumber.errors.pattern">
+                        Please enter a valid Kenyan phone number beginning with 254
+                      </span>
+                </div>
+              </div>
+
+              <div class="form-group col-md-4">
+                <label>Next of Kin Address  <span class="my_span"> *</span></label>
+                <input type="text" name="nextofkinaddress" [(ngModel)]="model.nextofkinaddress" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
+                       class="form-control" required [readOnly]="isReadOnly" #nextofkinaddress="ngModel">
+                <div *ngIf="(nextofkinaddress.dirty || nextofkinaddress.touched) && nextofkinaddress.invalid" class="text-danger">
+                      <span class="invalid-input" *ngIf="nextofkinaddress.errors.required">
+                        Next of Kin Address is required.
+                      </span>
+                  <span class="invalid-input" *ngIf="nextofkinaddress.errors.pattern">
+                    Next of Kin Address  must be a valid name with at least 3 characters
+                      </span>
+                </div>
+              </div>
+              <div class="form-group col-md-4">
+                <label>Next of Kin Occupation  <span class="my_span"> *</span></label>
+                <input type="text" name="nextofkinoccupation" [(ngModel)]="model.nextofkinoccupation" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
+                       class="form-control" required [readOnly]="isReadOnly" #nextofkinoccupation="ngModel">
+                <div *ngIf="(nextofkinoccupation.dirty || nextofkinoccupation.touched) && nextofkinoccupation.invalid" class="text-danger">
+                      <span class="invalid-input" *ngIf="nextofkinoccupation.errors.required">
+                        Next of Kin Occupation is required.
+                      </span>
+                  <span class="invalid-input" *ngIf="nextofkinoccupation.errors.pattern">
+                    Next of Kin Occupation  must be a valid name with at least 3 characters
+                      </span>
+                </div>
+              </div>
+
+
             </div>
-
 
             <div class="col-md-12 pull-right">
               <button type="button" *ngIf="!isUpdate" (click)="enableUpdate()" mat-stroked-button
