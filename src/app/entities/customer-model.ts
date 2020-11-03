@@ -1,4 +1,8 @@
+
 export class CustomerModel {
+  phoneNumber(phoneNumber: any) {
+    throw new Error('Method not implemented.');
+  }
   id: number;
   phone: string;
   name: string;
@@ -8,6 +12,12 @@ export class CustomerModel {
   customerMobile:any;
   firstName:string;
   idNumber:string;
+  nextofkinname:string;
+  currentAddress:string;
+  nextofkinrelationship:string;
+  nextofkinmobileNumber:string;
+  nextofkinaddress:string;
+  nextofkinoccupation:string;
   mobileNumber:string;
   surname:string;
   occupation:string;
@@ -20,8 +30,17 @@ export class CustomerModel {
   };
   employeeNumber:string;
   nationalId:idDocument;
-
-
+  industry:industries;
+  customerStatus:Customerstatus;
+  accountOfficer:accountofficer;
+  sector:Sectors;
+  tapAddressCollection: any;
+}
+export class Sectors{
+  id:string;
+}
+export class Customerstatus{
+  id:string;
 }
 export class Photo{
   id: string;
@@ -31,4 +50,10 @@ export class Signature {
 }
 export class idDocument {
   id: string;
+}
+export class industries{
+  id:string;
+}
+export class accountofficer{
+  id:string;
 }

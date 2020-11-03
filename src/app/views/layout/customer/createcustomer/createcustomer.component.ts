@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { CustomerModel, idDocument, Photo, Signature } from '../../../../entities/customer-model';
+import { accountofficer, CustomerModel, Customerstatus, idDocument, industries, Photo, Sectors, Signature } from '../../../../entities/customer-model';
 import { StewardService } from '../../../../shared/services/steward/steward.service';
 import { Notify } from '../../../../shared/class/notify';
 import { Observable } from 'rxjs';
@@ -16,6 +16,10 @@ import { Observable } from 'rxjs';
 })
 export class CreatecustomerComponent implements OnInit, OnDestroy {
   // isLinear = true;
+  industries:any;
+  customerStatus:any;
+  accOfficer:any;
+  sectors:any;
   model: CustomerModel;
   subscription: Subscription;
   customer: FormGroup;
@@ -41,6 +45,10 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute) {
     this.model = new CustomerModel();
     this.subscription = new Subscription();
+
+
+
+
   }
 
   ngOnInit() {
@@ -53,16 +61,61 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
       employeeNumber:['',Validators.required],
       kraPin:['',Validators.required],
       emailAddress:['',Validators.required],
+      nextofkinname:['',Validators.required],
+      nextofkinrelationship:['',Validators.required],
+      nextofkinmobileNumber:['',Validators.required],
+      nextofkinaddress:['',Validators.required],
+      nextofkinoccupation:['',Validators.required],
+      currentAddress:['',Validators],
       file: [Validators.required],
-      file1: [Validators.required]
+      file1: [Validators.required],
+      ids:['',Validators.required],
+      status:['',Validators.required],
+      account_officer:['',Validators.required],
+      sectors:['',Validators.required]
+
     });
 
-    this.customer = this.fb.group({
-      file: [Validators.required]
+          this.stewardService.get('fortis/rest/v2/entities/fortis_Industry').subscribe((response) => {
 
+            if (response) {
+              this.industries = response;
 
+          } else {
+              this.notify.showWarning(response.message);
+          }
+        });
+
+        this.stewardService.get('fortis/rest/v2/entities/fortis_CustomerStatus').subscribe((response) => {
+          console.log(response);
+
+          if (response) {
+            this.customerStatus = response;
+
+        } else {
+            this.notify.showWarning(response.message);
+        }
+      });
+      this.stewardService.get('fortis/rest/v2/entities/fortis_AccountOfficer').subscribe((response) => {
+        console.log(response);
+
+        if (response) {
+          this.accOfficer = response;
+
+      } else {
+          this.notify.showWarning(response.message);
+      }
     });
+         this.stewardService.get('fortis/rest/v2/entities/fortis_Sector').subscribe((response) => {
+          console.log(response);
 
+          if (response) {
+            this.sectors = response;
+
+        } else {
+            this.notify.showWarning(response.message);
+        }
+      });
   }
 
   @HostListener('window:beforeunload')
@@ -107,14 +160,21 @@ file1Change(event) {
           if(res1.id){
             console.log('===========>', res1.id);
             console.log('----------->', res.id);
-            // this.model.customerPhoto.id=res1.id;
+            this.model.industry=new industries();
             this.model.customerPhoto=new Photo();
+            this.model.nationalId=new idDocument();
+            this.model.customerStatus=new Customerstatus();
+            this.model.accountOfficer=new accountofficer();
+            this.model.sector=new Sectors();
 
-                this.model.nationalId=new idDocument();
-
-                this.model.customerPhoto.id = res1.id;
+            this.model.customerPhoto.id = res1.id;
             this.model.nationalId.id = res.id;
             console.log(">>>>>>>>",this.model);
+            this.model.industry.id=this.customerModel.value.ids;
+            this.model.customerStatus.id=this.customerModel.value.status;
+            this.model.sector.id=this.customerModel.value.sectors;
+
+            this.model.accountOfficer.id=this.customerModel.value.account_officer;
             this.stewardService.post('fortis/rest/v2/entities/fortis_CustomerDetails', this.model).subscribe((response:any) => {
 
               if (response.id.length !== 0) {

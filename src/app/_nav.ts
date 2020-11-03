@@ -40,6 +40,36 @@ export const navItems: INavData[] = [
     divider: true,
   },
   {
+    name: 'Master Data',
+    url: '/home/master-data',
+    // icon: 'fa fa-users',
+    children: [
+      {
+        name: 'Industry',
+        url: '/home/master-data/industry',
+        // icon: 'fa fa-caret-right'
+      },
+      {
+        name: 'Sector',
+        url: '/home/master-data/sector',
+        // icon: 'fa fa-caret-right'
+      },
+      {
+        name: 'Account Officer',
+        url: '/home/master-data/account-officer',
+        // icon: 'fa fa-caret-right'
+      },
+      {
+        name: 'Customer Status',
+        url: '/home/master-data/customer-status',
+        // icon: 'fa fa-user'
+      },
+    ],
+  },
+  {
+    divider: true,
+  },
+  {
     name: 'CUSTOMERS',
     url: '/home/customers',
     // icon: 'fa fa-building',

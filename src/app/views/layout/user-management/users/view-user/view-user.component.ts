@@ -40,6 +40,7 @@ export class ViewUserComponent implements OnInit, OnDestroy {
   form: FormGroup;
   @Output() id: string;
   subscription: Subscription;
+  responseData={};
 
   constructor(public dialog: MatDialog, private stewardService: StewardService<any, any>, private notify: Notify,
               private route: ActivatedRoute, protected router: Router, protected modalService: NgbModal) {
@@ -53,29 +54,15 @@ export class ViewUserComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const params: Map<any, string> = new Map();
     const inst = this;
-    params.set('actionStatus', 'Approved');
-    this.stewardService.get('workgroup', params).subscribe((response) => {
-      if (response.code === 200) {
-        inst.systemRoles = response.data.content;
-      } else {
-        inst.notify.showWarning(response.message);
-      }
-    });
-    this.stewardService.get('gender').subscribe((response) => {
-      if (response.code === 200) {
-        inst.gender = response.data.content;
-      } else {
-        inst.notify.showWarning(response.message);
-      }
-    });
+    // params.set('actionStatus', 'Approved');
+    // this.stewardService.get('workgroup', params).subscribe((response) => {
+    //   if (response.code === 200) {
+    //     inst.systemRoles = response.data.content;
+    //   } else {
+    //     inst.notify.showWarning(response.message);
+    //   }
+    // });
 
-    this.stewardService.get('user-types').subscribe((response) => {
-      if (response.code === 200) {
-        inst.userType = response.data.content;
-      } else {
-        inst.notify.showWarning(response.message);
-      }
-    });
 
     this.route.params.subscribe(params => {
       if (params['id'] != null) {
@@ -99,40 +86,51 @@ export class ViewUserComponent implements OnInit, OnDestroy {
     const params: Map<any, string> = new Map();
     const inst = this;
     inst.subscription.add(
-      this.stewardService.get('user/' + id, params).subscribe((response) => {
-        if (response.code === 200) {
-          // console.log(response);
-          inst.model = response.data;
-          const x = response.data.fullName.split(' ');
-          inst.firstName = x[0];
-          inst.lastName = x[1];
-          this.id = response.data.userId;
+      this.stewardService.get('fortis/rest/v2/entities/fortis_FortisUser/' + id, params).subscribe((response) => {
+        if (response) {
+
+          console.log(response.id);
+          console.log(response.email);
+
+          this.model.email=response.email;
+          this.model.firstName=response.firstName;
+          this.model.lastName=response.lastName;
+          this.model.phoneNumber=response.phoneNumber;
+          this.model.nationalId=response.nationalId;
+          this.model.position=response.position;
+
+          // console.log(this.responseData);
+
+          // const x = response.data.fullName.split(' ');
+          // inst.firstName = x[0];
+          // inst.lastName = x[1];
+          this.id = response.id;
           // console.log(inst.model.userTypeId, 'user type');
         } else {
           inst.notify.showWarning(response.message);
         }
       })
     );
-    inst.subscription.add(
-      this.stewardService.get('workgroups/' + id, params).subscribe((response) => {
-        // console.log(response);
-        if (response.code === 200) {
-          const data = response.data;
-          // console.log('Data:', data);
-          data.forEach(workgroup => {
-            this.systemRoles.map(mp => {
-              if (mp.groupId === workgroup.groupId) {
-                mp.checked = true;
-              }
-            });
+    // inst.subscription.add(
+    //   this.stewardService.get('workgroups/' + id, params).subscribe((response) => {
+    //     // console.log(response);
+    //     if (response.code === 200) {
+    //       const data = response.data;
+    //       // console.log('Data:', data);
+    //       data.forEach(workgroup => {
+    //         this.systemRoles.map(mp => {
+    //           if (mp.groupId === workgroup.groupId) {
+    //             mp.checked = true;
+    //           }
+    //         });
 
-          });
+    //       });
 
-        } else {
-          inst.notify.showWarning(response.message);
-        }
-      })
-    );
+    //     } else {
+    //       inst.notify.showWarning(response.message);
+    //     }
+    //   })
+    // );
 
   }
 
@@ -147,30 +145,31 @@ export class ViewUserComponent implements OnInit, OnDestroy {
   }
 
   onUpdate(form: NgForm) {
-    this.systemRoles.forEach(res => {
-      if (res.checked) {
-        this.workgroups.push(res.groupId);
-      }
-    });
+    // this.systemRoles.forEach(res => {
+    //   if (res.checked) {
+    //     this.workgroups.push(res.groupId);
+    //   }
+    // });
     this.model.workgroup_id = this.workgroups;
     this.model.fullName = this.firstName + ' ' + this.lastName;
     const inst = this;
 
 
-    if (this.model.workgroup_id.length < 1) {
-      inst.notify.showWarning('You have not selected any workgroups yet');
-    } else {
-      this.model.tenantIds = JSON.parse(localStorage.getItem('tenantId'));
-        const currentUserId = JSON.parse(localStorage.getItem('userId'));
+    // if (this.model.workgroup_id.length < 1) {
+    //   inst.notify.showWarning('You have not selected any workgroups yet');
+    // } else {
+    //   this.model.tenantIds = JSON.parse(localStorage.getItem('tenantId'));
+    //     const currentUserId = JSON.parse(localStorage.getItem('userId'));
 
-        if (currentUserId === this.model.userId) {
-          this.notify.showWarning('Unable to update current logged in user');
-          return;
-        }
-        this.model.tenantIds = JSON.parse(localStorage.getItem('tenantId'));
+    //     if (currentUserId === this.model.userId) {
+    //       this.notify.showWarning('Unable to update current logged in user');
+    //       return;
+    //     }
+    //     this.model.tenantIds = JSON.parse(localStorage.getItem('tenantId'));
+    const params: Map<any, string> = new Map();
 
-        this.stewardService.put('user', this.model).subscribe((response) => {
-          if (response.code === 200) {
+        this.stewardService.put('fortis/rest/v2/entities/fortis_FortisUser/'+this.id ,this.model).subscribe((response) => {
+          if (response) {
             inst.notify.showSuccess(response.message);
             form.resetForm();
             this.router.navigate(['home/user-management/users']);
@@ -181,7 +180,7 @@ export class ViewUserComponent implements OnInit, OnDestroy {
           inst.notify.showWarning(error.error.message);
         });
     }
-  }
+  // }
 
   approve(form: NgForm) {
     const ids: Array<any> = [];

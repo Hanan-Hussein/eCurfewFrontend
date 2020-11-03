@@ -1,114 +1,112 @@
-// import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
-// import {CustomerModel} from '../../../../entities/customer-model';
-// import {Subscription} from 'rxjs';
-// import {StewardService} from '../../../../shared/services/steward/steward.service';
-// import {Notify} from '../../../../shared/class/notify';
-// import {ActivatedRoute, Router} from '@angular/router';
-// import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {CustomerModel} from '../../../../entities/customer-model';
+import {Subscription} from 'rxjs';
+import {StewardService} from '../../../../shared/services/steward/steward.service';
+import {Notify} from '../../../../shared/class/notify';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import { Output } from '@angular/core';
 
-// @Component({
-//   selector: 'app-view-customer',
-//   templateUrl: './view-customer.component.html',
-//   styleUrls: ['./view-customer.component.scss']
-// })
-// export class ViewCustomerComponent implements OnInit, OnDestroy {
-//   model: CustomerModel;
-//   addresses = [];
-//   isReadOnly = true;
-//   disabled = true;
-//   isUpdate: boolean;
-//   subscription: Subscription;
-//   public customerForm: FormGroup;
-//   public addressForm: FormGroup;
-//   lat: number;
-//   lng: number;
-//   constructor(private stewardService: StewardService<any, any>, private notify: Notify,
-//               protected router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) {
-//     this.model = new CustomerModel();
-//     this.subscription = new Subscription();
-//   }
+@Component({
+  selector: 'app-view-customer',
+  templateUrl: './view-customer.component.html',
+  styleUrls: ['./view-customer.component.scss']
+})
+export class ViewCustomerComponent implements OnInit, OnDestroy {
+  model: CustomerModel;
+  addresses = [];
+  isReadOnly = true;
+  disabled = true;
+  isUpdate: boolean;
+  subscription: Subscription;
+  public customerForm: FormGroup;
+  public addressForm: FormGroup;
+  @Output() id: string;
+  constructor(private stewardService: StewardService<any, any>, private notify: Notify,
+              protected router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) {
+    this.model = new CustomerModel();
+    this.subscription = new Subscription();
+  }
 
-//   ngOnInit() {
-//     const inst = this;
-//     this.route.params.subscribe(params => {
-//       if (params['id'] != null) {
-//         this.fetchCustomer(params['id']);
-//       }
-//     });
-//     this.customerForm = this.formBuilder.group({
-//       name: ['', [Validators.required]],
-//       phoneNumber: ['', [Validators.required]],
-//       tapAddressCollection: this.formBuilder.array([]),
-//     });
-//     this.addressForm = this.formBuilder.group({
-//       lat: ['', [Validators.required]],
-//       lng: ['', [Validators.required]],
-//       moreInfo: ['', [Validators.required]],
-//     });
-//     this.stewardService.get('api/v1/address').subscribe((response) => {
-//       if (response.code === 200) {
-//         inst.addresses = response.data.content;
-//       } else {
-//         inst.notify.showWarning(response.message);
-//       }
-//     });
-//   }
+  ngOnInit() {
+    const inst = this;
+    this.route.params.subscribe(params => {
+      if (params['id'] != null) {
+        this.fetchCustomer(params['id']);
+      }
+    });
 
-//   @HostListener('window:beforeunload')
-//   ngOnDestroy(): void {
-//     if (this.subscription) {
-//       this.subscription.unsubscribe();
-//     }
-//   }
+    this.customerForm = new FormGroup({
+      action: new FormControl()
+    });
+  }
 
-//   get f() {
-//     return this.customerForm.controls;
-//   }
+  @HostListener('window:beforeunload')
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 
-//   // get product form controls
-//   get address() {
-//     return this.addressForm.controls;
-//   }
 
-//   fetchCustomer(id: number) {
-//     const params: Map<any, string> = new Map();
-//     const inst = this;
-//     inst.subscription.add(
-//       this.stewardService.getNoToken('api/v1/customer/' + id, params).subscribe((response) => {
-//         if (response.code === 200) {
-//           inst.model = response.data;
-//           this.customerForm.get('name').setValue(this.model.name);
-//           this.customerForm.get('phoneNumber').setValue(this.model.phoneNumber);
-//           // mapping address controls to address collection data
-//           const addressControl = <FormArray>this.customerForm.controls.tapAddressCollection;
-//           this.model.tapAddressCollection.forEach(item => {
-//             console.log('items', item);
-//             // JSON.parse(item.lat);
-//             // JSON.parse(item.lng);
-//             addressControl.push(this.formBuilder.group(item));
-//           });
-//         } else {
-//           inst.notify.showWarning(response.message);
-//         }
-//       })
-//     );
-//   }
+  fetchCustomer(id: number) {
+    const params: Map<any, string> = new Map();
+    const inst = this;
+    inst.subscription.add(
+      this.stewardService.get('fortis/rest/v2/entities/fortis_CustomerDetails/' + id, params).subscribe((response) => {
+        if (response) {
+          console.log(response.id);
+          inst.model.surname = response.surname;
+          this.model.mobileNumber=response.mobileNumber;
+          this.model.idNumber=response.idNumber;
+          this.model.firstName=response.firstName;
+          this.model.occupation=response.occupation;
+          this.model.employeeNumber=response.employeeNumber;
+          this.model.kraPin=response.kraPin;
+          this.model.emailAddress=response.emailAddress;
+          this.model.currentAddress=response.currentAddress;
+          this.model.nextofkinname=response.nextofkinname;
+          this.model.nextofkinrelationship=response.nextofkinrelationship;
+          this.model.nextofkinaddress=response.nextofkinaddress;
+          this.model.nextofkinmobileNumber=response.nextofkinmobileNumber;
+          this.model.nextofkinoccupation=response.nextofkinoccupation;
 
-//   get addressInfoForm() {
-//     return this.customerForm.get('tapAddressCollection') as FormArray;
-//   }
+          this.id = response.id;
 
-//   enableUpdate() {
-//     this.isReadOnly = false;
-//     this.isUpdate = !this.isUpdate;
+        } else {
+          inst.notify.showWarning(response.message);
+        }
+      })
+    );
+  }
 
-//   }
 
-//   disableUpdate() {
-//     this.isReadOnly = true;
-//     this.isUpdate = !this.isUpdate;
-//   }
+  enableUpdate() {
+    this.isReadOnly = false;
+    this.isUpdate = !this.isUpdate;
 
-//   onUpdate() {}
+  }
 
-// }
+  disableUpdate() {
+    this.isReadOnly = true;
+    this.isUpdate = !this.isUpdate;
+  }
+
+  onUpdate(form: NgForm) {
+    const params: Map<any, string> = new Map();
+    const inst = this;
+
+        this.stewardService.put('fortis/rest/v2/entities/fortis_CustomerDetails/'+this.id ,this.model).subscribe((response) => {
+          if (response) {
+            inst.notify.showSuccess(response.message);
+            this.router.navigate(['home/customers/customers']);
+          } else {
+            inst.notify.showWarning(response.message);
+          }
+        }, error => {
+          inst.notify.showWarning(error.error.message);
+        });
+    }
+  }
+
+

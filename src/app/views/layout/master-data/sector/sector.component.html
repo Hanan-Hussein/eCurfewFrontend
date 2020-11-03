@@ -1,0 +1,28 @@
+<div class="page">
+  <section class="tile">
+    <div class="info-title">
+      <h2>Sector</h2>
+    </div>
+    <div class="tile-body">
+      <app-functionality-buttons [addLabel]="'Add Sector'"
+                                 [addLink]="'home/master-data/add-sector'"
+                                 [deleteLabel]="'Delete'"
+                                 [approveLinkLabel]="'Approve'"
+                                 [approveLink]="'home/master-data/approve-sector'"
+                                 [endpoint]="endpoint"></app-functionality-buttons>
+      <app-custom-datatable
+        [endpoint]="endpoint"
+        [routeView]="routeView"
+        [hasCheckBox]="hasCheckBox"
+        [cols]="cols"
+        [idColumn]="idColumn"
+        [params]="params"
+        [hasShowEntries]="true"
+        [fileName]="'Sectors'"
+        [canExport]="true"
+        [filterParams]="''"
+        [isFilterPresent]="true"
+      ></app-custom-datatable>
+    </div>
+  </section>
+</div>
