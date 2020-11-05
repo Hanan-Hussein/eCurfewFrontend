@@ -52,8 +52,8 @@ export class CustomerComponent implements OnInit {
     });
 
     this.cols.push({
-      title: 'Current Address',
-      data: 'currentAddress'
+      title: 'Action Status',
+      data: 'actionStatus'
     });
     this.cols.push({
       data: 'id',

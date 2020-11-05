@@ -8,7 +8,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class ApproveCustomerComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/fortis_CustomerDetails?actionStatus=Unapproved';
+  endpoint = `fortis/rest/v2/entities/fortis_CustomerDetails`;
   routeView = 'home/customers/customers/{0}/view-customer';
   hasCheckBox = true;
   idColumn = 'id';
@@ -17,8 +17,8 @@ export class ApproveCustomerComponent implements OnInit {
   constructor() {
     this.cols = [];
     this.params = new Map();
-    this.params.set('sort', 'id,desc');
-    this.params.set('actionStatus', 'Unapproved');
+    // this.params.set('sort', 'id,desc');
+    // this.params.set('actionStatus', 'Unapproved');
   }
 
   ngOnInit() {
