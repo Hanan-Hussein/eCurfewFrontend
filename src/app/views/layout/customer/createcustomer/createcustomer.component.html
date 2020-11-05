@@ -259,6 +259,17 @@
   <mat-step>
       <div class="row">
         <div class="form-group col-md-6">
+        <button class="save-button btn-block" mat-stroked-button (click)="scanFingerPrint()">
+            Scan FingerPrint
+        </button>
+        <img src="../../assets/finger.jpeg"class="responsive">
+        <img src="../../assets/checked.png"class="responsive">
+
+        <ng-container *ngIf="scanned">
+          <img [src]="imageSource" class="responsive">
+          <img src="../../assets/checked.png"class="responsive">
+          <p>{{fingerprint.message}}</p>
+          </ng-container>
 
         </div>
 
