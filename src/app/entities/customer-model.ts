@@ -3,6 +3,7 @@ export class CustomerModel {
   phoneNumber(phoneNumber: any) {
     throw new Error('Method not implemented.');
   }
+  customerID:string;
   id: number;
   phone: string;
   name: string;

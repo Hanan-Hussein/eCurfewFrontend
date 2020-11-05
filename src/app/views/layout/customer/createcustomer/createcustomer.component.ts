@@ -52,6 +52,9 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.secondFormGroup=this.fb.group({
+      customerID:['',Validators.required],
+    })
     this.customerModel = this.fb.group({
       idNumber: ['',Validators.required],
       firstName:['',Validators.required],
@@ -139,7 +142,24 @@ file1Change(event) {
       this.customerModel.get('file1').setValue(file);
     }
 }
+onSecondForm(){
+  const inst = this;
+  this.model=this.secondFormGroup.value;
+  this.stewardService.post('fortis/rest/v2/services/fortis_CustomerKycService/ValidateCustomerakyc' ,this.model).subscribe((response: any) => {
+    if(response){
+      this.model.customerID=response.customerID;
+      this.customerModel.get('idNumber').setValue(this.secondFormGroup.get("customerID").value);
+      this.customerModel.get('surname').setValue(response.surName);
+      this.customerModel.get('firstName').setValue(response.firstName)
 
+    //  console.log(">>>>>>>>>>>",response);
+    }
+
+  }, error => {
+    inst.notify.showWarning(error.error.message);
+  });
+
+}
 
   onCreateForm() {
     const inst = this;
