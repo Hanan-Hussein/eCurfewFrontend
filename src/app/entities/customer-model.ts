@@ -24,6 +24,7 @@ export class CustomerModel {
   occupation:string;
   file:File;
   file1:File;
+  base64:string;
   kraPin:string;
   signature:Signature;
   customerPhoto: {
@@ -36,6 +37,14 @@ export class CustomerModel {
   accountOfficer:accountofficer;
   sector:Sectors;
   tapAddressCollection: any;
+  uploadRequest:uploadRequest;
+  fingerPrint:Print;
+}
+export class Print{
+  id:string;
+}
+export class uploadRequest{
+  file:string;
 }
 export class Sectors{
   id:string;
