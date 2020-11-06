@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { accountofficer, CustomerModel, Customerstatus, idDocument, industries, Photo, Sectors, Signature } from '../../../../entities/customer-model';
+import { accountofficer, CustomerModel, Customerstatus, uploadRequest, idDocument, industries, Photo, Print, Sectors, Signature } from '../../../../entities/customer-model';
 import { StewardService } from '../../../../shared/services/steward/steward.service';
 import { Notify } from '../../../../shared/class/notify';
 import { Observable } from 'rxjs';
@@ -86,9 +86,11 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
       ids:['',Validators.required],
       status:['',Validators.required],
       account_officer:['',Validators.required],
-      sectors:['',Validators.required]
+      sectors:['',Validators.required],
+      base64:['',Validators.required]
 
     });
+    this.customerModel.controls.base64.setValue(this.hardcodedBase64);
 
           this.stewardService.get('fortis/rest/v2/entities/fortis_Industry').subscribe((response) => {
 
@@ -188,6 +190,16 @@ onSecondForm(){
     const formData = new FormData();
     const formData1 = new FormData();
 
+
+    this.model=this.customerModel.get('base64').value;
+
+    this.stewardService.post('fortis/rest/v2/services/fortis_UploadFileService/UploadFile',{uploadRequest: {"file":this.model}}).subscribe((res3:any)=>
+    {
+      if(res3.id){
+      this.model.uploadRequest.file=res3.id;
+    //  console.log(">>>>>>>>>>fingerprint",res3.data);
+      }
+
     formData.append('file', this.customerModel.get('file').value);
 
     this.model = this.customerModel.value;
@@ -199,18 +211,20 @@ onSecondForm(){
         }
         this.stewardService.postFormDataMultipart('fortis/rest/v2/files',sendFile).subscribe((res: any) => {
           if(res1.id){
-            console.log('===========>', res1.id);
-            console.log('----------->', res.id);
+            // console.log('===========>', res1.id);
+            // console.log('----------->', res.id);
             this.model.industry=new industries();
             this.model.customerPhoto=new Photo();
             this.model.nationalId=new idDocument();
             this.model.customerStatus=new Customerstatus();
             this.model.accountOfficer=new accountofficer();
             this.model.sector=new Sectors();
+            this.model.fingerPrint=new Print();
 
             this.model.customerPhoto.id = res1.id;
             this.model.nationalId.id = res.id;
-            console.log(">>>>>>>>",this.model);
+            this.model.fingerPrint.id=res3.data;
+            // console.log(">>>>>>>>",this.model);
             this.model.industry.id=this.customerModel.value.ids;
             this.model.customerStatus.id=this.customerModel.value.status;
             this.model.sector.id=this.customerModel.value.sectors;
@@ -240,6 +254,9 @@ onSecondForm(){
       console.error(error.error);
     })
 
+  },(error: any) => {
+    console.error(error.error);
+  })
 
 
   }
