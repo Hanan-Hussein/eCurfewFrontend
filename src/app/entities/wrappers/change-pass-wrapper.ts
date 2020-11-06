@@ -1,6 +1,9 @@
 export class ChangepassWrapper {
     // currentPassword: string
     // username: string;
+    newPassword:string;
+    oldPassword:string;
+    email:string;
     // newPassword: string;
     changePasswordWrapper:PasswordWrapper;
     

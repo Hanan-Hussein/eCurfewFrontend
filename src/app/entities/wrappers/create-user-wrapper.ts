@@ -18,6 +18,7 @@ export class CreateUserWrapper {
     roleMaps: Array<RoleMaps>;
     passwordStatus: string;
     gender: string;
+    genderId:string;
     workgroup_id: number[];
     groupId:  number[];
     tenantIds: number;
