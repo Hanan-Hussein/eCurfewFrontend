@@ -92,7 +92,7 @@ export class ViewCustomerComponent implements OnInit, OnDestroy {
     this.isUpdate = !this.isUpdate;
   }
 
-  onUpdate(form: NgForm) {
+  onUpdate() {
     const params: Map<any, string> = new Map();
     const inst = this;
 
