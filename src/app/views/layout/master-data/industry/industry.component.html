@@ -1,28 +1,28 @@
 <div class="page">
   <section class="tile">
-    <div class="info-title">
-      <h2>Industry</h2>
-    </div>
-    <div class="tile-body">
-      <app-functionality-buttons [addLabel]="'Add Industry'"
-                                 [addLink]="'home/master-data/add-industry'"
-                                 [deleteLabel]="'Delete'"
-                                 [approveLinkLabel]="'Approve'"
-                                 [approveLink]="'home/master-data/approve-industry'"
-                                 [endpoint]="endpoint"></app-functionality-buttons>
-      <app-custom-datatable
-        [endpoint]="endpoint"
-        [routeView]="routeView"
-        [hasCheckBox]="hasCheckBox"
-        [cols]="cols"
-        [idColumn]="idColumn"
-        [params]="params"
-        [hasShowEntries]="true"
-        [fileName]="'Industry'"
-        [canExport]="true"
-        [filterParams]="''"
-        [isFilterPresent]="true"
-      ></app-custom-datatable>
-    </div>
+  <div class="info-title">
+  <h2>Industry</h2>
+  </div>
+  <div class="tile-body">
+  <app-functionality-buttons [addLabel]="'Add Industry'"
+  [addLink]="'home/master-data/add-industry'"
+  [deleteLabel]="'Delete'"
+  [approveLinkLabel]="'Approve'"
+  [approveLink]="'home/master-data/approve-industry'"
+  [endpoint]="endpoint"></app-functionality-buttons>
+  <app-custom-datatable
+  [endpoint]="endpoint"
+  [routeView]="routeView"
+  [hasCheckBox]="hasCheckBox"
+  [cols]="cols"
+  [idColumn]="idColumn"
+  [params]="params"
+  [hasShowEntries]="true"
+  [fileName]="'Industry'"
+  [canExport]="true"
+  [filterParams]="''"
+  [isFilterPresent]="true"
+  ></app-custom-datatable>
+  </div>
   </section>
-</div>
+  </div>
