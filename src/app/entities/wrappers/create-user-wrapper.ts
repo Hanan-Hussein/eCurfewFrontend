@@ -25,10 +25,17 @@ export class CreateUserWrapper {
     actionStatus: string;
     profilePhoto: Profile;
     userType: {userType: string};
+    uploadRequest:uploadRequest;
+    fingerPrint:Print;
+
 
 }
-
-
+export class Print{
+  id:string;
+}
+export class uploadRequest{
+  file:string;
+}
 export class Profile {
   id: string;
 }

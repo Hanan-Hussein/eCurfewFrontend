@@ -79,6 +79,11 @@ export const navItems: INavData[] = [
         url: '/home/customers/customers',
         // icon: 'fa fa-caret-right'
       },
+      // {
+      //   name: 'Authenticate Transaction',
+      //   url: '/home/customers/authenticate-transaction',
+      //   // icon: 'fa fa-caret-right'
+      // },
     ],
   },
   {

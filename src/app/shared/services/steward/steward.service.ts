@@ -230,6 +230,15 @@ export class StewardService<T, E> {
       .pipe(catchError(this.handleError<any>()));
   }
 
+  deleteCustomer(endpoint: string, data: T): Observable<ResponseWrapper<E>> {
+    return this.http
+      .post(this.globalParam.baseUrl + endpoint, {
+        headers: this.headers,
+        body: JSON.stringify(data),
+      })
+      .pipe(catchError(this.handleError<any>()));
+  }
+
   get(
     endpoint: string,
     data?: Map<string, string>

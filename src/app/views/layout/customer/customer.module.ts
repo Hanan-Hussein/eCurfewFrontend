@@ -37,13 +37,15 @@ import { NgxTreeSelectModule, ExpandMode } from 'ngx-tree-select';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CdkTableModule } from '@angular/cdk/table';
+import { AuthenticateTransactionComponent } from './authenticate-transaction/authenticate-transaction.component';
 
 @NgModule({
   declarations: [
     CustomerComponent,
       ApproveCustomerComponent,
       ViewCustomerComponent,
-      CreatecustomerComponent],
+      CreatecustomerComponent,
+      AuthenticateTransactionComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,

@@ -5,6 +5,7 @@ import {CustomerComponent} from './customer/customer.component';
 import {ViewCustomerComponent} from './view-customer/view-customer.component';
 import { CreatecustomerComponent } from './createcustomer/createcustomer.component';
 import { ApproveCustomerComponent } from './approve-customer/approve-customer.component';
+import {AuthenticateTransactionComponent} from './authenticate-transaction/authenticate-transaction.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
       {path: 'customers/create-customer', component: CreatecustomerComponent, canActivate: [AuthGuard]},
 
       {path: 'customers/approve-customer', component: ApproveCustomerComponent, canActivate: [AuthGuard]},
+      {path: 'authenticate-transaction', component: AuthenticateTransactionComponent, canActivate: [AuthGuard]},
 
     ]
   }

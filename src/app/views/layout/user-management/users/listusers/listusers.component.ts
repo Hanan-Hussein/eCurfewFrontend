@@ -54,7 +54,10 @@ export class ListusersComponent implements OnInit {
       title: 'Phone Number',
       data: 'phoneNumber'
     });
-
+    this.cols.push({
+      title: 'Action Status',
+      data: 'actionStatus'
+    });
     this.cols.push({
       title: 'View',
       data: 'id',

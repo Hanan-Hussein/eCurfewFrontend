@@ -34,7 +34,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   changePass() {
-   
+
     this.stewardService.postNoToken('change-password/first-time', this.model).subscribe(response => {
       if (response.code === 200) {
         this.router.navigate(['/login']);

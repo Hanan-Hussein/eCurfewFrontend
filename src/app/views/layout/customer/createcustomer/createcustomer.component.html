@@ -1,5 +1,5 @@
 <div class="tile-body">
-  <form [formGroup]="secondFormGroup" (ngSubmit)="onSecondForm()" role="form">
+  <form [formGroup]="secondFormGroup"  #form="ngForm"  (ngSubmit)="onSecondForm()" role="form">
     <div class="row">
       <div class="form-group col-md-6">
         <label>Id Number<span class="my_span"> *</span></label>
@@ -17,7 +17,7 @@
   </form>
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
 
-  <form  [formGroup]="customerModel" (ngSubmit)="onCreateForm()" #createForm="ngForm" role="form">
+  <form  [formGroup]="customerModel" (ngSubmit)="onCreateForm()" #createForm="ngForm"  #form="ngForm" role="form">
 <!-- <mat-step>
   <h4>Search Customer</h4>
   <div style="float: right;">
@@ -33,6 +33,12 @@
                   <input type="text" pattern="^[2][5][4][0-9]{9}$" maxlength="8" formControlName="idNumber" [readOnly]="isReadOnly"
                       name="idNumber"  class="form-control" required="required"
                      >
+                     <div>
+                      <span class="text-danger"
+                      *ngIf="customerModel.get('idNumber').invalid && customerModel.get('idNumber').touched">
+                   Id Number is required
+                </span>
+                    </div>
                   <!-- <div *ngIf="(name.dirty || name.touched) && name.invalid" class="text-danger">
                       <span class="invalid-input" *ngIf="name.errors.required">
                           Id Number is required.
@@ -45,17 +51,18 @@
 
                 <div class="form-group col-md-6">
                     <label>First Name<span class="my_span"> *</span></label>
-                    <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"  formControlName="firstName"  [readOnly]="isReadOnly"
-                        name="firstName"  class="form-control" required="required"
+                    <input type="text"   formControlName="firstName"  [readOnly]="isReadOnly"
+                        name="firstName"   class="form-control" required="required"
                         >
-                    <!-- <div *ngIf="(name.dirty || name.touched) && name.invalid" class="text-danger">
-                        <span class="invalid-input" *ngIf="name.errors.required">
-                            First Name is required.
-                        </span>
-                        <span class="invalid-input" *ngIf="name.errors.pattern">
-                            First Name must be a valid name with at least 3 characters
-                        </span>
-                    </div> -->
+                        <div>
+                          <span class="text-danger"
+                          *ngIf="customerModel.get('firstName').invalid && customerModel.get('firstName').touched
+                          &&customerModel.get('firstName').errors.required">
+                       First Name is required
+                    </span>
+
+
+                        </div>
                 </div>
 
               </div>
@@ -65,6 +72,12 @@
                   <label>Phone Number<span class="my_span"> *</span></label>
                   <input type="tel" pattern="^[2][5][4][0-9]{9}$" formControlName="mobileNumber"  maxlength="13" [readOnly]="isReadOnly"
                       name="mobileNumber" class="form-control" required  />
+                      <div>
+                        <span class="text-danger"
+                        *ngIf="customerModel.get('mobileNumber').invalid && customerModel.get('mobileNumber').touched">
+                     Phone Number is required
+                  </span>
+                      </div>
                   <!-- <div *ngIf="(mobileNumber.dirty || mobileNumber.touched) && mobileNumber.invalid" class="text-danger">
                       <span class="invalid-input" *ngIf="mobileNumber.errors.required">
                         mobile Number is required.
@@ -80,6 +93,12 @@
                 <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
                     name="surname" formControlName="surname" class="form-control" required="required"
                     >
+                    <div>
+                      <span class="text-danger"
+                      *ngIf="customerModel.get('surname').invalid && customerModel.get('surname').touched">
+                   SurName is required
+                </span>
+                    </div>
                 <!-- <div *ngIf="(surname.dirty || surname.touched) && surname.invalid" class="text-danger">
                     <span class="invalid-input" *ngIf="surname.errors.required">
                         SurName is required.
@@ -95,6 +114,12 @@
               <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"  formControlName="occupation"
                   name="occupation"  class="form-control" required="required"
                  >
+                 <div>
+                  <span class="text-danger"
+                  *ngIf="customerModel.get('occupation').invalid && customerModel.get('occupation').touched">
+               Occupation is required
+            </span>
+                </div>
               <!-- <div *ngIf="(occupation.dirty || occupation.touched) && occupation.invalid" class="text-danger">
                   <span class="invalid-input" *ngIf="occupation.errors.required">
                     occupation is required.
@@ -109,6 +134,12 @@
                 <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly" formControlName="employeeNumber"
                     name="employeeNumber"  class="form-control" required="required"
                    >
+                   <div>
+                    <span class="text-danger"
+                    *ngIf="customerModel.get('employeeNumber').invalid && customerModel.get('employeeNumber').touched">
+                 Employee Number is required
+              </span>
+                  </div>
                 <!-- <div *ngIf="(employeeNumber.dirty || employeeNumber.touched) && employeeNumber.invalid" class="text-danger">
                     <span class="invalid-input" *ngIf="employeeNumber.errors.required">
                       Employee Number is required.
@@ -120,9 +151,16 @@
           </div>
           <div class="form-group col-md-6">
             <label>KRA pin<span class="my_span"> *</span></label>
-            <input type="text" pattern="^(?=.*[A-Z, a-z, 0-9, _]{3,}$" [readOnly]="isReadOnly" formControlName="kraPin"
+            <input type="text" pattern="^(?=.*[A-Z, a-z, 0-9, _]{3,})$" [readOnly]="isReadOnly" formControlName="kraPin"
                 name="kraPin"  class="form-control" required="required"
                >
+               <div>
+                <span class="text-danger"
+                *ngIf="customerModel.get('kraPin').invalid && customerModel.get('kraPin').touched">
+             Kra Pin is required
+          </span>
+              </div>
+
             <!-- <div *ngIf="(kraPin.dirty || kraPin.touched) && kraPin.invalid" class="text-danger">
                 <span class="invalid-input" *ngIf="kraPin.errors.required">
                   KRA Pin is required.
@@ -137,6 +175,12 @@
           <input type="email" name="emailAddress" class="form-control" formControlName="emailAddress" required [readOnly]="isReadOnly"
               pattern="([A-Za-z0-9_\-\.]+)@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$"
               >
+              <div>
+                <span class="text-danger"
+                *ngIf="customerModel.get('emailAddress').invalid && customerModel.get('emailAddress').touched">
+             Email Address is required
+          </span>
+              </div>
           <!-- <div *ngIf="(emailAddress.dirty || emailAddress.touched) && emailAddress.invalid" class="text-danger">
               <span class="invalid-input" *ngIf="emailAddress.errors.required">
                   Email Address is required.
@@ -151,36 +195,72 @@
           <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
               name="currentAddress" formControlName="currentAddress" class="form-control" required="required"
               >
+              <div>
+                <span class="text-danger"
+                *ngIf="customerModel.get('currentAddress').invalid && customerModel.get('currentAddress').touched">
+             Current Address is required
+          </span>
+              </div>
         </div>
         <div class="form-group col-md-6">
           <label>Next of Kin Name<span class="my_span"> *</span></label>
           <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
               name="nextofkinname" formControlName="nextofkinname" class="form-control" required="required"
               >
+              <div>
+                <span class="text-danger"
+                *ngIf="customerModel.get('nextofkinname').invalid && customerModel.get('nextofkinname').touched">
+             Next of Kin Name is required
+          </span>
+              </div>
         </div>
         <div class="form-group col-md-6">
           <label>Next of Kin Relationship<span class="my_span"> *</span></label>
           <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
               name="nextofkinrelationship" formControlName="nextofkinrelationship" class="form-control" required="required"
               >
+              <div>
+                <span class="text-danger"
+                *ngIf="customerModel.get('nextofkinrelationship').invalid && customerModel.get('nextofkinrelationship').touched">
+             Next of Kin relationship is required
+          </span>
+              </div>
         </div>
         <div class="form-group col-md-6">
           <label>Next of Kin Mobile Number<span class="my_span"> *</span></label>
           <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
               name="nextofkinmobileNumber" formControlName="nextofkinmobileNumber" class="form-control" required="required"
               >
+              <div>
+                <span class="text-danger"
+                *ngIf="customerModel.get('nextofkinmobileNumber').invalid && customerModel.get('nextofkinmobileNumber').touched">
+             Next of Kin Mobile Number is required
+          </span>
+              </div>
         </div>
         <div class="form-group col-md-6">
           <label>Next of Kin Address<span class="my_span"> *</span></label>
           <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
               name="nextofkinaddress" formControlName="nextofkinaddress" class="form-control" required="required"
               >
+              <div>
+                <span class="text-danger"
+                *ngIf="customerModel.get('nextofkinaddress').invalid && customerModel.get('nextofkinaddress').touched">
+             Next of Kin Address is required
+          </span>
+              </div>
         </div>
         <div class="form-group col-md-6">
           <label>Next of Kin Occupation<span class="my_span"> *</span></label>
           <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$" [readOnly]="isReadOnly"
               name="nextofkinoccupation" formControlName="nextofkinoccupation" class="form-control" required="required"
               >
+              <div>
+                <span class="text-danger"
+                *ngIf="customerModel.get('nextofkinoccupation').invalid && customerModel.get('nextofkinoccupation').touched">
+             Next of Kin occupation is required
+          </span>
+              </div>
         </div>
 
 
@@ -190,6 +270,12 @@
           <select formControlName="status"  name="status" placeholder="Select Customer Status"  class="form-control " required>
               <option *ngFor="let status of customerStatus" value="{{status.id}}">{{status.description}}</option>
           </select>
+          <div>
+            <span class="text-danger"
+            *ngIf="customerModel.get('status').invalid && customerModel.get('status').touched">
+         Customer Status is required
+      </span>
+          </div>
 
       </div>
       <div class="form-group col-md-6">
@@ -197,6 +283,12 @@
         <select formControlName="sectors"  name="sectors" placeholder="Select Customer Sector"  class="form-control " required>
             <option *ngFor="let sect of sectors" value="{{sect.id}}">{{sect.description}}</option>
         </select>
+        <div>
+          <span class="text-danger"
+          *ngIf="customerModel.get('sectors').invalid && customerModel.get('sectors').touched">
+       Sector is required
+    </span>
+        </div>
 
     </div>
 
@@ -205,6 +297,12 @@
           <select formControlName="ids"  name="ids" placeholder="Select Industry"  class="form-control " required>
               <option *ngFor="let ind of industries" value="{{ind.id}}">{{ind.description}}</option>
           </select>
+          <div>
+            <span class="text-danger"
+            *ngIf="customerModel.get('ids').invalid && customerModel.get('ids').touched">
+         Industry  is required
+      </span>
+          </div>
 
       </div>
       <div class="form-group col-md-6">
@@ -212,6 +310,12 @@
         <select formControlName="account_officer"  name="account_officer" placeholder="Account Officer"  class="form-control " required>
             <option *ngFor="let acc of accOfficer" value="{{acc.id}}">{{acc.description}}</option>
         </select>
+        <div>
+          <span class="text-danger"
+          *ngIf="customerModel.get('account_officer').invalid && customerModel.get('account_officer').touched">
+       Account Officer is required
+    </span>
+        </div>
 
     </div>
 

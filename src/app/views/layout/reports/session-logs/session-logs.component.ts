@@ -36,6 +36,14 @@ export class SessionLogsComponent implements OnInit {
       title: 'Ip address',
       data: 'address'
     });
+    this.cols.push({
+      title: 'Started Ts',
+      data: 'startedTs'
+    });
+    this.cols.push({
+      title: 'Finished Ts',
+      data: 'finishedTs'
+    });
     // this.cols.push({
     //   title: 'Client Info',
     //   data: 'clientInfo'

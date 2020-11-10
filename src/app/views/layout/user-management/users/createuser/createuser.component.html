@@ -5,37 +5,18 @@
       <h2>User</h2>
     </div>
     <div class="tile-body">
-      <form [formGroup]="user" (ngSubmit) = "upload(form)" #form="ngForm" role="form">
-        <div class="row">
-          <div class="form-group col-md-6">
-            <label>Profile Picture</label>
-            <input type="file" class="form-control"(change)="fileChange($event)" #fileInput formControlName="file" accept=" .png , .jpg , .gif" required ="required" name="file">
-            </div>
 
-          <button style="margin:20px;"  type="submit" mat-stroked-button
-            class="save-button pull-right">upload
-    </button>
-
-
-        </div>
-
-      </form>
-      <form (ngSubmit)="onCreateUser(createForm)" #createForm="ngForm" role="form">
+      <form [formGroup]="CreateUserWrapper" (ngSubmit)="onCreateUser(createForm)" #createForm="ngForm" role="form">
 
         <div class="row">
           <div class="form-group col-md-6">
             <label>Gender<span class="my_span"> *</span></label>
-              <select  name="gender" class="form-control" name="gender" [(ngModel)]="model.gender"
+              <select  name="gender" class="form-control" name="gender" formControlName="gender"
               required>
                 required>
              <option *ngFor="let gen of gender" value="{{gen.word}}">{{gen.word}}</option>
             </select>
-            <!-- <div *ngIf="(gender.dirty || gender.touched) && gender.invalid"
-            class="text-danger">
-             <span class="invalid-input" *ngIf="gender.errors.required">
-               Gender is required.
-             </span>
-       </div> -->
+
             </div>
         </div>
         <h5 style="color: blue;">User Bio Data</h5>
@@ -43,118 +24,73 @@
           <div class="form-group col-md-6">
             <label>First Name<span class="my_span"> *</span></label>
             <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
-                   name="firstName" [(ngModel)]="model.firstName" class="form-control" required="required" #firstname="ngModel">
-            <div *ngIf="(firstname.dirty || firstname.touched) && firstname.invalid" class="text-danger">
-                  <span class="invalid-input" *ngIf="firstname.errors.required">
-                    First Name is required.
-                  </span>
-              <span class="invalid-input" *ngIf="firstname.errors.pattern">
-                    First Name must be a valid name with at least 3 characters
-                  </span>
-            </div>
+                   name="firstName" formControlName="firstName" class="form-control" required="required" >
+
           </div>
 
           <div class="form-group col-md-6">
             <label>Last Name<span class="my_span"> *</span> </label>
             <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
-                   name="lastName" [(ngModel)]="model.lastName" class="form-control" required #lastname="ngModel">
-            <div *ngIf="(lastname.dirty || lastname.touched) && lastname.invalid" class="text-danger">
-                  <span class="invalid-input" *ngIf="lastname.errors.required">
-                    Last Name is required.
-                  </span>
-              <span class="invalid-input" *ngIf="lastname.errors.pattern">
-                    Last Name must be a valid name with at least 3 characters
-                  </span>
-            </div>
+                   name="lastName" formControlName="lastName" class="form-control" required >
+
           </div>
           <div class="form-group col-md-6">
             <label>Designation<span class="my_span"> *</span> </label>
             <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
-                   name="position" [(ngModel)]="model.position" class="form-control" required #designation="ngModel">
-            <div *ngIf="(designation.dirty || designation.touched) && designation.invalid" class="text-danger">
-                  <span class="invalid-input" *ngIf="designation.errors.required">
-                    Designation is required.
-                  </span>
-              <span class="invalid-input" *ngIf="lastname.errors.pattern">
-                Designation must be a valid name with at least 3 characters
-                  </span>
-            </div>
+                   name="position" formControlName="position" class="form-control" required >
+
           </div>
 
 
           <div class="form-group col-md-6">
             <label>National Id <span class="my_span"> *</span> </label>
             <input type="text"
-                   name="national_id" [(ngModel)]="model.nationalId" class="form-control" required #national_id="ngModel">
-            <div *ngIf="(national_id.dirty || national_id.touched) && national_id.invalid" class="text-danger">
-                  <span class="invalid-input" *ngIf="national_id.errors.required">
-                    National ID is required.
-                  </span>
+                   name="national_id" formControlName="nationalId" class="form-control" required>
 
-            </div>
           </div>
-
-
-
-
-
         </div>
         <h5 style="padding-top: 13px; color: blue;">Contact Details</h5>
 
         <div class="row">
           <div class="form-group col-md-6">
             <label>Email Address<span class="my_span"> *</span></label>
-            <input [(ngModel)]="model.email" type="email" name="email" class="form-control" required
-                   pattern="([A-Za-z0-9_\-\.]+)@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$" #email="ngModel">
-            <div *ngIf="(email.dirty || email.touched) && email.invalid"
-                 class="text-danger">
-                  <span class="invalid-input" *ngIf="email.errors.required">
-                    Email Address is required.
-                  </span>
-              <span class="invalid-input" *ngIf="email.errors.pattern">
-                    Email Address must be a valid email
-                  </span>
-            </div>
+            <input type="text" formControlName="email" type="email" name="email" class="form-control" required
+                   pattern="([A-Za-z0-9_\-\.]+)@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$">
+
           </div>
 
           <div class="form-group col-md-6">
             <label>Phone Number<span class="my_span"> *</span></label>
-            <input type="tel" pattern="^[2][5][4][0-9]{9}$" maxlength="13" [(ngModel)]="model.phoneNumber"
-                   name="msisdn" class="form-control" required #phoneNumber="ngModel"/>
-            <div *ngIf="(phoneNumber.dirty || phoneNumber.touched) && phoneNumber.invalid"
-                 class="text-danger">
-                  <span class="invalid-input" *ngIf="phoneNumber.errors.required">
-                    Phone Number is required.
-                  </span>
-              <span class="invalid-input" *ngIf="phoneNumber.errors.pattern">
-                    Please enter a valid Kenyan phone number begining with 254....
-                  </span>
-            </div>
-          </div>
-        </div>
+            <input type="tel" pattern="^[2][5][4][0-9]{9}$" maxlength="13" formControlName="phoneNumber"
+                   name="msisdn" class="form-control" required />
 
-        <div class="row">
-          <div class="form-group col-md-12">
-            <div widget class="card">
-              <div class="card-header col-md-12">
-                <h3 class="sub-title">User Workgroups</h3>
-              </div>
-              <div class="card-body widget-body row m-20">
-                <div class="col-sm-4" *ngFor="let role of systemRoles">
-                  <div class="checkbox">
-                    <input type="checkbox" value="{{role.groupId}}" [(ngModel)]="role.checked" [name]="role.groupName"/>
-                    <label>{{role.groupName}}</label>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
+          <div class="form-group col-md-6">
+            <label>Profile Picture</label>
+            <input type="file" class="form-control"(change)="fileChange($event)" #fileInput  accept=" .png , .jpg , .gif" required ="required" name="file">
+            </div>
+            <div class="form-group col-md-6">
+              <button class="save-button btn-block" mat-stroked-button (click)="scanFingerPrint()">
+                  Scan FingerPrint
+              </button>
+              <img src="../../assets/finger.jpeg"class="responsive">
+              <img src="../../assets/checked.png"class="responsive">
+
+              <ng-container *ngIf="scanned">
+                <img [src]="imageSource" class="responsive">
+                <img src="../../assets/checked.png"class="responsive">
+                <p>{{fingerprint.message}}</p>
+                </ng-container>
+
+              </div>
           <div class="col-md-12 pull-right">
-            <button style="margin:5px;" [disabled]="!createForm.form.valid" type="submit" mat-stroked-button
+            <button style="margin:5px;"  type="submit" mat-stroked-button
                     class="save-button pull-right">Save
             </button>
           </div>
         </div>
+
+
 
       </form>
     </div>
