@@ -34,18 +34,15 @@ export class AuditLogsComponent implements OnInit {
       data: 'eventTs',
       isDate: true
     });
- 
+
     this.cols.push({
       title: 'Entity',
-      data: 'entity'
+      data: 'displayedEntityName'
     });
-    this.cols.push({
-      title: 'IP Address',
-      data: 'ipAddress'
-    });
+
     this.cols.push({
       title: 'User',
-      data: 'id.fullName'
+      data: 'id'
     });
 
     this.cols.push({

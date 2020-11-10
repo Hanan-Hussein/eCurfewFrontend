@@ -31,7 +31,7 @@ export class DeleteDialogComponent {
 
 
   processAction(form: NgForm) {
-    this.stewardService.delete(this.endpoint, this.checkerActions).subscribe((response) => {
+    this.stewardService.post(this.endpoint,{deleteUser: this.checkerActions} ).subscribe((response) => {
       this.processResponse(form, response);
     });
   }

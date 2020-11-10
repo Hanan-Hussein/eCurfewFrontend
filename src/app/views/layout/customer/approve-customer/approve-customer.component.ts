@@ -8,7 +8,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class ApproveCustomerComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = `fortis/rest/v2/entities/fortis_CustomerDetails/search?filter={"conditions": [{"property":"actionStatus","operator": "=","value": "Unapproved"}]}`;
+  endpoint = `fortis/rest/v2/entities/fortis_CustomerDetails/search?filter=%7B%22conditions%22%3A%20%5B%7B%22property%22%3A%20%22actionStatus%22%2C%22operator%22%3A%20%22startsWith%22%2C%22value%22%3A%20%22Unapproved%22%20%7D%5D%7D`;
   routeView = 'home/customers/customers/{0}/view-customer';
   hasCheckBox = true;
   idColumn = 'id';

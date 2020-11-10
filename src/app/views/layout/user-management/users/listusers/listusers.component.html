@@ -9,8 +9,8 @@
                                    [addLink]="'home/user-management/users/create-user'"
                                    [approveLinkLabel]="'Approve'"
                                    [approveLink]="'home/user-management/users/approve-user'"
-                                   [deleteLabel]="'Delete'"
-                                   [endpoint]="'user'"></app-functionality-buttons>
+                                   [deleteLabel]="'Disable User'"
+                                   [endpoint]="'fortis/rest/v2/services/fortis_DisableUserService/disableUser'"></app-functionality-buttons>
         <app-custom-datatable
           [endpoint]="endpoint"
           [hasCheckBox]="hasCheckBox"

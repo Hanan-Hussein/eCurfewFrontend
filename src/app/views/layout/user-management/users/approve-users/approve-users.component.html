@@ -9,8 +9,9 @@
         <app-functionality-buttons [addLabel]="'New User'"
                                    [addLink]="'home/user-management/users/create-user'"
                                    [approveLabel]="'Approve'"
+                                   [approveLink]="'fortis/rest/v2/services/fortis_MakerCheckerService/approveSystemUser'"
                                    [declineLabel]="'Decline'"
-                                   [endpoint]="'user'"></app-functionality-buttons>
+                                   [endpoint]="'fortis/rest/v2/services/fortis_MakerCheckerService/approveSystemUser'"></app-functionality-buttons>
         <app-custom-datatable
           [endpoint]="endpoint"
           [hasCheckBox]="hasCheckBox"
