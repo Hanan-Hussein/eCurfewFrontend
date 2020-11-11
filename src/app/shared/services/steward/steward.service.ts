@@ -1,112 +1,119 @@
-import { Injectable } from '@angular/core';
-import { Meta } from '@angular/platform-browser';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-  HttpParams,
-} from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { GlobalParams } from '../globalparams';
-import { ResponseWrapper } from '../../../entities/wrappers/response-wrapper';
-import { DataTableWrapper } from '../../../entities/wrappers/data-table-wrapper';
+import {Injectable} from '@angular/core';
+import {Meta} from '@angular/platform-browser';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {GlobalParams} from '../globalparams';
+import {ResponseWrapper} from '../../../entities/wrappers/response-wrapper';
+import {DataTableWrapper} from '../../../entities/wrappers/data-table-wrapper';
 import { MasterDataResponseWrapper } from '../../../entities/wrappers/masterdata-wrapper';
+// import {AppState} from '../redux/AppState';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class StewardService<T, E> {
-  private headers: HttpHeaders;
-  private headersNoToken: HttpHeaders;
-  private headersLogin: HttpHeaders;
-  private headersPlain: HttpHeaders;
-  private headersFormdata: HttpHeaders;
-  private headersFormdataNoToken: HttpHeaders;
-  private headersMultipart: HttpHeaders;
   token: string;
-  private headersSendToken: HttpHeaders;
 
   constructor(
     private http: HttpClient,
     private globalParam: GlobalParams,
-    private meta: Meta
+    private meta: Meta,
+    // private _state: AppState
   ) {
+
+  }
+
+  getHeaders(header: string): HttpHeaders {
     // const csrf = this.meta.getTag('name=_csrf').content;
+    const token = localStorage.getItem('access_token');
+    switch (header) {
 
-    this.token = localStorage.getItem('access_token');
+      case 'clean':
+        return new HttpHeaders({
+          'Content-Type': 'application/json; charset=utf-8',
+          // 'X-CSRF-TOKEN': csrf
+          'Authorization': 'Bearer ' + token
+        });
+        break;
 
-    this.headers = new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8',
-      // 'X-CSRF-TOKEN': csrf
-      Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-    });
+      case 'no-token':
+        return new HttpHeaders({
+          'Content-Type': 'application/json; charset=utf-8',
+          // 'X-CSRF-TOKEN': csrf
+        });
+        break;
 
-    this.headersNoToken = new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8',
-      // 'X-CSRF-TOKEN': csrf
-    });
-    this.headersLogin = new HttpHeaders({
-      'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
-      // 'X-CSRF-TOKEN': csrf
-      Authorization: 'Basic ' + btoa('client:secret'),
-    });
-    this.headersPlain = new HttpHeaders({
-      'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
-      // 'X-CSRF-TOKEN': csrf
-      Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-    });
+      case 'login':
+        return new HttpHeaders({
+          'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
+          // 'X-CSRF-TOKEN': csrf
+          'Authorization': 'Basic ' + btoa('web-portal:Data2020.')
+        });
+        break;
 
-    this.headersFormdata = new HttpHeaders({
-      // 'X-CSRF-TOKEN': csrf
-      Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-    });
+      case 'plain':
+        return new HttpHeaders({
+          'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
+          // 'X-CSRF-TOKEN': csrf
+          'Authorization': 'Bearer ' + token
+        });
+        break;
+      case 'form-data':
+        return new HttpHeaders({
+          // 'X-CSRF-TOKEN': csrf
+          'Authorization': 'Bearer ' + token
+        });
+        break;
 
-    this.headersMultipart = new HttpHeaders({
-      'Content-type': 'multipart/form-data; charset=utf-8',
-      // 'X-CSRF-TOKEN': csrf
-      Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-    });
-    this.headersSendToken = new HttpHeaders({
-      'Content-type': 'application/json; charset=utf-8',
-      // 'X-CSRF-TOKEN': csrf
-      Authorization: 'Basic ' + btoa('client:secret'),
-    });
+      case 'multi-part':
+        return new HttpHeaders({
+          'Content-type': 'multipart/form-data; charset=utf-8',
+          // 'X-CSRF-TOKEN': csrf
+          'Authorization': 'Bearer ' + token
+        });
+        break;
+        case 'sendToken':
+          return new HttpHeaders({
+            'Content-type': 'application/json; charset=utf-8',
+            // 'X-CSRF-TOKEN': csrf
+            Authorization: 'Basic ' + btoa('client:secret'),
+          });
+          break;
+
+      default:
+        return new HttpHeaders({
+          'Content-Type': 'application/json; charset=utf-8',
+          // 'X-CSRF-TOKEN': csrf
+          'Authorization': 'Bearer ' + token
+
+        });
+        break;
+    }
   }
 
   /**
    * Used to handle http post requests
    */
   post(endpoint: string, data: T): Observable<ResponseWrapper<E>> {
-    return this.http
-      .post(this.globalParam.baseUrl + endpoint, JSON.stringify(data), {
-        headers: this.headers,
-      })
-      .pipe(catchError(this.handleError<any>()));
+    return this.http.post(this.globalParam.baseUrl + endpoint, JSON.stringify(data), {headers: this.getHeaders('clean')}).pipe(
+      catchError(this.handleError<any>())
+    );
   }
 
   postNoToken(endpoint: string, data: T): Observable<ResponseWrapper<E>> {
-    return this.http
-      .post(this.globalParam.baseUrl + endpoint, JSON.stringify(data), {
-        headers: this.headersNoToken,
-      })
-      .pipe(catchError(this.handleError<any>()));
+    return this.http.post(this.globalParam.baseUrl + endpoint, JSON.stringify(data), {headers: this.getHeaders('no-token')}).pipe(
+      catchError(this.handleError<any>())
+    );
   }
+
 
   postLogin(endpoint: string, data: T): Observable<any> {
-    return this.http
-      .post(this.globalParam.baseUrl + endpoint, data, {
-        headers: this.headersLogin,
-      })
-      .pipe(catchError(this.handleError<any>()));
-  }
-
-  sendToken(endpoint: string, data: T): Observable<any> {
-    return this.http
-      .post(this.globalParam.baseUrl + endpoint, data, {
-        headers: this.headersSendToken,
-      })
-      .pipe(catchError(this.handleError<any>()));
+    return this.http.post(this.globalParam.baseUrl + endpoint, data, {
+      headers: this.getHeaders('login')
+    }).pipe(
+      catchError(this.handleError<any>())
+    );
   }
 
   postFormData(endpoint: string, data: T): Observable<ResponseWrapper<E>> {
@@ -115,50 +122,37 @@ export class StewardService<T, E> {
       formData.append(key, data[key]);
     });
 
-    return this.http
-      .post(this.globalParam.baseUrl + endpoint, formData, {
-        headers: this.headersFormdata,
-      })
-      .pipe(catchError(this.handleError<any>()));
+    return this.http.post(this.globalParam.baseUrl + endpoint, formData, {headers: this.getHeaders('form-data')}).pipe(
+      catchError(this.handleError<any>())
+    );
   }
 
-  postFormDataNoToken(
-    endpoint: string,
-    data: T
-  ): Observable<ResponseWrapper<E>> {
+  postFormDataNoToken(endpoint: string, data: T): Observable<ResponseWrapper<E>> {
     const formData: FormData = new FormData();
     Object.keys(data).forEach((key) => {
       formData.append(key, data[key]);
     });
 
-    return this.http
-      .post(this.globalParam.baseUrl + endpoint, formData, {
-        headers: this.headersFormdataNoToken,
-      })
-      .pipe(catchError(this.handleError<any>()));
+    return this.http.post(this.globalParam.baseUrl + endpoint, formData, {headers: this.getHeaders('form-data')}).pipe(
+      catchError(this.handleError<any>())
+    );
   }
 
-  postFormAuthorized(
-    endpoint: string,
-    data: T,
-    options?: HttpHeaders
-  ): Observable<any> {
+  postFormAuthorized(endpoint: string, data: T, options?: HttpHeaders): Observable<any> {
     if (!options) {
-      options = this.headersPlain;
+      options = this.getHeaders('plain');
     }
-    return this.http
-      .post(this.globalParam.baseUrl + endpoint, data, { headers: options })
-      .pipe(catchError(this.handleError<any>()));
+    return this.http.post(this.globalParam.baseUrl + endpoint, data, {headers: options}).pipe(
+      catchError(this.handleError<any>())
+    );
   }
 
-  postFormDataMultipart(
-    endpoint: string,
-    data: T
-  ): Observable<ResponseWrapper<E>> {
+
+  postFormDataMultipart(endpoint: string, data: T): Observable<ResponseWrapper<E>> {
     const formData: FormData = new FormData();
     Object.keys(data).forEach((key) => {
       if (Array.isArray(data[key])) {
-        data[key].forEach((k2) => {
+        data[key].forEach(k2 => {
           formData.append(key, k2);
         });
       } else {
@@ -166,116 +160,75 @@ export class StewardService<T, E> {
       }
     });
 
-    return this.http
-      .post(this.globalParam.baseUrl + endpoint, formData, {
-        headers: this.headersFormdata,
-      })
-      .pipe(catchError(this.handleError<any>()));
+    return this.http.post(this.globalParam.baseUrl + endpoint, formData, {headers: this.getHeaders('form-data')}).pipe(
+      catchError(this.handleError<any>())
+    );
   }
 
   sendFile(endpoint: string, data: T): Observable<ResponseWrapper<E>> {
     return this.http
       .post(this.globalParam.baseUrl + endpoint, data, {
-        headers: this.headersFormdata,
+        headers: this.getHeaders('form-data')
       })
       .pipe(catchError(this.handleError<any>()));
   }
 
-  putFormDataMultiPart(
-    endpoint: string,
-    data: T
-  ): Observable<ResponseWrapper<E>> {
+  putFormDataMultiPart(endpoint: string, data: T): Observable<ResponseWrapper<E>> {
     const formData: FormData = new FormData();
     Object.keys(data).forEach((key) => {
       if (Array.isArray(data[key])) {
-        data[key].forEach((k2) => {
+        data[key].forEach(k2 => {
           formData.append(key, k2);
         });
       } else {
         formData.append(key, data[key]);
       }
     });
-    return this.http
-      .put(this.globalParam.baseUrl + endpoint, formData, {
-        headers: this.headersFormdata,
-      })
-      .pipe(catchError(this.handleError<any>()));
+    return this.http.put(this.globalParam.baseUrl + endpoint, formData, {headers: this.getHeaders('form-data')}).pipe(
+      catchError(this.handleError<any>())
+    );
   }
 
   /**
    * Used to handle http post requests
    */
   put(endpoint: string, data: T): Observable<ResponseWrapper<E>> {
-    return this.http
-      .put(this.globalParam.baseUrl + endpoint, JSON.stringify(data), {
-        headers: this.headers,
-      })
-      .pipe(catchError(this.handleError<any>()));
+    return this.http.put(this.globalParam.baseUrl + endpoint, JSON.stringify(data), {headers: this.getHeaders('clean')}).pipe(
+      catchError(this.handleError<any>())
+    );
   }
 
   putNoToken(endpoint: string, data: T): Observable<ResponseWrapper<E>> {
-    return this.http
-      .put(this.globalParam.baseUrl + endpoint, JSON.stringify(data), {
-        headers: this.headersNoToken,
-      })
-      .pipe(catchError(this.handleError<any>()));
+    return this.http.put(this.globalParam.baseUrl + endpoint, JSON.stringify(data), {headers: this.getHeaders('no-token')}).pipe(
+      catchError(this.handleError<any>())
+    );
   }
 
   delete(endpoint: string, data: T): Observable<ResponseWrapper<E>> {
-    return this.http
-      .request('delete', this.globalParam.baseUrl + endpoint, {
-        headers: this.headers,
-        body: JSON.stringify(data),
-      })
-      .pipe(catchError(this.handleError<any>()));
+    return this.http.request('delete', this.globalParam.baseUrl + endpoint, {
+      headers: this.getHeaders('clean'),
+      body: JSON.stringify(data)
+    }).pipe(
+      catchError(this.handleError<any>())
+    );
   }
 
-  deleteCustomer(endpoint: string, data: T): Observable<ResponseWrapper<E>> {
-    return this.http
-      .post(this.globalParam.baseUrl + endpoint, {
-        headers: this.headers,
-        body: JSON.stringify(data),
-      })
-      .pipe(catchError(this.handleError<any>()));
-  }
-
-  get(
-    endpoint: string,
-    data?: Map<string, string>
-  ): Observable<ResponseWrapper<E>> {
+  get(endpoint: string, data?: Map<string, string>): Observable<ResponseWrapper<E>> {
     const options = {
-      headers: this.headers,
-      params: this.getHttpParams(data),
+      headers: this.getHeaders('clean'),
+      params: this.getHttpParams(data)
     };
-    return this.http
-      .get(this.globalParam.baseUrl + endpoint, options)
-      .pipe(catchError(this.handleError<any>()));
+    return this.http.get(this.globalParam.baseUrl + endpoint, options).pipe(
+      catchError(this.handleError<any>())
+    );
   }
+
   getMasterData(
     endpoint: string,
     data?: Map<string, string>
   ): Observable<MasterDataResponseWrapper<E>> {
     const options = {
-      headers: this.headers,
-      params: this.getHttpParams(data),
-    };
-    return this.http
-      .get(this.globalParam.baseUrl + endpoint, options)
-      .pipe(catchError(this.handleError<any>()));
-  }
-getToken(endpoint:string){
-  const token = localStorage.getItem('access_token');
-  const headers = {
-    Authorization: 'Bearer ' + token
-  }
-  return this.http.get(this.globalParam.baseUrl + endpoint, {headers: headers});
-}
-  getNoToken(
-    endpoint: string,
-    data?: Map<string, string>
-  ): Observable<ResponseWrapper<E>> {
-    const options = {
-      headers: this.headersNoToken,
+      headers: this.getHeaders('plain'),
       params: this.getHttpParams(data),
     };
     return this.http
@@ -283,6 +236,50 @@ getToken(endpoint:string){
       .pipe(catchError(this.handleError<any>()));
   }
 
+  getWithCustomeHeader(endpoint: string, data?: Map<string, string>, options?: HttpHeaders): Observable<ResponseWrapper<E>> {
+    let opt;
+    if (!options) {
+      opt = {
+        headers: options,
+        params: this.getHttpParams(data)
+      };
+    } else {
+      opt = {
+        headers: this.getHeaders('clean'),
+        params: this.getHttpParams(data)
+      };
+    }
+
+    return this.http.get(this.globalParam.baseUrl + endpoint, opt).pipe(
+      catchError(this.handleError<any>())
+    );
+  }
+
+  getNoToken(endpoint: string, data?: Map<string, string>): Observable<ResponseWrapper<E>> {
+    const options = {
+      headers: this.getHeaders('no-token'),
+      params: this.getHttpParams(data)
+    };
+    return this.http.get(this.globalParam.baseUrl + endpoint, options).pipe(
+      catchError(this.handleError<any>())
+    );
+  }
+  getToken(endpoint: string, data?: Map<string, string>): Observable<ResponseWrapper<E>> {
+    const options = {
+      headers: this.getHeaders('clean'),
+      params: this.getHttpParams(data)
+    };
+    return this.http.get(this.globalParam.baseUrl + endpoint, options).pipe(
+      catchError(this.handleError<any>())
+    );
+  }
+  sendToken(endpoint: string, data: T): Observable<any> {
+    return this.http
+      .post(this.globalParam.baseUrl + endpoint, data, {
+        headers: this.getHeaders('sendToken'),
+      })
+      .pipe(catchError(this.handleError<any>()));
+  }
   private getHttpParams(data: Map<string, string>): HttpParams {
     if (data === undefined) {
       return new HttpParams();
@@ -302,14 +299,9 @@ getToken(endpoint:string){
     $($.fn.dataTable.tables(true)).DataTable().ajax.reload(null, false);
   }
 
-  public intiateDataTable(
-    endpoint: string,
-    cols: Array<DataTables.ColumnSettings>,
-    idField: string,
-    params?: Map<any, string>,
-    paramCallBack?: any,
-    isCheckBoxEnable?: boolean
-  ): DataTables.Settings {
+  public intiateDataTable(endpoint: string, cols: Array<DataTables.ColumnSettings>,
+                          idField: string, params?: Map<any, string>,
+                          paramCallBack?: any, isCheckBoxEnable?: boolean): DataTables.Settings {
     if (isCheckBoxEnable === undefined) {
       isCheckBoxEnable = true;
     }
@@ -328,8 +320,8 @@ getToken(endpoint:string){
         className: 'select-checkbox',
         targets: 0,
         checkboxes: {
-          selectRow: isCheckBoxEnable,
-        },
+          selectRow: isCheckBoxEnable
+        }
       };
     }
 
@@ -345,29 +337,25 @@ getToken(endpoint:string){
         }
         const options = {
           // REVERT TO HEADERS.
-          headers: this.headersFormdata,
-          params: this.parseDataTableParams(dTParams, httpParams),
+          headers: this.getHeaders('form-data'),
+          params: this.parseDataTableParams(dTParams, httpParams)
         };
         this.http
           .get<DataTableWrapper<T>>(
             this.globalParam.baseUrl + endpoint,
             options
-          )
-          .subscribe((resp:any) => {
-            callback({
-              recordsTotal: resp.length,
-              recordsFiltered: resp.length,
-              // data: resp.data.content,
-              data:resp
-            });
+          ).subscribe((resp :any)=> {
+          callback({
+            recordsTotal: resp.length,
+            recordsFiltered: resp.length,
+           // data: resp.data.content
+           data:resp
           });
+        });
       },
       columns: cols,
-      on: (
-        event: string,
-        callback: (e: Event, settings: any, json: any) => void
-      ) => {
-
+      on: (event: string, callback: ((e: Event, settings: any, json: any) => void)) => {
+        // console.log('Testing on select event');
       },
       // preDrawCallback: preCallBack,
       rowCallback: (row: Node, data: T[], index: number) => {
@@ -384,99 +372,14 @@ getToken(endpoint:string){
       // USED FOR HORIZONTAL SCROLLING.
       scrollX: true,
       buttons: [],
-      columnDefs: [columOptions],
-      select: {
-        style: 'multi',
-      },
-      order: [[1, 'asc']],
-    };
-    return dtOptions;
-  }
-
-  public intiateDataTableNoToken(
-    endpoint: string,
-    cols: Array<DataTables.ColumnSettings>,
-    idField: string,
-    params?: Map<any, string>,
-    paramCallBack?: any
-  ): DataTables.Settings {
-    if (params == null) {
-      params = new Map<any, string>();
-    }
-    let dtOptions: any = {};
-    let httpParams: HttpParams = new HttpParams();
-    params.forEach((value: any, key: string) => {
-      httpParams = httpParams.append(key, value);
-    });
-    dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      serverSide: true,
-      processing: true,
-      responsive: {
-        breakpoints: [
-          { name: 'desktop', width: Infinity },
-          { name: 'tablet', width: 1024 },
-          { name: 'fablet', width: 768 },
-          { name: 'phone', width: 480 },
-        ],
-      },
-      // select: true,
-      ajax: (dTParams: any, callback) => {
-        if (paramCallBack != null) {
-          paramCallBack(dTParams);
-        }
-        const options = {
-          headers: this.headersNoToken,
-          params: this.parseDataTableParams(dTParams, httpParams),
-        };
-        this.http
-          .get<DataTableWrapper<T>>(
-            this.globalParam.baseUrl + endpoint,
-            options
-          )
-          .subscribe((resp) => {
-            callback({
-              recordsTotal: resp.data.totalElements,
-              recordsFiltered: resp.data.totalElements,
-              data: resp.data.content,
-            });
-          });
-      },
-      columns: cols,
-      on: (
-        event: string,
-        callback: (e: Event, settings: any, json: any) => void
-      ) => {
-
-      },
-      //            preDrawCallback: preCallBack,
-      rowCallback: (row: Node, data: T[], index: number) => {
-
-        $(row).attr('data-id', data[idField]);
-        return row;
-      },
-      dom: 'Bfrtip',
-      // USED TO REMOVE THE SEARCH INPUT.
-      bFilter: false,
-      // USED FOR HORIZONTAL SCROLLING.
-      scrollX: true,
-      buttons: [],
       columnDefs: [
-        {
-          orderable: false,
-          className: 'select-checkbox',
-          targets: 0,
-          checkboxes: {
-            selectRow: true,
-          },
-        },
+        columOptions
       ],
       select: {
-        style: 'multi',
-        // selector: 'td:first-child'
-      },
-      order: [[1, 'asc']],
+        style: 'multi'
+      }
+      ,
+      order: [[1, 'asc']]
     };
     return dtOptions;
   }
@@ -484,50 +387,43 @@ getToken(endpoint:string){
   /**
    * used to parse datatable params to http client and spring boot pageable params
    */
-  private parseDataTableParams(
-    dtParams: any,
-    httpParams: HttpParams
-  ): HttpParams {
-    let ss: boolean = httpParams.has('sort');
-
-    httpParams = httpParams.append(
-      'page',
-      '' + dtParams.start / dtParams.length
-    );
+  private parseDataTableParams(dtParams: any, httpParams: HttpParams): HttpParams {
+    httpParams = httpParams.append('page', '' + (dtParams.start / dtParams.length));
     if (!dtParams.needle) {
       httpParams = httpParams.append('needle', dtParams.search.value);
     }
 
-    if (dtParams.order.length > 0) {
-      if (ss) {
-        httpParams = httpParams.append('sort', httpParams.get('sort'));
-      } else {
-        httpParams = httpParams.append(
-          'sort',
-          dtParams.columns[dtParams.order[0].column].data +
-            ',' +
-            dtParams.order[0].dir
-        );
+    let isSort = false;
+    let srtString = '';
+    const htp: any = httpParams;
+    if (htp.updates) {
+      const parm: Array<any> = htp.updates;
+
+      const srt: any = parm.filter(x => {
+        return x.param === 'sort';
+      });
+      if (srt != null) {
+        isSort = true;
+        srtString = srt.value;
+      }
+    }
+    if (isSort) {
+      httpParams = httpParams.append('sort', srtString);
+    } else {
+      if (dtParams.order.length > 0) {
+        httpParams = httpParams.append('sort', dtParams.columns[dtParams.order[0].column].data + ',' + dtParams.order[0].dir);
       }
     }
 
     Object.keys(dtParams).forEach((key) => {
-      // tslint:disable-next-line:triple-equals
-      if (
-        key != 'length' &&
-        key != 'start' &&
-        key != 'search' &&
-        key != 'sort' &&
-        // tslint:disable-next-line:triple-equals
-        key != 'order' &&
-        key != 'columns'
-      ) {
+      if (key != 'length' && key != 'start' && key != 'search' && key != 'sort' && key != 'order' && key != 'columns') {
         httpParams = httpParams.append(key, dtParams[key]);
       }
     });
 
     return httpParams;
   }
+
 
   /**
    * Used to catch exception thrown by http client returns internal server error
@@ -540,8 +436,7 @@ getToken(endpoint:string){
       // tslint:disable-next-line:triple-equals
       if (error.status == 500) {
         res.code = error.status;
-        res.message =
-          'Sorry internal server error occured please try again later';
+        res.message = 'Sorry internal server error occured please try again later';
       } else {
         res.code = error.status;
         res.message = error.error.message;
