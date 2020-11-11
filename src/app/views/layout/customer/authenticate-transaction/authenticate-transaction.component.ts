@@ -8,6 +8,7 @@ import { AuthenticateModel } from '../../../../entities/authenticate-transaction
 import { Notify } from '../../../../shared/class/notify';
 import { StewardService } from '../../../../shared/services/steward/steward.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-authenticate-transaction',
@@ -56,7 +57,7 @@ export class AuthenticateTransactionComponent implements OnInit {
     this.base64FingerPrint = this.fingerprint.payload;
 
   }
-  onAuthenticate(){
+  onAuthenticate(form: NgForm){
     const inst = this;
     this.model.authenticateTransaction=this.authenticateModel.value;
     this.model.authenticateTransaction.idNumber=this.authenticateModel.value.idNumber;
