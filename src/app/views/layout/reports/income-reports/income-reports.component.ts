@@ -9,7 +9,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 export class IncomeReportsComponent implements OnInit {
 
   cols: Array<DatatableColumns>;
-  endpoint = 'income-report';
+  endpoint = 'income-report?limit=20&returnCount=true';
   hasCheckBox = false;
   idColumn = 'id';
   params: Map<any, string>;
@@ -47,8 +47,8 @@ export class IncomeReportsComponent implements OnInit {
       title: 'balance',
       data: 'incomeToDate'
     });
-  
-    
+
+
   }
 
 }

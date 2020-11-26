@@ -8,7 +8,7 @@ import {DatatableColumns} from '../../../../../entities/datatable/datatable-colu
 })
 export class ApproveRolesComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'role';
+  endpoint = 'role?limit=20&returnCount=true';
   hasCheckBox = true;
   idColumn = 'roleId';
   params: Map<any, string>;

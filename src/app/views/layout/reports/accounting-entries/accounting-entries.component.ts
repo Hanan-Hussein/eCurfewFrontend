@@ -9,7 +9,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 export class AccountingEntriesComponent implements OnInit {
 
   cols: Array<DatatableColumns>;
-  endpoint = 'accounting-reports';
+  endpoint = 'accounting-reports?limit=20&returnCount=true';
   hasCheckBox = false;
   idColumn = 'id';
   params: Map<any, string>;
@@ -40,7 +40,7 @@ export class AccountingEntriesComponent implements OnInit {
       title: 'Debit Amount',
       data: 'debit'
     });
-   
+
     this.cols.push({
       title: 'Codes',
       data: 'referenceNumber'
@@ -53,13 +53,13 @@ export class AccountingEntriesComponent implements OnInit {
       title: 'Description',
       data: 'description'
     });
-   
+
     this.cols.push({
       title: 'Date',
       data: 'createdAt',
       isDate: true
     });
-    
+
   }
 
 }

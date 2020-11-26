@@ -7,7 +7,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class AccountOfficerComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/fortis_AccountOfficer';
+  endpoint = 'fortis/rest/v2/entities/fortis_AccountOfficer?limit=20&returnCount=true';
   routeView = 'home/master-data/account-officer/{0}/view-account-officer';
   hasCheckBox = true;
   idColumn = 'id';

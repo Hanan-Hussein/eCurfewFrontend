@@ -8,7 +8,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class CustomerStatusComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/fortis_CustomerStatus';
+  endpoint = 'fortis/rest/v2/entities/fortis_CustomerStatus?limit=20&returnCount=true';
   routeView = 'home/master-data/customer-status/{0}/view-customer-status';
   hasCheckBox = true;
   idColumn = 'id';

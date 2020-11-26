@@ -9,7 +9,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 export class ConsumptionReportComponent implements OnInit {
 
   cols: Array<DatatableColumns>;
-  endpoint = 'consumption-reports';
+  endpoint = 'consumption-reports?limit=20&returnCount=true';
   hasCheckBox = false;
   idColumn = 'id';
   params: Map<any, string>;
@@ -44,13 +44,13 @@ export class ConsumptionReportComponent implements OnInit {
       title: 'Description',
       data: 'description'
     });
-   
+
     this.cols.push({
       title: 'Date',
       data: 'createdAt',
       isDate: true
     });
-    
+
   }
 
 }

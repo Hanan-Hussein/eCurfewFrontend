@@ -335,9 +335,12 @@ export class StewardService<T, E> {
         if (paramCallBack != null) {
           paramCallBack(dTParams);
         }
+        dTParams.limit = dTParams.size;
+        delete dTParams.size;
         const options = {
           // REVERT TO HEADERS.
           headers: this.getHeaders('form-data'),
+          header: this.getHeaders('X-Total-Count'),
           params: this.parseDataTableParams(dTParams, httpParams)
         };
         this.http
@@ -345,11 +348,14 @@ export class StewardService<T, E> {
             this.globalParam.baseUrl + endpoint,
             options
           ).subscribe((resp :any)=> {
+            // console.log('>>>>>>', resp.headers.get('X-Total-Count'));
+
           callback({
             recordsTotal: resp.length,
             recordsFiltered: resp.length,
            // data: resp.data.content
            data:resp
+
           });
         });
       },

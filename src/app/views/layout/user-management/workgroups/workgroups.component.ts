@@ -8,7 +8,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class WorkgroupsComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/sec$Group';
+  endpoint = 'fortis/rest/v2/entities/sec$Group?limit=20&returnCount=true';
   hasCheckBox = true;
   idColumn = 'id';
   params: Map<any, string>;

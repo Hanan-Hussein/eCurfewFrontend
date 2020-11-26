@@ -9,7 +9,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 export class TopUpRequestsComponent implements OnInit {
 
   cols: Array<DatatableColumns>;
-  endpoint = 'top-up-reports';
+  endpoint = 'top-up-reports?limit=20&returnCount=true';
   hasCheckBox = false;
   idColumn = 'id';
   params: Map<any, string>;
@@ -60,7 +60,7 @@ export class TopUpRequestsComponent implements OnInit {
       data: 'createTs',
       isDate: true
     });
-    
+
   }
 
 }
