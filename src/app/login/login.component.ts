@@ -50,6 +50,8 @@ export class LoginComponent implements OnInit {
         this.notify.showWarning(response.message);
       } else if (response.code === 401){
         this.notify.showWarning(response.message);
+      }else if(response.code === 410){
+        this.router.navigate(['first-change']);
       } else {
         if (response.correlationId.length !== 0) {
           localStorage.setItem('correlationId', response.correlationId);

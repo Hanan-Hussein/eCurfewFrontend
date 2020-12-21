@@ -30,6 +30,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AppRoutingModule} from './app.routing.module';
 import {AuthGuard} from './shared/guard';
 import {AgmCoreModule} from '@agm/core';
+import { FirstChangeComponent } from './first-change/first-change.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -59,6 +61,8 @@ const APP_CONTAINERS = [
     ChartsModule,
     MatSnackBarModule,
     MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB0QsYTRtcdjU1kUKym7iqA6FXqaTTMimg'
     })
@@ -67,7 +71,8 @@ const APP_CONTAINERS = [
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
-    P500Component
+    P500Component,
+    FirstChangeComponent
   ],
   providers: [
     GlobalParams,
