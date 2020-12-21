@@ -83,7 +83,7 @@ export class AddIndustryComponent implements OnInit {
     if (this.isUpdate) {
       this.stewardService.put('fortis/rest/v2/entities/fortis_Industry/'+this.id, this.model).subscribe((response) => {
         console.log(response);
-        if (response) {
+        if (response.code === 200) {
           inst.notify.showSuccess(response.message);
           this.router.navigate(['home/master-data/industry']);
         } else {
@@ -94,9 +94,9 @@ export class AddIndustryComponent implements OnInit {
         inst.notify.showWarning(error.error.message);
       });
     } else {
-      this.stewardService.post('fortis/rest/v2/entities/fortis_Industry', this.model).subscribe((response) => {
+      this.stewardService.post('fortis/rest/v2/services/fortis_MessageService/messageIndustry',{user:this.model}).subscribe((response) => {
         console.log(response);
-        if (response) {
+        if (response.code === 200) {
           inst.notify.showSuccess(response.message);
           this.router.navigate(['home/master-data/industry']);
         } else {

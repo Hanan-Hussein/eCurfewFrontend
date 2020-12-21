@@ -35,21 +35,11 @@ export class AuditLogsComponent implements OnInit {
       isDate: true
     });
 
-    this.cols.push({
-      title: 'Entity',
-      data: 'displayedEntityName'
-    });
-
-    this.cols.push({
-      title: 'User',
-      data: 'id'
-    });
-
-    this.cols.push({
-      title: 'View More',
-      data: 'id',
-      isViewMore: true
-    });
+    // this.cols.push({
+    //   title: 'View More',
+    //   data: 'id',
+    //   isViewMore: true
+    // });
   }
 
 }

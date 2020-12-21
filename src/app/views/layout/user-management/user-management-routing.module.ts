@@ -14,6 +14,7 @@ import {ApproveRolesComponent} from './roles/approve-roles/approve-roles.compone
 import {ApproveWorkgroupsComponent} from './workgroups/approve-workgroups/approve-workgroups.component';
 import {ApproveUsersComponent} from './users/approve-users/approve-users.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
+import { LockedUsersComponent } from './users/locked-users/locked-users.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
       {path: 'workgroups/approve-workgroup', component: ApproveWorkgroupsComponent, canActivate: [AuthGuard]},
       {path: 'users/approve-user', component: ApproveUsersComponent, canActivate: [AuthGuard]},
       {path: 'user/profile', component: UserProfileComponent, canActivate: [AuthGuard]},
+      {path: 'user/locked-users', component: LockedUsersComponent, canActivate: [AuthGuard]},
     ]
   }
 ];

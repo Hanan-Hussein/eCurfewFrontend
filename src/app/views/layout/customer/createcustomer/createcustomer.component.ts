@@ -70,7 +70,7 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
     this.customerModel = this.fb.group({
       idNumber: ['',Validators.required, Validators.pattern(/^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$/)],
       firstName:['',Validators.required],
-      mobileNumber:['',Validators.required],
+      mobileNumber:['',[Validators.required,Validators.pattern('^[2][5][4][0-9]{9}$')]],
       surname:['',Validators.required],
       occupation:['',Validators.required],
       employeeNumber:['',Validators.required],
@@ -88,7 +88,11 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
       status:['',Validators.required],
       account_officer:['',Validators.required],
       sectors:['',Validators.required],
-      base64:['',Validators.required]
+      base64:['',Validators.required],
+      title: ['',Validators.required],
+      otherNames: ['',Validators.required],
+      dateOfBirth: ['',Validators.required],
+      signature: ['',Validators.required],
 
     });
     this.firstName=this.customerModel.get('firstName');
@@ -146,6 +150,12 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
 
   }
 
+  get email(){
+    return this.customerModel.get('emailAddress');
+  }
+  get phone(){
+    return this.customerModel.get('mobileNumber');
+  }
   @HostListener('window:beforeunload')
   ngOnDestroy(): void {
     if (this.subscription) {
@@ -164,6 +174,12 @@ file1Change(event) {
   if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.customerModel.get('file1').setValue(file);
+    }
+}
+fileSignature(event) {
+  if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.customerModel.get('signature').setValue(file);
     }
 }
 onSecondForm(){

@@ -13,39 +13,50 @@
             <label>Gender<span class="my_span"> *</span></label>
               <select  name="gender" class="form-control" name="gender" formControlName="gender"
               required>
-                required>
              <option *ngFor="let gen of gender" value="{{gen.word}}">{{gen.word}}</option>
             </select>
-
+            <div>
+              <span class="text-danger" *ngIf="CreateUserWrapper.get('gender').hasError('required') &&
+              CreateUserWrapper.get('gender').untouched ">Gender is required</span>
+            </div>
             </div>
         </div>
         <h5 style="color: blue;">User Bio Data</h5>
         <div class="row">
           <div class="form-group col-md-6">
             <label>First Name<span class="my_span"> *</span></label>
-            <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
-                   name="firstName" formControlName="firstName" class="form-control" required="required" >
-
+            <input type="text" name="firstName" formControlName="firstName" class="form-control" required="required" >
+            <div>
+              <span class="text-danger" *ngIf="CreateUserWrapper.get('firstName').hasError('required') &&
+              CreateUserWrapper.get('firstName').untouched ">First name is required</span>
+            </div>
           </div>
 
           <div class="form-group col-md-6">
             <label>Last Name<span class="my_span"> *</span> </label>
-            <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
-                   name="lastName" formControlName="lastName" class="form-control" required >
-
+            <input type="text" name="lastName" formControlName="lastName" class="form-control" required >
+                  <div>
+                    <span class="text-danger" *ngIf="CreateUserWrapper.get('lastName').hasError('required') &&
+                    CreateUserWrapper.get('lastName').untouched ">Last name is required</span>
+                  </div>
           </div>
           <div class="form-group col-md-6">
             <label>Designation<span class="my_span"> *</span> </label>
-            <input type="text" pattern="^(?=.*[A-z].*[A-z])[A-z-'.\s]{3,}$"
-                   name="position" formControlName="position" class="form-control" required >
-
+            <input type="text" name="position" formControlName="position" class="form-control" required >
+            <div>
+              <span class="text-danger" *ngIf="CreateUserWrapper.get('position').hasError('required') &&
+              CreateUserWrapper.get('position').untouched ">Designation is required</span>
+            </div>
           </div>
-
 
           <div class="form-group col-md-6">
             <label>National Id <span class="my_span"> *</span> </label>
             <input type="text"
                    name="national_id" formControlName="nationalId" class="form-control" required>
+                   <div>
+                    <span class="text-danger" *ngIf="CreateUserWrapper.get('nationalId').hasError('required') &&
+                    CreateUserWrapper.get('nationalId').untouched ">National id is required</span>
+                  </div>
 
           </div>
         </div>
@@ -55,14 +66,24 @@
           <div class="form-group col-md-6">
             <label>Email Address<span class="my_span"> *</span></label>
             <input type="text" formControlName="email" type="email" name="email" class="form-control" required
-                   pattern="([A-Za-z0-9_\-\.]+)@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$">
+                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" email>
+                   <div *ngIf="email.hasError('pattern')" class="text-danger">Invalid email</div>
+                   <div>
+                    <span class="text-danger" *ngIf="CreateUserWrapper.get('email').hasError('required') &&
+                    CreateUserWrapper.get('email').untouched ">Email address is required</span>
+                  </div>
 
           </div>
 
           <div class="form-group col-md-6">
             <label>Phone Number<span class="my_span"> *</span></label>
-            <input type="tel" pattern="^[2][5][4][0-9]{9}$" maxlength="13" formControlName="phoneNumber"
-                   name="msisdn" class="form-control" required />
+            <input type="tel"   placeholder="254700000000" formControlName="phoneNumber"
+                   name="msisdn" class="form-control" required >
+                   <!-- <div *ngIf="phone.errors.pattern && phone.touched" class="text-danger">Invalid phone number</div>
+                   <div *ngIf="phone.errors.minLength || phone.errors.maxLength" class="text-danger">Invalid phone number length</div> -->
+
+                    <span class="text-danger" *ngIf="CreateUserWrapper.get('phoneNumber').hasError('required') &&
+                    CreateUserWrapper.get('phoneNumber').untouched ">Phone number is required</span>
 
           </div>
           <div class="form-group col-md-6">
@@ -85,7 +106,7 @@
               </div>
           <div class="col-md-12 pull-right">
             <button style="margin:5px;"  type="submit" mat-stroked-button
-                    class="save-button pull-right">Save
+                    class="save-button pull-right" >Save
             </button>
           </div>
         </div>

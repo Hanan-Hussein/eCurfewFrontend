@@ -9,7 +9,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 export class CurrencyComponent implements OnInit {
 
   cols: Array<DatatableColumns>;
-  endpoint = 'currency?limit=20&returnCount=true';
+  endpoint = 'currency?returnCount=true';
   routeView = 'home/master-data/currency/{0}/view-currency';
   hasCheckBox = true;
   idColumn = 'id';

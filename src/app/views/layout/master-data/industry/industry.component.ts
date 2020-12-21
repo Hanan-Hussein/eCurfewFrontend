@@ -8,7 +8,7 @@ styleUrls: ['./industry.component.scss']
 })
 export class IndustryComponent implements OnInit {
 cols: Array<DatatableColumns>;
-endpoint = 'fortis/rest/v2/entities/fortis_Industry?limit=20&returnCount=true';
+endpoint = 'fortis/rest/v2/entities/fortis_Industry?returnCount=true';
 routeView = 'home/master-data/sector/{0}/view-sector';
 hasCheckBox = true;
 idColumn = 'id';

@@ -6,10 +6,10 @@
     <div class="tile-body">
       <app-functionality-buttons [addLabel]="'Add Account Officer'"
                                  [addLink]="'home/master-data/add-account-officer'"
-                                 [deleteLabel]="'Delete'"
                                  [approveLinkLabel]="'Approve'"
                                  [approveLink]="'home/master-data/approve-account-officer'"
-                                 [endpoint]="endpoint"></app-functionality-buttons>
+                                 [deleteLabel]="'Delete'"
+                                 [endpoint]="'fortis/rest/v2/services/fortis_DisableAccountOfficerService/DisableAccountOfficer'"></app-functionality-buttons>
       <app-custom-datatable
         [endpoint]="endpoint"
         [routeView]="routeView"

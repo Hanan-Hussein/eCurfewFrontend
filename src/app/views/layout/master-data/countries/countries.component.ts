@@ -9,7 +9,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 export class CountriesComponent implements OnInit {
 
   cols: Array<DatatableColumns>;
-  endpoint = 'countries?limit=20&returnCount=true';
+  endpoint = 'countries?returnCount=true';
   routeView = 'home/master-data/countries/{0}/view-country';
   hasCheckBox = true;
   idColumn = 'id';

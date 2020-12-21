@@ -34,6 +34,11 @@ export const navItems: INavData[] = [
         url: '/home/user-management/user/profile',
         // icon: 'fa fa-user'
       },
+      {
+        name: 'Locked Users',
+        url: '/home/user-management/user/locked-users',
+        // icon: 'fa fa-user'
+      },
     ],
   },
   {

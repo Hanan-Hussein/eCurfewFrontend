@@ -1,21 +1,17 @@
-import {Component, OnInit,inject} from '@angular/core';
-import {NgModule} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import {NgForm} from '@angular/forms';
-// import {StewardService} from '../shared/services/steward/steward.service';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {DatatableColumns} from '../../../../../entities/datatable/datatable-columns';
-// import { StewardService } from 'src/app/shared/services/steward/steward.service';
 import {StewardService} from '../../../../../shared/services/steward/steward.service';
-@Component({
-  selector: 'app-listusers',
-  templateUrl: './listusers.component.html',
-  styleUrls: ['./listusers.component.scss'],
 
+@Component({
+  selector: 'app-locked-users',
+  templateUrl: './locked-users.component.html',
+  styleUrls: ['./locked-users.component.scss']
 })
-export class ListusersComponent implements OnInit {
+export class LockedUsersComponent implements OnInit {
+
   model: any = {};
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/fortis_FortisUser?returnCount=true';
+  endpoint = 'fortis/rest/v2/entities/fortis_FortisUser?returnCount=true&active=false';
   hasCheckBox = true;
   idColumn = 'id';
   params: Map<any, string>;
@@ -65,5 +61,6 @@ export class ListusersComponent implements OnInit {
     });
 
   }
+
 
 }

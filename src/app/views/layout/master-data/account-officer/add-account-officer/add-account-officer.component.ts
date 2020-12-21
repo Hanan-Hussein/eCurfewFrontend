@@ -91,9 +91,9 @@ export class AddAccountOfficerComponent implements OnInit {
         inst.notify.showWarning(error.error.message);
       });
     } else {
-      this.stewardService.post('fortis/rest/v2/entities/fortis_AccountOfficer', this.model).subscribe((response) => {
+      this.stewardService.post('fortis/rest/v2/services/fortis_MessageService/messageAccountOfficer',{user: this.model}).subscribe((response) => {
         console.log(response);
-        if (response) {
+        if (response.code === 200) {
           inst.notify.showSuccess(response.message);
           this.router.navigate(['home/master-data/account-officer']);
         } else {

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Meta} from '@angular/platform-browser';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {GlobalParams} from '../globalparams';
@@ -78,6 +78,14 @@ export class StewardService<T, E> {
             'Content-type': 'application/json; charset=utf-8',
             // 'X-CSRF-TOKEN': csrf
             Authorization: 'Basic ' + btoa('client:secret'),
+          });
+          break;
+          case 'X-Total-Count':
+          return new HttpHeaders({
+            'Content-type': 'application/json; charset=utf-8',
+            // 'X-CSRF-TOKEN': csrf
+            Authorization: 'Basic ' + btoa('client:secret'),
+            observe: 'response' as 'body'
           });
           break;
 
@@ -330,6 +338,7 @@ export class StewardService<T, E> {
       serverSide: true,
       processing: true,
       responsive: true,
+      // searchable: true,
       // select: true,
       ajax: (dTParams: any, callback) => {
         if (paramCallBack != null) {
@@ -337,25 +346,34 @@ export class StewardService<T, E> {
         }
         dTParams.limit = dTParams.size;
         delete dTParams.size;
-        const options = {
-          // REVERT TO HEADERS.
+        const option = {
           headers: this.getHeaders('form-data'),
           header: this.getHeaders('X-Total-Count'),
-          params: this.parseDataTableParams(dTParams, httpParams)
+          params: this.parseDataTableParams(dTParams, httpParams),
+          // set response to get all  response headers
+          observe:'response' as 'body',
+
+
         };
+
+
         this.http
-          .get<DataTableWrapper<T>>(
+          .get<DataTableWrapper<any>>(
             this.globalParam.baseUrl + endpoint,
-            options
-          ).subscribe((resp :any)=> {
-            // console.log('>>>>>>', resp.headers.get('X-Total-Count'));
+            option,
+
+          ).subscribe((resp: any) => {
+
+            // pagination working with cuba backend
+            // Get keys from  reponse headers
+            const myKeys =  resp.headers.keys();
+            const myheaders = myKeys.map((key)=>resp.headers.get(key));
+            const total = resp.headers.get('x-total-count');
 
           callback({
-            recordsTotal: resp.length,
-            recordsFiltered: resp.length,
-           // data: resp.data.content
-           data:resp
-
+            recordsTotal: total,
+            recordsFiltered: total,
+            data: resp.body
           });
         });
       },
@@ -376,8 +394,9 @@ export class StewardService<T, E> {
       // USED TO REMOVE THE SEARCH INPUT.
       bFilter: false,
       // USED FOR HORIZONTAL SCROLLING.
-      scrollX: true,
-      buttons: [],
+      // scrollX: true,
+      searching: true,
+      // info: true,
       columnDefs: [
         columOptions
       ],
@@ -385,8 +404,17 @@ export class StewardService<T, E> {
         style: 'multi'
       }
       ,
-      order: [[1, 'asc']]
+      // order: [[1, 'asc']]
     };
+     // Apply the search
+    //  dtOptions.columns().eq(0).each(function(colIdx) {
+    //   $('input', dtOptions.column(colIdx).footer()).on('keyup change', function() {
+    //     dtOptions
+    //       .column(colIdx)
+    //       .search(any)
+    //       .draw();
+    //   });
+    // });
     return dtOptions;
   }
 
@@ -394,7 +422,8 @@ export class StewardService<T, E> {
    * used to parse datatable params to http client and spring boot pageable params
    */
   private parseDataTableParams(dtParams: any, httpParams: HttpParams): HttpParams {
-    httpParams = httpParams.append('page', '' + (dtParams.start / dtParams.length));
+
+    httpParams = httpParams.append('offset', '' + (dtParams.start));
     if (!dtParams.needle) {
       httpParams = httpParams.append('needle', dtParams.search.value);
     }
@@ -422,7 +451,7 @@ export class StewardService<T, E> {
     }
 
     Object.keys(dtParams).forEach((key) => {
-      if (key != 'length' && key != 'start' && key != 'search' && key != 'sort' && key != 'order' && key != 'columns') {
+      if (key !== 'length' && key !== 'start' && key !== 'search' && key !== 'sort' && key !== 'order' && key !== 'columns') {
         httpParams = httpParams.append(key, dtParams[key]);
       }
     });

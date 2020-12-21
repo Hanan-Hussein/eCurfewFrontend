@@ -69,28 +69,27 @@ export class CreateuserComponent implements OnInit, OnDestroy {
 
     this.CreateUserWrapper = this.fb.group({
       firstName:['',Validators.required],
-      phoneNumber:['',Validators.required],
+      phoneNumber:['', Validators.required],
       lastName:['',Validators.required],
       position:['',Validators.required],
       nationalId:['',Validators.required],
       email:['',Validators.required],
-      status:['',Validators.required],
+      status:['',Validators.required,Validators.email],
       gender:['',Validators.required],
       file: ['',Validators.required],
       base64:['',Validators.required]
 
-
-
     });
+
 
     this.CreateUserWrapper.controls.base64.setValue(this.hardcodedBase64);
 
     // params.set('actionStatus', 'Approved');
     this.stewardService.getToken('fortis/rest/v2/entities/sec$Group').subscribe((response:any) => {
-      if (response.code === 200) {
+      if (response) {
         inst.systemRoles = response;
       } else {
-        inst.notify.showWarning(response.message);
+        // inst.notify.showWarning(response.message);
       }
     });
     // this.stewardService.get('gender').subscribe((response) => {
@@ -102,6 +101,12 @@ export class CreateuserComponent implements OnInit, OnDestroy {
     //   }
     // });
 
+  }
+  get email(){
+    return this.CreateUserWrapper.get('email');
+  }
+  get phone(){
+    return this.CreateUserWrapper.get('phoneNumber');
   }
   scanFingerPrint(){
     const fpRsponse:string=(<any>window).fortis.getFingerPrint();
@@ -161,11 +166,11 @@ export class CreateuserComponent implements OnInit, OnDestroy {
           this.router.navigate(['home/user-management/users']);
           // localStorage.removeItem('picId');
         } else {
-          inst.notify.showWarning(response.message);
+          // inst.notify.showWarning(response.message);
         }
       }, error => {
         console.log(error);
-        inst.notify.showWarning(error.error.message);
+        // inst.notify.showWarning(error.error.message);
       });
     },(error: any) => {
       form.reset();

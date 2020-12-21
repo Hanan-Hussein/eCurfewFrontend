@@ -8,7 +8,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class SectorComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/fortis_Sector?limit=20&returnCount=true';
+  endpoint = 'fortis/rest/v2/entities/fortis_Sector?returnCount=true';
   routeView = 'home/master-data/sector/{0}/view-sector';
   hasCheckBox = true;
   idColumn = 'id';

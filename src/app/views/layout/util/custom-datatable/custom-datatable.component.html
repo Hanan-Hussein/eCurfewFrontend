@@ -11,10 +11,10 @@
     <option value="250">250</option>
     <option value="500">500</option>
   </select>
-  <app-date-filter (submitForm)="filterById($event)" [filterParams]="filterParams" *ngIf="isFilterPresent">
-  </app-date-filter>
+  <!-- <app-date-filter (submitForm)="filterById($event)" [filterParams]="filterParams" *ngIf="isFilterPresent">
+  </app-date-filter> -->
 </div>
-<br>
+<!-- <br> -->
 <div class="pull-right" *ngIf="canExport">
   <button mat-stroked-button class="excel" (click)="export('xlsx')">Export Excel</button>
   <button mat-stroked-button class="pdf" (click)="export('pdf')">Export PDF</button>

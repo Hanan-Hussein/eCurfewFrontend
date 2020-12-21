@@ -89,9 +89,9 @@ export class AddSectorComponent implements OnInit {
         inst.notify.showWarning(error.error.message);
       });
     } else {
-      this.stewardService.post('fortis/rest/v2/entities/fortis_Sector', this.model).subscribe((response) => {
+      this.stewardService.post('fortis/rest/v2/services/fortis_MessageService/messageSector', {user:this.model}).subscribe((response) => {
         console.log(response);
-        if (response) {
+        if (response.code === 200) {
           this.notify.showSuccess(response.message);
           this.router.navigate(['home/master-data/sector']);
         } else {

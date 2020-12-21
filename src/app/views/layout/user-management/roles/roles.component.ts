@@ -8,7 +8,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class RolesComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/sec$Role?limit=20&returnCount=true';
+  endpoint = 'fortis/rest/v2/entities/sec$Role?returnCount=true';
   hasCheckBox = true;
   idColumn = 'roleId';
   params: Map<any, string>;

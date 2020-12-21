@@ -401,14 +401,14 @@ radioModel: string = 'Month';
   numberOfCustomerRegistrationsToday:any;
   totalNumberOfCustomers:any;
 
-  
+
     Kenya:any;
     Uganda:any;
     Tanzania:any;
     Nigeria:any;
 
   dashboardData:any = [];
- 
+
   subscription: Subscription;
 
 
@@ -476,7 +476,7 @@ radioModel: string = 'Month';
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Total No TopUps' },
     { data: [51, 39, 20, 51, 76, 59, 10], label: 'Total Collections' },
     { data: [23, 76, 70, 91, 86, 95, 20], label: 'Total Top ups' },
-    
+
   ];
   public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   // public lineChartOptions: (ChartOptions & { annotation:any }) = {
@@ -495,7 +495,7 @@ radioModel: string = 'Month';
       borderColor: '#A27EA8',
       backgroundColor: '#e4e5e652',
     },
-   
+
   ];
   public lineChartLegend = true;
   public lineChartType = 'line';
@@ -508,15 +508,15 @@ radioModel: string = 'Month';
 
   ngOnInit() {
 
-    this.subscription.add( 
+    this.subscription.add(
       this.stewardService.get('dashboard').subscribe((response) => {
         if (response.code === 200) {
           this.dashboardData.push(response.data);
-          
-          
-          
+
+
+
         } else {
-          this.notify.showWarning(response.message);
+          // this.notify.showWarning(response.message);
         }
       })
     );
@@ -530,12 +530,12 @@ radioModel: string = 'Month';
   }
 
   onChange(dataindex) {
-    
+
     // this.finalDataToDisplay = [];
     // this.finalDataToDisplay.push(this.dashboardData[dataindex].dashboardData);
-   
-    
-    
+
+
+
   }
 
 

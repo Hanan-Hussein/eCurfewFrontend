@@ -15,7 +15,7 @@
                   <span class="invalid-input" *ngIf="name.errors.required">
                     Industry Name is required.
                   </span>
-              <!-- <span class="invalid-input" *ngIf="name.errors.pattern">
+              <!-- <span class="invalid-input" *ngIf="name.errors.hasError(pattern)">
                     Industry Name must be a valid name with at least 3 characters
                   </span> -->
             </div>
@@ -23,14 +23,16 @@
 
           <div class="form-group col-md-6">
             <label>Industry Code</label>
-            <input type="text" [readOnly]="isReadOnly"
+            <input type="text" [readOnly]="isReadOnly" pattern="^[0-9]+$"
                    name="code" [(ngModel)]="model.code" class="form-control" required
                    #code="ngModel">
             <div *ngIf="(code.dirty || code.touched) && code.invalid" class="text-danger">
                   <span class="invalid-input" *ngIf="code.errors.required">
                     Code is required.
                   </span>
-
+                  <span class="invalid-input" *ngIf="code.hasError('pattern')">
+                    Code should be numbers
+                  </span>
             </div>
           </div>
 
