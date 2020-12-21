@@ -1,0 +1,62 @@
+<div class="page page-core">
+  <div class="container w-420 p-35 mt-40 text-center log-form">
+    <img src="assets/new-fortis-logo-login.png" style="height:20%;"/>
+    <section>
+      <h4 class="trynot text-login">Change Password</h4>
+      <form [formGroup]="form" (ngSubmit)="changePass()"  role="form"
+            class="form-validation">
+        <div class="form-group col-md-12">
+          <label for="email">Email  <span class="my_span"> *</span></label>
+          <input type="email" id="email" class="form-control" [(ngModel)]="model.email" name="email"
+                 required="required" placeholder="Email" formControlName="email">
+        </div>
+        <div class="form-group col-md-12">
+          <label for="oldpassword">Current Password  <span class="my_span"> *</span></label>
+          <input type="password" class="form-control borders" [(ngModel)]="model.oldPassword"
+                 name="oldPassword" required="required" id="oldpassword" placeholder="****"
+                 formControlName="oldPassword"/>
+        </div>
+        <div class="form-group col-md-12">
+          <label for="newPassword">New Password <span class="my_span"> *</span></label>
+          <input type="password" class="form-control borders" [(ngModel)]="confirmPassword"
+                 name="confirmPassword" required="required" id="confirmPassword" placeholder="****"
+                 formControlName="confirmPassword"/>
+        </div>
+        <div class="form-group col-md-12">
+          <label for="newPassword">Confirm Password <span class="my_span"> *</span></label>
+          <input type="password" class="form-control borders" [(ngModel)]="model.newPassword"
+                 name="newPassword" required="required" id="newPassword" placeholder="****"
+                 formControlName="newPassword"/>
+          <span class="help-block text-danger"
+                *ngIf="form.get('newPassword').hasError('mismatchedPasswords')">Passwords do not match</span>
+        </div>
+        <div class="form-group col-md-12">
+          <a routerLink="/forgot-password" class="trynot pull-left back-login">Forgot Password?</a>
+
+          <button  class="save-button btn-block" mat-stroked-button type="submit">
+            Change Password
+          </button>
+        </div>
+        <br>
+        <br>
+        <div class="form-group col-md-12 text-left">
+          <p><span class="custom_span">For Help Call:</span> 072993440</p>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
+<div class="footer">
+  <div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+      <div class="row">
+        <div class="col">Contact Us</div>
+        <div class="col">Privacy</div>
+        <div class="col">Legal</div>
+      </div>
+    </div>
+    <div class="col-sm-4"></div>
+  </div>
+</div>
+

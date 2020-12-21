@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {DefaultLayoutComponent} from './containers';
+import { FirstChangeComponent } from './first-change/first-change.component';
 import {P404Component} from './views/error/404.component';
 
 export const routes: Routes = [
@@ -47,6 +48,7 @@ export const routes: Routes = [
       {path: 'home', loadChildren: () => import('./views/layout/layout.module').then(m => m.LayoutModule)},
     ]
   },
+  {path: 'first-change', component: FirstChangeComponent},
   {path: '**', component: P404Component}
 ];
 
