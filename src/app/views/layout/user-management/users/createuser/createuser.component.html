@@ -15,10 +15,14 @@
               required>
              <option *ngFor="let gen of gender" value="{{gen.word}}">{{gen.word}}</option>
             </select>
+
             <div>
-              <span class="text-danger" *ngIf="CreateUserWrapper.get('gender').hasError('required') &&
-              CreateUserWrapper.get('gender').untouched ">Gender is required</span>
-            </div>
+              <span class="text-danger"
+              *ngIf="CreateUserWrapper.get('gender').invalid && CreateUserWrapper.get('gender').touched
+              &&CreateUserWrapper.get('gender').errors.required">
+          Gender is required
+          </span>
+          </div>
             </div>
         </div>
         <h5 style="color: blue;">User Bio Data</h5>
@@ -27,36 +31,60 @@
             <label>First Name<span class="my_span"> *</span></label>
             <input type="text" name="firstName" formControlName="firstName" class="form-control" required="required" >
             <div>
-              <span class="text-danger" *ngIf="CreateUserWrapper.get('firstName').hasError('required') &&
-              CreateUserWrapper.get('firstName').untouched ">First name is required</span>
-            </div>
+              <span class="text-danger"
+              *ngIf="CreateUserWrapper.get('firstName').invalid && CreateUserWrapper.get('firstName').touched
+              &&CreateUserWrapper.get('firstName').errors.required">
+           First Name is required
+        </span>
+        <span class="text-danger" *ngIf="CreateUserWrapper.get('firstName').errors?.pattern">
+          Customer Name must be a valid name with at least 3 characters</span>
+
+        </div>
           </div>
 
           <div class="form-group col-md-6">
             <label>Last Name<span class="my_span"> *</span> </label>
             <input type="text" name="lastName" formControlName="lastName" class="form-control" required >
                   <div>
-                    <span class="text-danger" *ngIf="CreateUserWrapper.get('lastName').hasError('required') &&
-                    CreateUserWrapper.get('lastName').untouched ">Last name is required</span>
-                  </div>
+                    <span class="text-danger"
+                    *ngIf="CreateUserWrapper.get('lastName').invalid && CreateUserWrapper.get('lastName').touched
+                    &&CreateUserWrapper.get('lastName').errors.required">
+                Last Name is required
+              </span>
+              <span class="text-danger" *ngIf="CreateUserWrapper.get('lastName').errors?.pattern">
+                Last Name must be a valid name with at least 3 characters</span>
+
+              </div>
           </div>
           <div class="form-group col-md-6">
             <label>Designation<span class="my_span"> *</span> </label>
             <input type="text" name="position" formControlName="position" class="form-control" required >
-            <div>
-              <span class="text-danger" *ngIf="CreateUserWrapper.get('position').hasError('required') &&
-              CreateUserWrapper.get('position').untouched ">Designation is required</span>
-            </div>
+                  <div>
+                    <span class="text-danger"
+                    *ngIf="CreateUserWrapper.get('position').invalid && CreateUserWrapper.get('position').touched
+                    &&CreateUserWrapper.get('position').errors.required">
+                Position is required
+              </span>
+              <span class="text-danger" *ngIf="CreateUserWrapper.get('position').errors?.pattern">
+                Position Name must be a valid name with at least 3 characters</span>
+
+              </div>
           </div>
 
           <div class="form-group col-md-6">
             <label>National Id <span class="my_span"> *</span> </label>
             <input type="text"
                    name="national_id" formControlName="nationalId" class="form-control" required>
-                   <div>
-                    <span class="text-danger" *ngIf="CreateUserWrapper.get('nationalId').hasError('required') &&
-                    CreateUserWrapper.get('nationalId').untouched ">National id is required</span>
-                  </div>
+                          <div>
+                            <span class="text-danger"
+                            *ngIf="CreateUserWrapper.get('nationalId').invalid && CreateUserWrapper.get('nationalId').touched
+                            &&CreateUserWrapper.get('nationalId').errors.required">
+                        National ID is required
+                      </span>
+                      <span class="text-danger" *ngIf="CreateUserWrapper.get('nationalId').errors?.pattern">
+                        National Id must be a valid </span>
+
+                      </div>
 
           </div>
         </div>
@@ -68,10 +96,16 @@
             <input type="text" formControlName="email" type="email" name="email" class="form-control" required
                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" email>
                    <div *ngIf="email.hasError('pattern')" class="text-danger">Invalid email</div>
-                   <div>
-                    <span class="text-danger" *ngIf="CreateUserWrapper.get('email').hasError('required') &&
-                    CreateUserWrapper.get('email').untouched ">Email address is required</span>
-                  </div>
+                          <div>
+                            <span class="text-danger"
+                            *ngIf="CreateUserWrapper.get('email').invalid && CreateUserWrapper.get('email').touched
+                            &&CreateUserWrapper.get('email').errors.required">
+                        Email is required
+                      </span>
+                      <span class="text-danger" *ngIf="CreateUserWrapper.get('email').errors?.pattern">
+                        Email must be a valid </span>
+
+                      </div>
 
           </div>
 
@@ -82,8 +116,16 @@
                    <!-- <div *ngIf="phone.errors.pattern && phone.touched" class="text-danger">Invalid phone number</div>
                    <div *ngIf="phone.errors.minLength || phone.errors.maxLength" class="text-danger">Invalid phone number length</div> -->
 
-                    <span class="text-danger" *ngIf="CreateUserWrapper.get('phoneNumber').hasError('required') &&
-                    CreateUserWrapper.get('phoneNumber').untouched ">Phone number is required</span>
+                            <div>
+                              <span class="text-danger"
+                              *ngIf="CreateUserWrapper.get('phoneNumber').invalid && CreateUserWrapper.get('phoneNumber').touched
+                              &&CreateUserWrapper.get('phoneNumber').errors.required">
+                          Phone Number is required
+                        </span>
+                        <span class="text-danger" *ngIf="CreateUserWrapper.get('phoneNumber').errors?.pattern">
+                          Phone Number must be a valid</span>
+
+                        </div>
 
           </div>
           <div class="form-group col-md-6">
