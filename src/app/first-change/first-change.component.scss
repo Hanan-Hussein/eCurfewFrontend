@@ -1,0 +1,137 @@
+
+/* @import url('https://fonts.googleapis.com/css?family=Cutive+Mono|Dosis&display=swap'); */
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400&display=swap'); */
+.page{
+  /* background:#FFFFFF; */
+  /* Location of the image */
+  /* background-image: url(../../assets/pure-white.png); */
+
+  /* Image is centered vertically and horizontally at all times */
+  background-position: center center;
+
+  /* Image doesn't repeat */
+  background-repeat: no-repeat;
+
+  /* Makes the image fixed in the viewport so that it doesn't move when
+     the content height is greater than the image height */
+  background-attachment: fixed;
+
+  /* This is what makes the background image rescale based on its container's size */
+  background-size: cover;
+
+  /* Pick a solid background color that will be displayed while the background image is loading */
+  background-color:#FFFFFF;
+
+  /* SHORTHAND CSS NOTATION
+   * background: url(background-photo.jpg) center center cover no-repeat fixed;
+   */
+}
+.tryme{
+  font-family: poppins ;
+  font-size: 25px;
+
+  font-weight: lighter;
+
+/* font-size: 2.9rem;
+font-weight: 200; */
+
+
+}
+.forgot{
+
+  font-family: poppins;
+  font-size: 14px;
+  color: #7C51A1;
+  font-weight: lighter;
+}
+.trynot{
+
+  font-family: poppins;
+  font-size: 25px;
+  color: #666666;
+  font-weight: lighter;
+
+}
+.log-form {
+  margin-top: 10px;
+  width: 400px;
+  height: 450px;
+  background: #FFFFFF 0 0 no-repeat padding-box;
+  border: 1px solid #EAECED;
+  border-radius: 5px;
+  opacity: 1;
+}
+
+a {
+  text-decoration: none;
+  color: #7C51A1;
+}
+
+input[type="email"] {
+  /*background: transparent;*/
+  background-color: #FFFFFF;
+  font-weight: lighter;
+  font-family: poppins;
+  font-size: 14px;
+  color: #000000;
+  border-color: #5F3F91;
+}
+
+input[type="password"] {
+  /*background: transparent;*/
+  background-color: #FFFFFF;
+  font-size: 14px;
+  color: #000000;
+  border-color: #5F3F91;
+}
+
+.form-control.ng-touched.ng-invalid {
+  border-left: 4px solid #F3B431;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #BBBBBB;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #BBBBBB;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #BBBBBB;
+}
+
+.forgot-pass {
+  margin-bottom: 8px;
+}
+
+.login-name {
+  text-align: center;
+  color: #ffffff;
+}
+label{
+  display: flex;
+  color:rgb(102, 119, 128);
+  font-weight: unset;
+}
+.my_span{
+  color: #FFA800;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #F7F9FA;
+  color: #666666;
+  text-align: center;
+}
+.custom_span{
+  font-family: poppins;
+  color: #666666;
+  font-weight: lighter;
+}
