@@ -18,8 +18,8 @@ export class ApproveUsersComponent implements OnInit {
   constructor() {
     this.cols = [];
     this.params = new Map();
-    // this.params.set('sort', 'id,desc');
-    // this.params.set('actionStatus', 'Unapproved');
+    this.params.set('sort', 'id');
+    this.params.set('actionStatus', 'Unapproved');
   }
 
   ngOnInit() {
