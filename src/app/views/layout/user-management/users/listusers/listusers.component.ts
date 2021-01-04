@@ -15,7 +15,7 @@ import {StewardService} from '../../../../../shared/services/steward/steward.ser
 export class ListusersComponent implements OnInit {
   model: any = {};
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/fortis_FortisUser?returnCount=true';
+  endpoint = 'fortis/rest/v2/entities/fortis_FortisUser/search?filter=%7B%22conditions%22%3A%20%5B%7B%22property%22%3A%20%22active%22%2C%22operator%22%3A%20%22%3D%22%2C%22value%22%3A%20true%7D%5D%7D&returnCount=true';
   hasCheckBox = true;
   idColumn = 'id';
   params: Map<any, string>;

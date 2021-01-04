@@ -7,7 +7,7 @@ import {StewardService} from '../../../../../shared/services/steward/steward.ser
 import {Notify} from '../../../../../shared/class/notify';
 import {routerTransition} from '../../../../../router.animations';
 import {Router} from '@angular/router';
-import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {Component, ElementRef, HostListener, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import { Gender } from '../../../../../../Sdk/enums/enums';
@@ -28,7 +28,7 @@ export class CreateuserComponent implements OnInit, OnDestroy {
   multiple:false;
   CreateUserWrapper: FormGroup;
   fileControl:FormGroup;
-  workgroups: number[] = [];
+  workgroups : any=[];
   public isUpdate = false;
   gender:any =  [];
   isReadOnly = false;
@@ -77,31 +77,48 @@ export class CreateuserComponent implements OnInit, OnDestroy {
       status:['',Validators.required,Validators.email],
       gender:['',Validators.required],
       file: ['',Validators.required],
-      base64:['',Validators.required]
+      base64:['',Validators.required],
+      workGroups:this.fb.array([]),
 
     });
-
-
-    this.CreateUserWrapper.controls.base64.setValue(this.hardcodedBase64);
-
-    // params.set('actionStatus', 'Approved');
-    this.stewardService.getToken('fortis/rest/v2/entities/sec$Group').subscribe((response:any) => {
+    this.stewardService.get('fortis/rest/v2/entities/fortis_WorkGroups', params).subscribe((response:any) => {
       if (response) {
+        console.log(">>>>>>>>>>>",response);
         inst.systemRoles = response;
       } else {
-        // inst.notify.showWarning(response.message);
+        inst.notify.showWarning(response.message);
       }
     });
-    // this.stewardService.get('gender').subscribe((response) => {
 
-    //   if (response.code === 200) {
-    //     inst.gender = response.data.content;
-    //   } else {
-    //     inst.notify.showWarning(response.message);
-    //   }
-    // });
+    // this.CreateUserWrapper.controls.base64.setValue(this.hardcodedBase64);
 
   }
+  checkValue(type: string, id: string) {
+    if (type === 'roles') {
+    return this.CreateUserWrapper.value[type].some(role => role.roleId === id);
+    } else {
+    return this.CreateUserWrapper.value[type] ? this.CreateUserWrapper.value[type].id === id : false;
+    }
+    }
+
+    onRadioChange(data: string, event: any, type: string) {
+    const newRole = { id: data };
+    const roleFormArray = this.CreateUserWrapper.controls.workGroups as FormArray;
+
+    if (event && type === 'role') roleFormArray.push(new FormControl(newRole));
+    else if (event && type === 'gender') {
+    this.CreateUserWrapper.controls.gender = new FormControl({ id: event.value });
+    } else if (event && type === 'document')
+    this.CreateUserWrapper.controls.documentType = new FormControl({ id: event.value });
+    else {
+    if (type === 'role') {
+    const index = roleFormArray.controls.findIndex(
+    role => role.value === newRole,
+    );
+    roleFormArray.removeAt(index);
+    }
+    }
+    }
   get email(){
     return this.CreateUserWrapper.get('email');
   }
@@ -135,6 +152,11 @@ export class CreateuserComponent implements OnInit, OnDestroy {
 
   onCreateUser(form: NgForm) {
     const inst = this;
+    // this.systemRoles.forEach(res => {
+    //   if (res.checked) {
+    //     this.workgroups.push(res.id);
+    //   }
+    // });
     this.model=this.CreateUserWrapper.get('base64').value;
     this.stewardService.post('fortis/rest/v2/services/fortis_UploadFileService/UploadFile',{uploadRequest: {"file":this.model}}).subscribe((res3:any)=>
     {
@@ -160,18 +182,21 @@ export class CreateuserComponent implements OnInit, OnDestroy {
       this.model.profilePhoto.id = res.id;
       this.model.fingerPrint=new Print();
       this.model.fingerPrint.id=res3.data;
-      this.stewardService.post('fortis/rest/v2/entities/fortis_FortisUser', this.model).subscribe((response: any) => {
-        if (response) {
-          inst.notify.showSuccess('Request was successful');
+
+      this.stewardService.post('fortis/rest/v2/services/fortis_CreateFortisUserService/createFortisUser', {"fortisUser":this.model}).subscribe((response: any) => {
+        console.log(response);
+        if (response.code === 200) {
+          console.log("rrrr",response);
+          this.notify.showSuccess(response.message);
           this.router.navigate(['home/user-management/users']);
-          // localStorage.removeItem('picId');
         } else {
-          // inst.notify.showWarning(response.message);
+          inst.notify.showWarning(response.message);
         }
       }, error => {
         console.log(error);
-        // inst.notify.showWarning(error.error.message);
+        inst.notify.showWarning(error.error.message);
       });
+
     },(error: any) => {
       form.reset();
       console.error(error.error);

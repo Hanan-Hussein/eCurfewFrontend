@@ -38,8 +38,8 @@ ngOnInit() {
       data: 'description'
     });
     this.cols.push({
-      title: 'Id',
-      data: 'id'
+      title: 'Status',
+      data: 'actionStatus'
     });
     this.cols.push({
       data: 'id',

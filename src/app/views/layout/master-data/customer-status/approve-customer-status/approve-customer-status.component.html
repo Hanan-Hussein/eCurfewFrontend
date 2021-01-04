@@ -1,1 +1,32 @@
-<p>approve-customer-status works!</p>
+<div>
+  <div class="page page-dashboard">
+    <section class="tile">
+      <div class="info-title">
+        <app-back-component></app-back-component>
+        <h2>Approve Customer Status</h2>
+      </div>
+      <div class="tile-body">
+        <app-functionality-buttons [addLabel]="'Add Customer Status'"
+                                   [addLink]="'home/master-data/add-customer-status'"
+                                   [approveLabel]="'Approve'"
+                                   [approveLink]="'fortis/rest/v2/services/fortis_MakerCheckerService/approveCustomerStatus'"
+                                   [declineLabel]="'Decline'"
+                                   [endpoint]="'fortis/rest/v2/services/fortis_MakerCheckerService/approveCustomerStatus'"></app-functionality-buttons>
+        <app-custom-datatable
+          [endpoint]="endpoint"
+          [hasCheckBox]="hasCheckBox"
+          [cols]="cols"
+          [idColumn]="idColumn"
+          [hasShowEntries]="true"
+          [fileName]="'Customer Status'"
+          [canExport]="true"
+          [filterParams]="'Full Name, Phone Number, Email'"
+          [isFilterPresent]="true"
+          [params]="params"
+          [routeView]="routeView"
+        ></app-custom-datatable>
+      </div>
+    </section>
+  </div>
+</div>
+

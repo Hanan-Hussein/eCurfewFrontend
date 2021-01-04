@@ -1,0 +1,22 @@
+<div class="page">
+  <section class="tile">
+    <div class="info-title">
+      <h2>Authorized And Unauthorized Report</h2>
+    </div>
+    <div class="tile-body">
+      <app-custom-datatable
+        [endpoint]="endpoint"
+        [routeView]="routeView"
+        [hasCheckBox]="hasCheckBox"
+        [cols]="cols"
+        [idColumn]="idColumn"
+        [params]="params"
+        [hasShowEntries]="true"
+        [fileName]="'Authorized And Unauthorized '"
+        [canExport]="true"
+        [filterParams]="''"
+        [isFilterPresent]="true"
+      ></app-custom-datatable>
+    </div>
+  </section>
+</div>

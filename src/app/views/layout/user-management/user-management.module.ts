@@ -47,6 +47,7 @@ import {ApproveWorkgroupsComponent} from './workgroups/approve-workgroups/approv
 import {ApproveUsersComponent} from './users/approve-users/approve-users.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import { LockedUsersComponent } from './users/locked-users/locked-users.component';
+import {ProfileComponent} from './user-profile/profile/profile.component';
 
 
 @NgModule({
@@ -66,7 +67,9 @@ import { LockedUsersComponent } from './users/locked-users/locked-users.componen
     ApproveWorkgroupsComponent,
     ApproveUsersComponent,
     UserProfileComponent,
-    LockedUsersComponent
+    LockedUsersComponent,
+    ProfileComponent
+
   ],
   imports: [
     CommonModule,

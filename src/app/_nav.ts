@@ -14,11 +14,11 @@ export const navItems: INavData[] = [
     url: '/home/user-management',
     // icon: 'fa fa-users',
     children: [
-      {
-        name: 'Roles',
-        url: '/home/user-management/roles',
-        // icon: 'fa fa-caret-right'
-      },
+      // {
+      //   name: 'Roles',
+      //   url: '/home/user-management/roles',
+      //   // icon: 'fa fa-caret-right'
+      // },
       {
         name: 'Workgroups',
         url: '/home/user-management/workgroups',
@@ -30,9 +30,13 @@ export const navItems: INavData[] = [
         // icon: 'fa fa-caret-right'
       },
       {
-        name: 'User Profile',
+        name: 'Change Password',
         url: '/home/user-management/user/profile',
         // icon: 'fa fa-user'
+      },
+      {
+        name:'User Profile',
+        url: '/home/user-management/profile'
       },
       {
         name: 'Locked Users',
@@ -99,6 +103,16 @@ export const navItems: INavData[] = [
     url: '/home/reports',
     // icon: 'fa fa-clipboard',
     children: [
+      {
+        name: 'Authentication Reports',
+        url: '/home/reports/authentication-report',
+        // icon: 'fa fa-caret-right'
+      },
+      // {
+      //   name: 'Authorized and Unauthorized Reports',
+      //   url: '/home/reports/authorized-unauthorized-reports',
+      //   // icon: 'fa fa-caret-right'
+      // },
       {
         name: 'Audit Trails',
         url: '/home/reports/audit-logs',
