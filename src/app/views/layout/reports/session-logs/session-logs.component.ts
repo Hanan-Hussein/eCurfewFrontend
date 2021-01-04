@@ -9,7 +9,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 export class SessionLogsComponent implements OnInit {
 
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/sec$SessionLogEntry?limit=20&returnCount=true';
+  endpoint = 'fortis/rest/v2/entities/sec$SessionLogEntry?returnCount=true';
   hasCheckBox = false;
   idColumn = 'id';
   params: Map<any, string>;

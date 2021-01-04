@@ -9,7 +9,8 @@ export class Roles {
     intrash: string;
     checked: boolean;
     groupId: number;
-    groupName: string;
+    id:string;
+    name: string;
 }
 
 

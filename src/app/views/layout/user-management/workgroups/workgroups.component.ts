@@ -8,7 +8,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class WorkgroupsComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/sec$Group?returnCount=true';
+  endpoint = 'fortis/rest/v2/entities/fortis_WorkGroups/?view=workGroups-view&returnCount=true';
   hasCheckBox = true;
   idColumn = 'id';
   params: Map<any, string>;
@@ -30,10 +30,10 @@ export class WorkgroupsComponent implements OnInit {
       title: 'Workgroup',
       data: 'name'
     });
-    // this.cols.push({
-    //   title: 'Description',
-    //   data: 'description',
-    // });
+    this.cols.push({
+      title: 'Description',
+      data: 'description',
+    });
     // this.cols.push({
     //   title: 'Date Created',
     //   data: 'createdOn',

@@ -6,6 +6,21 @@
     </div>
     <div class="tile-body">
 
+      <div class="form-group col-md-6">
+        <button class="save-button btn-block" mat-stroked-button (click)="scanFingerPrint()">
+            Scan FingerPrint
+        </button>
+        <img src="../../assets/finger.jpeg"class="responsive">
+        <img src="../../assets/checked.png"class="responsive">
+
+        <ng-container *ngIf="scanned">
+          <img [src]="imageSource" class="responsive">
+          <img src="../../assets/checked.png"class="responsive">
+          <p>{{fingerprint.message}}</p>
+          </ng-container>
+
+        </div>
+
       <form [formGroup]="CreateUserWrapper" (ngSubmit)="onCreateUser(createForm)" #createForm="ngForm" role="form">
 
         <div class="row">
@@ -132,29 +147,31 @@
             <label>Profile Picture</label>
             <input type="file" class="form-control"(change)="fileChange($event)" #fileInput  accept=" .png , .jpg , .gif" required ="required" name="file">
             </div>
-            <div class="form-group col-md-6">
-              <button class="save-button btn-block" mat-stroked-button (click)="scanFingerPrint()">
-                  Scan FingerPrint
-              </button>
-              <img src="../../assets/finger.jpeg"class="responsive">
-              <img src="../../assets/checked.png"class="responsive">
+          </div>
+            <div class="row">
+              <div class="form-group col-md-12">
+                <div class="card mb-3">
+                  <div class="card-header tile-header bg-slategray">User Workgroups</div>
+                  <div class="card-body widget-body row m-20" *ngFor="let role of systemRoles">
+                    <mat-radio-group>
+                      <label class="checkbox">
+                      <input type="checkbox" (change)="onRadioChange(role.id,$event.target.checked,'role')"
+                      (checked)="checkValue('roles',role.id)"
+                      >
+                      {{role.name}}
 
-              <ng-container *ngIf="scanned">
-                <img [src]="imageSource" class="responsive">
-                <img src="../../assets/checked.png"class="responsive">
-                <p>{{fingerprint.message}}</p>
-                </ng-container>
-
+                      </label>
+                    </mat-radio-group>
+                  </div>
+                </div>
               </div>
+
           <div class="col-md-12 pull-right">
             <button style="margin:5px;"  type="submit" mat-stroked-button
                     class="save-button pull-right" >Save
             </button>
           </div>
         </div>
-
-
-
       </form>
     </div>
   </section>
