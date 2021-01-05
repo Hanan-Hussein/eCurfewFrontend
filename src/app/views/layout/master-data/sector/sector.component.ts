@@ -8,7 +8,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class SectorComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/fortis_Sector?returnCount=true';
+  endpoint = 'fortis/rest/v2/entities/fortis_Sector?returnCount=true&view=sector-view';
   routeView = 'home/master-data/sector/{0}/view-sector';
   hasCheckBox = true;
   idColumn = 'id';
@@ -19,34 +19,38 @@ export class SectorComponent implements OnInit {
     this.params = new Map();
     this.params.set('sort', 'code,asc');
   }
-ngOnInit() {
+  ngOnInit() {
     this.cols.push({
-      isCheckBox: true,
-      title: '',
-      data: 'id'
+    isCheckBox: true,
+    title: '',
+    data: 'id'
     });
-    this.cols.push({
-      title: 'Entity Name',
-      data: '_entityName'
-    });
+    // this.cols.push({
+    // title: 'Entity Name',
+    // data: '_entityName'
+    // });
 
     this.cols.push({
-      title: 'Code',
-      data: 'code'
+    title: 'Code',
+    data: 'code'
     });
     this.cols.push({
-      title: 'Name',
-      data: 'description'
+    title: 'Description',
+    data: 'description'
     });
     this.cols.push({
-      title: 'Status',
-      data: 'actionStatus'
+      title: 'Created at',
+      data: 'createTs'
     });
     this.cols.push({
-      data: 'id',
-      title: 'View',
-      isViewMore: true,
+      title: 'Created By',
+      data: 'createdBy'
     });
-  }
+    this.cols.push({
+    data: 'id',
+    title: 'View',
+    isViewMore: true,
+    });
+    }
 
-}
+    }

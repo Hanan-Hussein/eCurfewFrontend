@@ -8,7 +8,7 @@ styleUrls: ['./industry.component.scss']
 })
 export class IndustryComponent implements OnInit {
 cols: Array<DatatableColumns>;
-endpoint = 'fortis/rest/v2/entities/fortis_Industry?returnCount=true';
+endpoint = 'fortis/rest/v2/entities/fortis_Industry?returnCount=true&view=industry-view';
 routeView = 'home/master-data/sector/{0}/view-sector';
 hasCheckBox = true;
 idColumn = 'id';
@@ -25,22 +25,26 @@ isCheckBox: true,
 title: '',
 data: 'id'
 });
-this.cols.push({
-title: 'Entity Name',
-data: '_entityName'
-});
+// this.cols.push({
+// title: 'Entity Name',
+// data: '_entityName'
+// });
 
 this.cols.push({
 title: 'Code',
 data: 'code'
 });
 this.cols.push({
-title: 'Name',
+title: 'Description',
 data: 'description'
 });
 this.cols.push({
-  title: 'Status',
-  data: 'actionStatus'
+  title: 'Created at',
+  data: 'createTs'
+});
+this.cols.push({
+  title: 'Created By',
+  data: 'createdBy'
 });
 this.cols.push({
 data: 'id',

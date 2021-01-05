@@ -7,19 +7,20 @@
       </div>
       <div class="tile-body">
         <app-functionality-buttons [addLabel]="'New Workgroup'"
-                                   [addLink]="'home/user-management/workgroups/create-workgroup'"
+                                   [addLink]="'home/user-management/users/create-user'"
                                    [approveLabel]="'Approve'"
+                                   [approveLink]="'fortis/rest/v2/services/fortis_MakerCheckerService/approveWorkGroup'"
                                    [declineLabel]="'Decline'"
-                                   [endpoint]="'workgroup'"></app-functionality-buttons>
+                                   [endpoint]="'fortis/rest/v2/services/fortis_MakerCheckerService/approveWorkGroup'"></app-functionality-buttons>
         <app-custom-datatable
           [endpoint]="endpoint"
           [hasCheckBox]="hasCheckBox"
           [cols]="cols"
           [idColumn]="idColumn"
           [hasShowEntries]="true"
-          [fileName]="'Workgroups'"
+          [fileName]="'Users'"
           [canExport]="true"
-          [filterParams]="'Workgroup'"
+          [filterParams]="'Full Name, Phone Number, Email'"
           [isFilterPresent]="true"
           [params]="params"
           [routeView]="routeView"
