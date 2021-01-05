@@ -151,6 +151,13 @@
     ora "4.0.3"
     rxjs "6.5.4"
 
+"@angular-material-components/file-input@^4.0.1":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@angular-material-components/file-input/-/file-input-4.0.2.tgz#a339b621b4dce19b802d90060bbc1bea7ac9ecba"
+  integrity sha512-alYb0JMFBNp/+59hNaPPcldf/vN0DEUSmP6BxOJeIdFW05IcSoQ8bCicj0MBTDq7Lou9vzmq4Y7l4x7P1py4gw==
+  dependencies:
+    tslib "^2.0.0"
+
 "@angular/animations@^9.1.9":
   version "9.1.9"
   resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-9.1.9.tgz#de54334ea195189402487855c9a98f5618605da4"
@@ -1091,6 +1098,11 @@
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@coreui/icons/-/icons-0.3.0.tgz#d5bece91b1442a9543593d1146bc8042b18489e3"
   integrity sha512-RbBi5K5hUA8LUI9mM/i1BTaLjlyoS6kHwKbxWsH62+/j9L9WF8gAiJUhrNjMt1br8TY9RLeolyQys0E9480fIg==
+
+"@cuba-platform/rest@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@cuba-platform/rest/-/rest-1.0.3.tgz#aa80c1108f9c8df589800ef1d0124d9fa42be8ab"
+  integrity sha512-sMI91ZD0HoBvPEm/la70iI+vNtYkRx2PVFO/WB2nac2GLJFQ/TBYJdYbLteWMThbxN4zEbkYA/gXnGH147aYvQ==
 
 "@istanbuljs/schema@^0.1.2":
   version "0.1.2"
