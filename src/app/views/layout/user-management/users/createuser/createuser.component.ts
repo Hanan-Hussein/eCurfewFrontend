@@ -81,7 +81,7 @@ export class CreateuserComponent implements OnInit, OnDestroy {
       workGroups:this.fb.array([]),
 
     });
-    this.stewardService.get('fortis/rest/v2/entities/fortis_WorkGroups', params).subscribe((response:any) => {
+    this.stewardService.get('fortis/rest/v2/entities/fortis_WorkGroups/search?filter=%7B%22conditions%22%3A%20%5B%7B%22property%22%3A%20%22actionStatus%22%2C%22operator%22%3A%20%22%3D%22%2C%22value%22%3A%20%22APPROVED%22%20%7D%5D%7D&returnCount=true', params).subscribe((response:any) => {
       if (response) {
         console.log(">>>>>>>>>>>",response);
         inst.systemRoles = response;

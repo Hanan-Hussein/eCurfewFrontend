@@ -18,7 +18,7 @@ export class CreateWorkgroupComponent implements OnInit {
   model: Workgroups;
   Workgroups: FormGroup;
  workgroupRoleForm: FormGroup;
- dummyroles=[{name:"Admin2FA",id:"1"},{name:"RolePermissions",id:"2"},{name:"RestApiAccess",id:"3"}];
+ dummyroles=[{name:"approveRole",id:"1"},{name:"authenticateCustomer",id:"2"},{name:"disableRole",id:"3"},{name:"createRole",id:"4"},{name:"readRole",id:"5"},{name:"updateRole",id:"6"}];
  workgroupRoles:FormArray;
 
 
@@ -88,9 +88,9 @@ export class CreateWorkgroupComponent implements OnInit {
     // if (this.model.workgroupRolesIds.length < 1) {
     //   inst.notify.showWarning('You have not selected any role yet');
     // } else {
-        this.stewardService.post('fortis/rest/v2/entities/fortis_WorkGroups', this.model).subscribe((response) => {
+        this.stewardService.post('fortis/rest/v2/services/fortis_MessageService/messageWorkgroups', {"workGroups":this.model}).subscribe((response: any) =>{
           console.log('response', this.model);
-          if (response) {
+          if (response.code === 200) {
             inst.notify.showSuccess(response.message);
             // form.resetForm();
             inst.router.navigate(['/home/user-management/workgroups']);
@@ -99,6 +99,7 @@ export class CreateWorkgroupComponent implements OnInit {
           }
         }, error => {
           console.log(error);
+          inst.notify.showWarning(error.error.message);
         });
     // }
 

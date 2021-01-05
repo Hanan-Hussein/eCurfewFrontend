@@ -40,8 +40,8 @@ export class WorkgroupsComponent implements OnInit {
     //   isDate: true
     // });
     this.cols.push({
-      title: 'Version',
-      data: 'version'
+      title: 'Status',
+      data: 'actionStatus'
     });
     this.cols.push({
       title: 'View',
