@@ -231,6 +231,17 @@ export class StewardService<T, E> {
     );
   }
 
+// get fingerPrint localhost 8080
+  getFingerPrint(endpoint: string, data?: Map<string, string>): Observable<ResponseWrapper<E>> {
+    const options = {
+      headers: this.getHeaders('no-token'),
+      params: this.getHttpParams(data)
+    };
+    return this.http.get(endpoint, options).pipe(
+      catchError(this.handleError<any>())
+    );
+  }
+
   getMasterData(
     endpoint: string,
     data?: Map<string, string>

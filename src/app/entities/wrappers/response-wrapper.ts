@@ -22,6 +22,7 @@ export class ResponseWrapper<T> {
   nextofkinmobileNumber:string;
   nextofkinname:string;
   nextofkinrelationship:string;
+  payload: any;
 
 
 

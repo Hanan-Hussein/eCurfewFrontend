@@ -7,3 +7,8 @@ export class Otp {
   correlationId: string;
   otpCode: string;
 }
+
+export class Biometrics {
+  username: string;
+  fingerPrint: string;
+}
