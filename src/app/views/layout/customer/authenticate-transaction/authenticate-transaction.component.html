@@ -5,6 +5,20 @@
       <h2>Authenticate Transaction</h2>
     </div>
     <div class="tile-body">
+      <div class="form-group col-md-6">
+        <button class="save-button btn-block" mat-stroked-button (click)="scanFingerPrint()">
+          Scan FingerPrint
+      </button>
+        <!-- <img src="../../assets/finger.jpeg"class="responsive">
+        <img src="../../assets/checked.png"class="responsive"> -->
+
+        <ng-container *ngIf="scanned">
+          <img [src]="imageSource" class="responsive">
+          <img src="../../assets/checked.png"class="responsive">
+          <!-- <p>{{fingerprint.message}}</p> -->
+          </ng-container>
+
+        </div>
       <form [formGroup]="authenticateModel" (ngSubmit)="onAuthenticate(createForm)" #createForm="ngForm" role="form">
         <div class="row">
           <div class="form-group col-md-6">
@@ -19,20 +33,7 @@
             <input type="text"
                    name="code" formControlName="transactionId"  class="form-control" required >
           </div>
-          <div class="form-group col-md-6">
-            <button class="save-button btn-block" mat-stroked-button (click)="scanFingerPrint()">
-                Scan FingerPrint
-            </button>
-            <img src="../../assets/finger.jpeg"class="responsive">
-            <img src="../../assets/checked.png"class="responsive">
 
-            <ng-container *ngIf="scanned">
-              <img [src]="imageSource" class="responsive">
-              <img src="../../assets/checked.png"class="responsive">
-              <p>{{fingerprint.message}}</p>
-              </ng-container>
-
-            </div>
         <div class="col-md-12 pull-right">
           <button style="margin:5px;"  type="submit" mat-stroked-button
                   class="save-button pull-right">Authenticate

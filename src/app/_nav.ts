@@ -108,11 +108,16 @@ export const navItems: INavData[] = [
         url: '/home/reports/authentication-report',
         // icon: 'fa fa-caret-right'
       },
-      // {
-      //   name: 'Authorized and Unauthorized Reports',
-      //   url: '/home/reports/authorized-unauthorized-reports',
-      //   // icon: 'fa fa-caret-right'
-      // },
+      {
+        name: 'Customer Authorized and Unauthorized Reports',
+        url: '/home/reports/customer-authorized-unauthorized-reports',
+        // icon: 'fa fa-caret-right'
+      },
+      {
+        name: 'User Authorized and Unauthorized Reports',
+        url: '/home/reports/user-authorized-unauthorized-reports',
+        // icon: 'fa fa-caret-right'
+      },
       {
         name: 'Audit Trails',
         url: '/home/reports/audit-logs',

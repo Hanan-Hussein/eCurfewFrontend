@@ -1,4 +1,18 @@
 <div class="tile-body">
+  <div class="row">
+    <!-- <div class="form-group col-md-6">
+    <button class="save-button btn-block" mat-stroked-button (click)="scanFingerPrint()">
+        Scan FingerPrint
+    </button>
+    <ng-container *ngIf="scanned">
+      <img [src]="imageSource" class="responsive">
+      <img src="../../assets/checked.png"class="responsive">
+      <p>{{fingerprint.message}}</p>
+      </ng-container>
+
+    </div> -->
+
+  </div>
   <form [formGroup]="secondFormGroup"  #form="ngForm"  (ngSubmit)="onSecondForm()" role="form">
     <div class="row">
       <div class="form-group col-md-6">
@@ -104,7 +118,7 @@
           </div>
           <div class="form-group col-md-6">
             <label>Signature<span class="my_span"> *</span></label>
-            <input type="file"  [readOnly]="isReadOnly" (change)="fileSignature($event)" 
+            <input type="file"  [readOnly]="isReadOnly" (change)="fileSignature($event)"
                 name="employeeNumber"  class="form-control" required="required"
                >
       </div>
@@ -257,13 +271,13 @@
         <button class="save-button btn-block" mat-stroked-button (click)="scanFingerPrint()">
             Scan FingerPrint
         </button>
-        <img src="../../assets/finger.jpeg"class="responsive">
-        <img src="../../assets/checked.png"class="responsive">
+        <!-- <img src="../../assets/finger.jpeg"class="responsive">
+        <img src="../../assets/checked.png"class="responsive"> -->
 
         <ng-container *ngIf="scanned">
           <img [src]="imageSource" class="responsive">
           <img src="../../assets/checked.png"class="responsive">
-          <p>{{fingerprint.message}}</p>
+          <!-- <p>{{fingerprint.message}}</p> -->
           </ng-container>
 
         </div>

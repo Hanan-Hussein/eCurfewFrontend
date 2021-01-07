@@ -8,7 +8,7 @@ import {DatatableColumns} from "../../../../entities/datatable/datatable-columns
 })
 export class CustomerReportsComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/fortis_FortisUser/search?filter=%7B%22conditions%22%3A%20%5B%7B%22property%22%3A%20%22active%22%2C%22operator%22%3A%20%22%3D%22%2C%22value%22%3A%20true%7D%5D%7D&returnCount=true&view=maker-checker-view';
+  endpoint = 'fortis/rest/v2/entities/fortis_CustomerDetails?view=customerReport&returnCount=true';
   hasCheckBox = false;
   idColumn = 'id';
   params: Map<any, string>;
@@ -23,32 +23,32 @@ export class CustomerReportsComponent implements OnInit {
   ngOnInit() {
     this.cols.push({
       title: 'First Name',
-      data: 'customer.firstName'
+      data: 'firstName'
     });
     this.cols.push({
       title: 'Sur Name',
-      data: 'customer.surname'
+      data: 'surname'
+    });
+    this.cols.push({
+      title: 'Other Name',
+      data: 'otherNames'
     });
     this.cols.push({
       title: 'National Id',
-      data: 'nationalId'
+      data: 'idNumber'
     });
     this.cols.push({
-      title: 'Transaction Id',
-      data: 'transactionId'
+      title: 'Action Status',
+      data: 'actionStatus'
     });
     this.cols.push({
-      title: 'Result',
-      data: 'result',
-      // isDate: true
+      title: 'Created By',
+      data: 'createdBy',
     });
 
+
     this.cols.push({
-      title: 'Score',
-      data: 'score'
-    });
-    this.cols.push({
-      title: 'Authenticated Date',
+      title: 'Created Date',
       data: 'createTs',
       isDate: true
     });
