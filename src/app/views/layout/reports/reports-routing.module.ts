@@ -8,6 +8,7 @@ import { AccountingEntriesComponent } from './accounting-entries/accounting-entr
 import { ConsumptionReportComponent } from './consumption-report/consumption-report.component';
 import {AuthenticationReportComponent}from './authentication-report/authentication-report.component';
 import { CustomerReportsComponent } from './customer-reports/customer-reports.component';
+import {UserReportComponent} from './user-report/user-report.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
       {path: 'top-up-reports', component: TopUpRequestsComponent},
       {path: 'accounting-entries', component:AccountingEntriesComponent},
       {path: 'consumption-reports', component:ConsumptionReportComponent},
-      {path:  'authorized-unauthorized-reports',component:CustomerReportsComponent}
+      {path:  'customer-authorized-unauthorized-reports',component:CustomerReportsComponent},
+      {path: 'user-authorized-unauthorized-reports',component:UserReportComponent}
       ]
   }
 ];

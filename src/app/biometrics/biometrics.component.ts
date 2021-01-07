@@ -44,12 +44,12 @@ export class BiometricsComponent implements OnInit {
   scanFingerPrint(){
     this.stewardService.getFingerPrint('http://localhost:8080/launchmso').subscribe((response) => {
       if (response.payload) {
-        this.base64FingerPrint = response.payload;
         this.scanned=true;
         this.imageSource =this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/bmp;base64,${response.payload}`);
-        
+        this.base64FingerPrint = response.payload;
+
         this.notify.showSuccess("Finger print scanned");
-        
+
       } else {
         this.notify.showWarning("Make sure the Desktop FingerPrint Scanner is Running");
       }
@@ -66,16 +66,15 @@ export class BiometricsComponent implements OnInit {
 
     this.stewardService.sendToken('fortis/rest/v2/oauth/verify-print', {'username':this.model.email,'fingerPrint':this.base64FingerPrint}).subscribe((response: any) => {
       console.log(">>>>>>>>>>>>>>>>>>>>>response",response.access_token);
-      if (response.code === 0) {
-        this.notify.showWarning("Network Error, check Newtork Connection")
-      }
-      
+      // if (response.code === 0) {
+      //   this.notify.showWarning("Network Error, check Newtork Connection")
+      // }
         if (response.code === 400) {
           this.notify.showWarning(response.message);
         } else if (response.code === 401){
           this.notify.showWarning(response.message);
         } else {
-          
+
         }
         if (response.access_token) {
             localStorage.setItem('access_token', response.access_token);

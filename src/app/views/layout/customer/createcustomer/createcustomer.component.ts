@@ -96,7 +96,7 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
 
     });
     this.firstName=this.customerModel.get('firstName');
-    this.customerModel.controls.base64.setValue(this.hardcodedBase64);
+    // this.customerModel.controls.base64.setValue(this.hardcodedBase64);
 
           this.stewardService.get('fortis/rest/v2/entities/fortis_Industry').subscribe((response) => {
 
@@ -142,15 +142,24 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
 
   // Method that calls the TornadoFx(javaFX) methods to Open USB finger print scanner.
   scanFingerPrint(){
-    const fpRsponse:string=(<any>window).fortis.getFingerPrint();
-    this.fingerprint =JSON.parse(fpRsponse);
-    this.scanned=true;
-    this.imageSource =this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/bmp;base64,${this.fingerprint.payload}`);
-    this.base64FingerPrint = this.fingerprint.payload;
-    // this.customerModel.patchValue({
-    //   base64:this.base64FingerPrint
-    // });
+    this.stewardService.getFingerPrint('http://localhost:8080/launchmso').subscribe((response) => {
+      if (response.payload) {
+        this.scanned=true;
+        this.imageSource =this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/bmp;base64,${response.payload}`);
+        this.base64FingerPrint = response.payload;
+        this.customerModel.patchValue({
+          base64:this.base64FingerPrint
+        });
 
+        this.notify.showSuccess("Finger print scanned");
+
+      } else {
+        this.notify.showWarning("Make sure the Desktop FingerPrint Scanner is Running");
+      }
+    },
+     error => {
+      this.notify.showWarning("no server");
+    });
   }
 
   get email(){
