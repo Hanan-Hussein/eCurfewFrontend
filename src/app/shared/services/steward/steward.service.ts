@@ -343,13 +343,21 @@ export class StewardService<T, E> {
         }
       };
     }
+    // const option = {
+    //       headers: this.getHeaders('form-data'),
+    //       header: this.getHeaders('X-Total-Count'),
+    //       // set response to get all  response headers
+    //       observe:'response' as 'body',
+    //     };
 
     dtOptions = {
       pagingType: 'full_numbers',
-      serverSide: true,
+      serverSide: false,
       processing: true,
       responsive: true,
-      // searchable: true,
+      // ajax: this.http.get<any>(this.globalParam.baseUrl + endpoint, option),
+      //       option,
+      searchable: true,
       // select: true,
       ajax: (dTParams: any, callback) => {
         if (paramCallBack != null) {
@@ -360,7 +368,7 @@ export class StewardService<T, E> {
         const option = {
           headers: this.getHeaders('form-data'),
           header: this.getHeaders('X-Total-Count'),
-          params: this.parseDataTableParams(dTParams, httpParams),
+          // params: this.parseDataTableParams(dTParams, httpParams),
           // set response to get all  response headers
           observe:'response' as 'body',
 

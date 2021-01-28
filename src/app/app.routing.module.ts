@@ -5,11 +5,11 @@ import { FirstChangeComponent } from './first-change/first-change.component';
 import {P404Component} from './views/error/404.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'landingPage',
-    pathMatch: 'full',
-  },
+  // {
+  //   path: '',
+  //   redirectTo: 'landingPage',
+  //   pathMatch: 'full',
+  // },
   {
     path: 'landingPage',
     loadChildren:() => import('./landing-page/landing-page.module').then(m=>m.LandingPageModule)

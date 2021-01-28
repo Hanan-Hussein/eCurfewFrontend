@@ -89,15 +89,15 @@
           <div class="form-group col-md-6">
             <label>National Id <span class="my_span"> *</span> </label>
             <input type="text"
-                   name="national_id" formControlName="nationalId" class="form-control" required>
+                   name="national_id" formControlName="nationalId" class="form-control" pattern="^[0-9]+" required>
                           <div>
                             <span class="text-danger"
                             *ngIf="CreateUserWrapper.get('nationalId').invalid && CreateUserWrapper.get('nationalId').touched
                             &&CreateUserWrapper.get('nationalId').errors.required">
                         National ID is required
                       </span>
-                      <span class="text-danger" *ngIf="CreateUserWrapper.get('nationalId').errors?.pattern">
-                        National Id must be a valid </span>
+                      <span class="text-danger" *ngIf="CreateUserWrapper.get('nationalId').hasError('pattern')">
+                        National Id must be a valid with numbers only </span>
 
                       </div>
 
@@ -127,15 +127,15 @@
           <div class="form-group col-md-6">
             <label>Phone Number<span class="my_span"> *</span></label>
             <input type="tel"   placeholder="254700000000" formControlName="phoneNumber"
-                   name="msisdn" class="form-control" required >
+                   name="msisdn" class="form-control" pattern="^[0-9]+" required >
                    <!-- <div *ngIf="phone.errors.pattern && phone.touched" class="text-danger">Invalid phone number</div>
                    <div *ngIf="phone.errors.minLength || phone.errors.maxLength" class="text-danger">Invalid phone number length</div> -->
 
                             <div>
                               <span class="text-danger"
                               *ngIf="CreateUserWrapper.get('phoneNumber').invalid && CreateUserWrapper.get('phoneNumber').touched
-                              &&CreateUserWrapper.get('phoneNumber').errors.required">
-                          Phone Number is required
+                              &&CreateUserWrapper.get('phoneNumber').hasErrors('pattern')">
+                            Phone Number is required
                         </span>
                         <span class="text-danger" *ngIf="CreateUserWrapper.get('phoneNumber').errors?.pattern">
                           Phone Number must be a valid</span>
