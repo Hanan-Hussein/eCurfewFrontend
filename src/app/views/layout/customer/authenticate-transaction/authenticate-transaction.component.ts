@@ -76,11 +76,11 @@ export class AuthenticateTransactionComponent implements OnInit {
     this.model.authenticateTransaction.fingerPrint=this.authenticateModel.value.fingerPrint;
     console.log(">>>>>>>>>>",this.model);
     this.stewardService.post('fortis/rest/v2/services/fortis_AuthenticateTransactionService/AuthenticateTransaction',  this.model).subscribe((response) => {
-      if (response.code === 200) {
+      if (response.code === 200 || response.code == 410) {
           inst.notify.showSuccess(response.message);
           this.router.navigate(['home/reports/authentication-report']);
       } else {
-        this.notify.showWarning("Bad Finger Print Image or Check internet connection to server");
+        inst.notify.showWarning(response.message)
       }
   }, error => {
     inst.notify.showWarning(error.error.message);

@@ -9,7 +9,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 export class SessionLogsComponent implements OnInit {
 
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/sec$SessionLogEntry?returnCount=true';
+  endpoint = 'fortis/rest/v2/entities/sec$SessionLogEntry?returnCount=true&sort=-finishedTs';
   hasCheckBox = false;
   idColumn = 'id';
   params: Map<any, string>;
@@ -27,22 +27,24 @@ export class SessionLogsComponent implements OnInit {
       title: 'Last Action',
       data: 'lastAction'
     });
-    this.cols.push({
-      title: 'Occurence Time',
-      data: 'startedTs',
-      isDate: true
-    });
+    // this.cols.push({
+    //   title: 'Occurence Time',
+    //   data: 'startedTs',
+    //   isDate: true
+    // });
     this.cols.push({
       title: 'Ip address',
       data: 'address'
     });
     this.cols.push({
       title: 'Started Ts',
-      data: 'startedTs'
+      data: 'startedTs',
+      isDate: true
+
     });
     this.cols.push({
       title: 'Finished Ts',
-      data: 'finishedTs'
+      data: 'finishedTs',
     });
     // this.cols.push({
     //   title: 'Client Info',
@@ -53,11 +55,11 @@ export class SessionLogsComponent implements OnInit {
     //   data: 'userId.fullName'
     // });
 
-    this.cols.push({
-      title: 'View More',
-      data: 'id',
-      isViewMore: true
-    });
+    // this.cols.push({
+    //   title: 'View More',
+    //   data: 'id',
+    //   isViewMore: true
+    // });
   }
 
 }

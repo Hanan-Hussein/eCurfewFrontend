@@ -6,37 +6,82 @@
     </div>
     <div class="tile-body">
       <form (ngSubmit)="onUpdate(workgroupsForm)" #workgroupsForm="ngForm" role="form">
+        <!-- <form [formGroup]="Workgroups" (ngSubmit)="onUpdate(workgroupsForm)" #workgroupsForm="ngForm" role="form"> -->
+
         <div class="row">
           <div class="form-group col-md-6">
             <label>Workgroup Name <span class="my_span"> *</span></label>
-            <input type="text" name="groupName" pattern="^(?=.*[A-z0-9].*[A-z0-9])[0-9A-z-'.\s]{3,}$"
-                   [(ngModel)]="model.groupName" class="form-control" required [readOnly]="isReadOnly" #groupname="ngModel">
-            <div *ngIf="(groupname.dirty || groupname.touched) && groupname.invalid" class="text-danger">
-                  <span class="invalid-input" *ngIf="groupname.errors.required">
-                    Group Name is required.
+            <input type="text" name="name" pattern="^(?=.*[A-z0-9].*[A-z0-9])[0-9A-z-'.\s]{3,}$"
+            [(ngModel)]="model.name"
+            class="form-control" required [readOnly]="isReadOnly">
+            <!-- <div *ngIf="(name.dirty || name.touched) && name.invalid" class="text-danger">
+                  <span class="invalid-input" *ngIf="name.errors.required">
+                   Work Group Name is required.
                   </span>
-              <span class="invalid-input" *ngIf="groupname.errors.pattern">
-                    Group Name must be a valid name with at least 3 characters
+              <span class="invalid-input" *ngIf="name.errors.pattern">
+                   Work Group Name must be a valid name with at least 3 characters
                   </span>
-            </div>
+            </div> -->
           </div>
 
           <div class="form-group col-md-6">
             <label>Workgroup Description <span class="my_span"> *</span></label>
             <input type="text" name="description" pattern="^(?=.*[A-z0-9].*[A-z0-9])[0-9A-z-'.\s]{6,}$"
-                   [(ngModel)]="model.description" class="form-control" [readOnly]="isReadOnly" #description="ngModel" required>
-            <div *ngIf="(description.dirty || description.touched) && description.invalid" class="text-danger">
+            [(ngModel)]="model.description" class="form-control" [readOnly]="isReadOnly">
+            <!-- <div *ngIf="(description.dirty || description.touched) && description.invalid" class="text-danger">
                   <span class="invalid-input" *ngIf="description.errors.required">
                     Group description is required.
                   </span>
               <span class="invalid-input" *ngIf="description.errors.pattern">
                     Group description must be a valid name with at least 6 characters
                   </span>
-            </div>
+            </div> -->
           </div>
         </div>
 
+              <!-- <div class="row">
+              <div class="col-lg-12">
+              <div class="card mb-3">
+              <div class="card-header tile-header bg-slategray">Assign Role</div>
+              <div class="card-body widget-body row m-20">
+              <div class="col-sm-4" *ngFor="let role of roles1.permissions">
+              <div class="checkbox">
+              <input type="checkbox" value="{{role.id}}" [(ngModel)]="role.checked"
+              [name]="role.name"/>
+              <label>{{role.name}}</label>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div> -->
+        <!---start-->
         <div class="row">
+      <div class="col-md-6" *ngFor="let ent of roles1">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title custom-font"><strong>{{ent.title}}</strong>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-sm-6" *ngFor="let permi of ent.permissions">
+                    <div class="checkbox">
+
+                        <input type="checkbox"
+                        value="{{permi.id}}" [(ngModel)]="permi.checked"
+                        [name]="permi.name"
+                        />
+                        <label>{{permi.name}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+
+
+        <!----endddddd-->
+        <!-- <div class="row">
           <div class="col-lg-12">
             <div class="card mb-3">
               <div class="card-header tile-header bg-slategray">Assign Role</div>
@@ -51,7 +96,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="row">
           <div class="col-md-12 pull-right">

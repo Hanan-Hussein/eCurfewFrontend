@@ -16,7 +16,12 @@ export class EntityLogItem extends BaseUuidEntity {
   changes?: string | null;
   displayedEntityName?: string | null;
 }
-export type EntityLogItemViewName = "_base" | "_local" | "_minimal" | "logView";
+export type EntityLogItemViewName =
+  | "_base"
+  | "_local"
+  | "_minimal"
+  | "audit-view"
+  | "logView";
 export type EntityLogItemView<
   V extends EntityLogItemViewName
 > = V extends "_base"
@@ -42,6 +47,19 @@ export type EntityLogItemView<
       | "entityInstanceName"
       | "changes"
       | "displayedEntityName"
+    >
+  : V extends "audit-view"
+  ? Pick<
+      EntityLogItem,
+      | "id"
+      | "sysTenantId"
+      | "eventTs"
+      | "type"
+      | "entity"
+      | "entityInstanceName"
+      | "changes"
+      | "displayedEntityName"
+      | "user"
     >
   : V extends "logView"
   ? Pick<

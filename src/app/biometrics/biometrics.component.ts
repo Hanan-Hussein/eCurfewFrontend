@@ -87,7 +87,7 @@ export class BiometricsComponent implements OnInit {
         }
       },
       error => {
-        this.message = "Unauthorized, Place the correct finger correctly for a better Quality";
+        this.message = "Unauthorized";
         this.notify.showWarning(this.message);
       });
   }

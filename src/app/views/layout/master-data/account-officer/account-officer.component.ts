@@ -7,7 +7,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class AccountOfficerComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/fortis_AccountOfficer?returnCount=true&view=accountOfficer-view';
+  endpoint = 'fortis/rest/v2/entities/fortis_AccountOfficer?returnCount=true&view=accountOfficer-view&sort=-createTs';
   routeView = 'home/master-data/account-officer/{0}/view-account-officer';
   hasCheckBox = true;
   idColumn = 'id';
@@ -38,12 +38,12 @@ ngOnInit() {
     data: 'description'
     });
     this.cols.push({
-      title: 'Created at',
-      data: 'createTs'
-    });
-    this.cols.push({
       title: 'Created By',
       data: 'createdBy'
+    });
+    this.cols.push({
+      title: 'Created at',
+      data: 'createTs'
     });
     this.cols.push({
     data: 'id',

@@ -49,8 +49,7 @@ export class AddIndustryComponent implements OnInit {
         if (response) {
           this.model.code=response.code;
           this.model.description=response.description;
-          // inst.model = response.data;
-          this.id = response.id;
+          this.id=response.id;
 
         } else {
           inst.notify.showWarning(response.message);
@@ -83,7 +82,7 @@ export class AddIndustryComponent implements OnInit {
     if (this.isUpdate) {
       this.stewardService.put('fortis/rest/v2/entities/fortis_Industry/'+this.id, this.model).subscribe((response) => {
         console.log(response);
-        if (response.code === 200) {
+        if (response) {
           inst.notify.showSuccess(response.message);
           this.router.navigate(['home/master-data/industry']);
         } else {

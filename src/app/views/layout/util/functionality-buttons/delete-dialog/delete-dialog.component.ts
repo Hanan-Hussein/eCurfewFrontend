@@ -44,7 +44,9 @@ export class DeleteDialogComponent {
       this.dialogRef.close();
     } else {
       form.resetForm();
-      this.notify.showWarning(response.data[0]);
+      // this.notify.showWarning(response.data[0]);
+      this.notify.showWarning(response.message);
+
     }
   }
 

@@ -1,8 +1,11 @@
 export class ResponseWrapper<T> {
   code: number;
   message: string;
+  workGroups:[Array<workgroupRoles>];
   data: T;
   id: any;
+  name:string;
+  description:string;
   email:string;
   firstName:string;
   lastName:string;
@@ -22,9 +25,23 @@ export class ResponseWrapper<T> {
   nextofkinmobileNumber:string;
   nextofkinname:string;
   nextofkinrelationship:string;
+  workgroupRoles:any;
   payload: any;
-
-
-
+  
+  leftThumbPrint:string;
+  leftIndexPrint:string;
+  leftMiddlePrint:string;
+  leftRingPrint:string;
+  leftPinkyPrint:string;
+  rightThumbPrint:string;
+  rightIndexPrint:string;
+  rightMidPrint:string;
+  rightRingPrint:string;
+  rightPinkyPrint:string;
 
 }
+export class workgroupRoles {
+  name: string;
+  id:string;
+}
+

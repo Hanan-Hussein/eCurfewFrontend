@@ -1,19 +1,36 @@
 import { User } from "./base/sec$User";
-import { Gender } from "../enums/enums";
+import { WorkGroups } from "./fortis_WorkGroups";
+import { Status, Gender } from "../enums/enums";
 import { FileDescriptor } from "./base/sys$FileDescriptor";
+import { Fingerprints } from "./fortis_Fingerprints";
 export class FortisUser extends User {
   static NAME = "fortis_FortisUser";
   nationalId?: string | null;
+  workGroups?: WorkGroups[] | null;
+  fileTemplate?: string | null;
+  declineNotes?: string | null;
+  deleteNotes?: string | null;
+  intrash?: string | null;
+  actionStatus?: Status | null;
+  approvedBy?: string | null;
+  notes?: string | null;
   gender?: Gender | null;
   profilePhoto?: FileDescriptor | null;
   fingerPrint?: FileDescriptor | null;
+  fingerPrints?: Fingerprints[] | null;
   phoneNumber?: string | null;
 }
 export type FortisUserViewName =
   | "_base"
   | "_local"
   | "_minimal"
-  | "fortisUser-view";
+  | "finger_print_login"
+  | "fortis-view"
+  | "fortisUser-view"
+  | "maker-checker-view"
+  | "userprofile"
+  | "work-group-view"
+  | "workgroup-view";
 export type FortisUserView<V extends FortisUserViewName> = V extends "_base"
   ? Pick<
       FortisUser,
@@ -21,6 +38,13 @@ export type FortisUserView<V extends FortisUserViewName> = V extends "_base"
       | "login"
       | "name"
       | "nationalId"
+      | "fileTemplate"
+      | "declineNotes"
+      | "deleteNotes"
+      | "intrash"
+      | "actionStatus"
+      | "approvedBy"
+      | "notes"
       | "gender"
       | "phoneNumber"
       | "loginLowerCase"
@@ -45,6 +69,13 @@ export type FortisUserView<V extends FortisUserViewName> = V extends "_base"
       FortisUser,
       | "id"
       | "nationalId"
+      | "fileTemplate"
+      | "declineNotes"
+      | "deleteNotes"
+      | "intrash"
+      | "actionStatus"
+      | "approvedBy"
+      | "notes"
       | "gender"
       | "phoneNumber"
       | "login"
@@ -68,11 +99,53 @@ export type FortisUserView<V extends FortisUserViewName> = V extends "_base"
     >
   : V extends "_minimal"
   ? Pick<FortisUser, "id" | "login" | "name">
-  : V extends "fortisUser-view"
+  : V extends "finger_print_login"
   ? Pick<
       FortisUser,
       | "id"
       | "nationalId"
+      | "fileTemplate"
+      | "declineNotes"
+      | "deleteNotes"
+      | "intrash"
+      | "actionStatus"
+      | "approvedBy"
+      | "notes"
+      | "gender"
+      | "phoneNumber"
+      | "login"
+      | "loginLowerCase"
+      | "password"
+      | "passwordEncryption"
+      | "name"
+      | "firstName"
+      | "lastName"
+      | "middleName"
+      | "position"
+      | "email"
+      | "language"
+      | "timeZone"
+      | "timeZoneAuto"
+      | "active"
+      | "changePasswordAtNextLogon"
+      | "groupNames"
+      | "ipMask"
+      | "sysTenantId"
+      | "fingerPrint"
+      | "fingerPrints"
+    >
+  : V extends "fortis-view"
+  ? Pick<
+      FortisUser,
+      | "id"
+      | "nationalId"
+      | "fileTemplate"
+      | "declineNotes"
+      | "deleteNotes"
+      | "intrash"
+      | "actionStatus"
+      | "approvedBy"
+      | "notes"
       | "gender"
       | "phoneNumber"
       | "login"
@@ -95,5 +168,136 @@ export type FortisUserView<V extends FortisUserViewName> = V extends "_base"
       | "sysTenantId"
       | "profilePhoto"
       | "fingerPrint"
+    >
+  : V extends "fortisUser-view"
+  ? Pick<
+      FortisUser,
+      | "id"
+      | "nationalId"
+      | "fileTemplate"
+      | "declineNotes"
+      | "deleteNotes"
+      | "intrash"
+      | "actionStatus"
+      | "approvedBy"
+      | "notes"
+      | "gender"
+      | "phoneNumber"
+      | "login"
+      | "loginLowerCase"
+      | "password"
+      | "passwordEncryption"
+      | "name"
+      | "firstName"
+      | "lastName"
+      | "middleName"
+      | "position"
+      | "email"
+      | "language"
+      | "timeZone"
+      | "timeZoneAuto"
+      | "active"
+      | "changePasswordAtNextLogon"
+      | "groupNames"
+      | "ipMask"
+      | "sysTenantId"
+      | "profilePhoto"
+      | "fingerPrint"
+      | "createdBy"
+      | "createTs"
+    >
+  : V extends "maker-checker-view"
+  ? Pick<
+      FortisUser,
+      | "id"
+      | "login"
+      | "name"
+      | "actionStatus"
+      | "notes"
+      | "createdBy"
+      | "active"
+      | "declineNotes"
+      | "deleteNotes"
+      | "gender"
+      | "intrash"
+      | "nationalId"
+      | "phoneNumber"
+      | "updatedBy"
+      | "updateTs"
+      | "createTs"
+      | "firstName"
+      | "lastName"
+      | "email"
+    >
+  : V extends "userprofile"
+  ? Pick<
+      FortisUser,
+      | "id"
+      | "nationalId"
+      | "fileTemplate"
+      | "declineNotes"
+      | "deleteNotes"
+      | "intrash"
+      | "actionStatus"
+      | "approvedBy"
+      | "notes"
+      | "gender"
+      | "phoneNumber"
+      | "login"
+      | "loginLowerCase"
+      | "password"
+      | "passwordEncryption"
+      | "name"
+      | "firstName"
+      | "lastName"
+      | "middleName"
+      | "position"
+      | "email"
+      | "language"
+      | "timeZone"
+      | "timeZoneAuto"
+      | "active"
+      | "changePasswordAtNextLogon"
+      | "groupNames"
+      | "ipMask"
+      | "sysTenantId"
+      | "workGroups"
+    >
+  : V extends "work-group-view"
+  ? Pick<FortisUser, "id" | "login" | "name" | "workGroups">
+  : V extends "workgroup-view"
+  ? Pick<
+      FortisUser,
+      | "id"
+      | "nationalId"
+      | "fileTemplate"
+      | "declineNotes"
+      | "deleteNotes"
+      | "intrash"
+      | "actionStatus"
+      | "approvedBy"
+      | "notes"
+      | "gender"
+      | "phoneNumber"
+      | "login"
+      | "loginLowerCase"
+      | "password"
+      | "passwordEncryption"
+      | "name"
+      | "firstName"
+      | "lastName"
+      | "middleName"
+      | "position"
+      | "email"
+      | "language"
+      | "timeZone"
+      | "timeZoneAuto"
+      | "active"
+      | "changePasswordAtNextLogon"
+      | "groupNames"
+      | "ipMask"
+      | "sysTenantId"
+      | "workGroups"
+      | "userRoles"
     >
   : never;

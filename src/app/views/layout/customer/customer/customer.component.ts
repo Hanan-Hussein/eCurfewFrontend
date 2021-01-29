@@ -8,7 +8,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class CustomerComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/fortis_CustomerDetails?returnCount=true';
+  endpoint = 'fortis/rest/v2/entities/fortis_CustomerDetails?view=customerReport&returnCount=true&sort=-createTs';
   routeView = 'home/customers/customers/{0}/view-customer';
   hasCheckBox = true;
   idColumn = 'id';
@@ -50,10 +50,14 @@ export class CustomerComponent implements OnInit {
       title: 'Occupation',
       data: 'occupation'
     });
-
     this.cols.push({
       title: 'Action Status',
       data: 'actionStatus'
+    });
+    this.cols.push({
+      title: 'Created Date',
+      data: 'createTs',
+      isDate: true
     });
     this.cols.push({
       data: 'id',

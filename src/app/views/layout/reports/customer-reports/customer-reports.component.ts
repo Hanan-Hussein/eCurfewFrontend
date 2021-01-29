@@ -8,7 +8,7 @@ import {DatatableColumns} from "../../../../entities/datatable/datatable-columns
 })
 export class CustomerReportsComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/fortis_CustomerDetails?view=customerReport&returnCount=true';
+  endpoint = 'fortis/rest/v2/entities/fortis_CustomerDetails?view=customerReport&returnCount=true&sort=-createTs';
   hasCheckBox = false;
   idColumn = 'id';
   params: Map<any, string>;
@@ -45,8 +45,10 @@ export class CustomerReportsComponent implements OnInit {
       title: 'Created By',
       data: 'createdBy',
     });
-
-
+    this.cols.push({
+      title: 'Approved By',
+      data: 'approvedBy',
+    });
     this.cols.push({
       title: 'Created Date',
       data: 'createTs',
