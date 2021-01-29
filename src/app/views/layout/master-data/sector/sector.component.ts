@@ -8,7 +8,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class SectorComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/fortis_Sector?returnCount=true&view=sector-view';
+  endpoint = 'fortis/rest/v2/entities/fortis_Sector?returnCount=true&view=sector-view&sort=-createTs';
   routeView = 'home/master-data/sector/{0}/view-sector';
   hasCheckBox = true;
   idColumn = 'id';
@@ -39,12 +39,12 @@ export class SectorComponent implements OnInit {
     data: 'description'
     });
     this.cols.push({
-      title: 'Created at',
-      data: 'createTs'
-    });
-    this.cols.push({
       title: 'Created By',
       data: 'createdBy'
+    });
+    this.cols.push({
+      title: 'Created at',
+      data: 'createTs'
     });
     this.cols.push({
     data: 'id',

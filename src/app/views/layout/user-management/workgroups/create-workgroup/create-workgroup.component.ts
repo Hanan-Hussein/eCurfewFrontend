@@ -18,11 +18,25 @@ export class CreateWorkgroupComponent implements OnInit {
   model: Workgroups;
   Workgroups: FormGroup;
  workgroupRoleForm: FormGroup;
- dummyroles=[{name:"approveRole",id:"1"},{name:"authenticateCustomer",id:"2"},{name:"disableRole",id:"3"},{name:"createRole",id:"4"},{name:"readRole",id:"5"},{name:"updateRole",id:"6"}];
- workgroupRoles:FormArray;
+          roles = [{title:'USER',permissions:[{name:'CreateUser',id:'1'},{name:'UpdateUser',id:'2'},{name:'DisableUser',id:'3'},{name:'ReadUser',id:'4'},{name:'approveUser',id:'5'}]},
+          {title:'Customers',permissions:[{name:'CreateCustomerRole',id:'6'},{name:'UpdateCustomer',id:'7'},{name:'disableCustomerRole',id:'8'},{name:"ReadCustomer",id:"9"},{name:"ApproveCustomer",id:"10"}]},
+          {title:'Industry',permissions:[{name:'CreateIndustry',id:'11'},{name:'ReadIndustry',id:'12'},{name:"UpdateIndustry",id:"13"},{name:"DisableIndustry",id:"14"}]},
+          {title:'Sector',permissions:[{name:'CreateSector',id:'15'},{name:"ReadSector",id:"16"},{name:"UpdateSector",id:"17"},{name:"disableSector",id:"18"}]},
+          {title:'Customer Status',permissions:[{name:'CreateCustomerStatus',id:'19'},{name:"ReadCustomerStatus",id:"20"},{name:"UpdateCustomerStatus",id:"21"},{name:"DisableCustomerStatus",id:"22"}]},
+          {title:'Account Officer',permissions:[{name:'CreateAccountOfficer',id:'23'},{name:'ReadAccountOfficer',id:'24'},{name:"UpdateAccountOfficer",id:"25"},{name:"DisableAccountOfficer",id:"26"}]},
+          {title:'Authenticate Customer',permissions:[{name:'authenticateCustomer',id:'27'}]},
+          {title:'Authentication Report',permissions:[{name:'AuthenticationReport',id:'28'}]},
+          {title:'Audit Report',permissions:[{name:'AuditLogs',id:'29'}]},
+          {title:'Session Report',permissions:[{name:'SessionLog',id:'30'}]},
+          {title:'Work Groups',permissions:[{name:'ReadWorkGroups',id:'31'},{name:'CreateWorkGroups',id:'32'},{name:'ApproveWorkGroups',id:'33'},{name:'DisableWorkGroups',id:'34'},{name:'UpdateWorkGroup',id:'35',checked:false}]},
 
 
-  roles: Roles[];
+
+        ];
+          workgroupRoles:FormArray;
+
+
+  // roles: Roles[];
   checkedRoles: number [] = [];
 
   constructor(private stewardService: StewardService<any, any>, private globalParam: GlobalParams,

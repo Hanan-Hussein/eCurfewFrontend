@@ -11,7 +11,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 export class AuditLogsComponent implements OnInit {
 
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/sec$EntityLog/?view=audit-view&returnCount=true';
+  endpoint = 'fortis/rest/v2/entities/sec$EntityLog/?view=audit-view&returnCount=true&sort=-eventTs';
   hasCheckBox = false;
   idColumn = 'id';
   params: Map<any, string>;
@@ -46,11 +46,11 @@ export class AuditLogsComponent implements OnInit {
     });
 
 
-    this.cols.push({
-      title: 'View More',
-      data: 'id',
-      isViewMore: true
-    });
+    // this.cols.push({
+    //   title: 'View More',
+    //   data: 'id',
+    //   isViewMore: true
+    // });
   }
 
 }

@@ -8,8 +8,8 @@ styleUrls: ['./industry.component.scss']
 })
 export class IndustryComponent implements OnInit {
 cols: Array<DatatableColumns>;
-endpoint = 'fortis/rest/v2/entities/fortis_Industry?returnCount=true&view=industry-view';
-routeView = 'home/master-data/sector/{0}/view-sector';
+endpoint = 'fortis/rest/v2/entities/fortis_Industry?returnCount=true&view=industry-view&sort=-createTs';
+routeView = 'home/master-data/industry/{0}/view-industry';
 hasCheckBox = true;
 idColumn = 'id';
 params: Map<any, string>;
@@ -39,12 +39,12 @@ title: 'Description',
 data: 'description'
 });
 this.cols.push({
-  title: 'Created at',
-  data: 'createTs'
-});
-this.cols.push({
   title: 'Created By',
   data: 'createdBy'
+});
+this.cols.push({
+  title: 'Created at',
+  data: 'createTs'
 });
 this.cols.push({
 data: 'id',

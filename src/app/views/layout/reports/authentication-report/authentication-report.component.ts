@@ -8,7 +8,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 })
 export class AuthenticationReportComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/fortis_CustomerAuthentication/?view=customerAuthentication-view&returnCount=true';
+  endpoint = 'fortis/rest/v2/entities/fortis_CustomerAuthentication/?view=customerAuthentication-view&returnCount=true&sort=-createTs';
   hasCheckBox = false;
   idColumn = 'id';
   params: Map<any, string>;

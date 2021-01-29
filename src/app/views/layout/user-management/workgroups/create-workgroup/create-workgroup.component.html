@@ -39,33 +39,31 @@
               </div>
           </div>
         </div>
-
+              <div>
+          <h3 style="font-weight: 600; color:#0085D4; padding: 15px">Roles</h3>
+      </div>
         <div class="row">
-          <div class="col-lg-12">
-            <div class="card mb-3">
-              <div class="card-header tile-header bg-slategray">Assign Role</div>
-              <div class="card-body widget-body row m-20" *ngFor="let dummyrole of dummyroles">
-                <mat-radio-group>
-                  <label class="checkbox">
-                  <input type="checkbox" (change)="onRadioChange(dummyrole.name,$event.target.checked,'role')"
-                  (checked)="checkValue('roles',dummyrole.id)"
-                  >
-                  {{dummyrole.name}}
 
-                  </label>
-                </mat-radio-group>
-                <!-- <div class="col-sm-4" *ngFor="let role of roles">
-                  <div class="checkbox">
-                    <input type="checkbox" value="{{role.roleId}}" [(ngModel)]="role.checked"
-                           [name]="role.roleName"/>
-                    <label>{{role.roleName}}</label>
-                  </div>
-                </div> -->
-              </div>
+    <div class="col-md-6" *ngFor="let ent of roles">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title custom-font"><strong>{{ent.title}}</strong>
+                </h3>
             </div>
-          </div>
-        </div>
+            <div class="panel-body">
+                <div class="col-sm-6" *ngFor="let permi of ent.permissions">
+                    <div class="checkbox">
 
+                        <input type="checkbox" value="{{permi.name}}"
+                        (change)="onRadioChange(permi.name,$event.target.checked,'role')" [name]="permi.name"
+                        (checked)="checkValue('roles',permi.id)"/>
+                        <label>{{permi.name}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
         <div class="row">
           <div class="col-md-12 pull-right">
             <button style="margin:5px;"  type="submit" mat-stroked-button

@@ -1,4 +1,42 @@
+export enum CustomerAuthenticationStatus {
+  SUCCESS = "SUCCESS",
+  FAIL = "FAIL",
+  ERROR = "ERROR"
+}
+
+export enum Fingers {
+  RIGHTTHUMB = "RIGHTTHUMB",
+  RIGHTINDEX = "RIGHTINDEX",
+  RIGHTMIDDLE = "RIGHTMIDDLE",
+  RIGHTRING = "RIGHTRING",
+  RIGHTPINKY = "RIGHTPINKY",
+  LEFTTHUMB = "LEFTTHUMB",
+  LEFTINDEX = "LEFTINDEX",
+  LEFTMIDDLE = "LEFTMIDDLE",
+  LEFTRING = "LEFTRING",
+  LEFTPINKY = "LEFTPINKY"
+}
+
 export enum Gender {
   MALE = "MALE",
   FEMALE = "FEMALE"
+}
+
+export enum HandType {
+  RIGHTHAND = "RIGHTHAND",
+  LEFTHAND = "LEFTHAND"
+}
+
+export enum IprsStatus {
+  FOUND = "FOUND",
+  NOTFOUND = "NOTFOUND",
+  FAILED = "FAILED",
+  NOTMATCH = "NOTMATCH"
+}
+
+export enum Status {
+  APPROVED = "APPROVED",
+  UNAPPROVED = "UNAPPROVED",
+  DEACTIVATED = "DEACTIVATED",
+  ACTIVATE = "ACTIVATE"
 }

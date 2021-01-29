@@ -162,6 +162,22 @@
 <!--          </div>-->
 
         </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card mb-3">
+              <div class="card-header tile-header bg-slategray">Assigned workgroup</div>
+              <div class="card-body widget-body row m-20">
+                <div class="col-sm-4" *ngFor="let role of systemRoles">
+                  <div class="checkbox">
+                    <input type="checkbox" value="{{role.id}}" [(ngModel)]="role.checked"
+                           [name]="role.name" />
+                    <label>{{role.name}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="row">
           <div class="form-group col-md-12">

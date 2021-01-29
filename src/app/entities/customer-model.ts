@@ -12,6 +12,7 @@ export class CustomerModel {
   country: string;
   customerMobile:any;
   firstName:string;
+  employeeNumber:string;
   idNumber:string;
   nextofkinname:string;
   currentAddress:string;
@@ -30,7 +31,6 @@ export class CustomerModel {
   customerPhoto: {
     id: string;
   };
-  employeeNumber:string;
   nationalId:idDocument;
   industry:industries;
   customerStatus:Customerstatus;

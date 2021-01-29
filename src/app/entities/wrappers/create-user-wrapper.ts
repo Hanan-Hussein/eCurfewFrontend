@@ -13,6 +13,7 @@ export class CreateUserWrapper {
     // userType: string;
     userTypeId: number;
     documentType: string;
+    workGroups:Array<WG>
     documentNumber: string;
     status: string;
     roleMaps: Array<RoleMaps>;
@@ -26,9 +27,23 @@ export class CreateUserWrapper {
     profilePhoto: Profile;
     userType: {userType: string};
     uploadRequest:uploadRequest;
-    fingerPrint:Print;
+   // fingerPrint:Print;
+    rightThumb:string;
+    rightIndex:string;
+    rightMid:string;
+    rightRing:string;
+    rightPinky:string;
+    leftThumb:string;
+    leftIndex:string;
+    leftMid:string;
+    leftRing:string;
+    leftPinky:string;
+    fingerPrints:any [] = [];
 
-
+}
+export class Prints{
+  fingerType:string;
+  file:Print
 }
 export class Print{
   id:string;
@@ -39,3 +54,9 @@ export class uploadRequest{
 export class Profile {
   id: string;
 }
+export class WG{
+  id:string;
+}
+
+
+

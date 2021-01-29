@@ -11,6 +11,7 @@ export class Roles {
     groupId: number;
     id:string;
     name: string;
+    role:string;
 }
 
 
