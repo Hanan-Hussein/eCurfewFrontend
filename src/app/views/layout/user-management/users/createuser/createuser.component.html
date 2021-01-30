@@ -245,7 +245,7 @@
                             <div>
                               <span class="text-danger"
                               *ngIf="CreateUserWrapper.get('phoneNumber').invalid && CreateUserWrapper.get('phoneNumber').touched
-                              &&CreateUserWrapper.get('phoneNumber').hasErrors('pattern')">
+                              &&CreateUserWrapper.get('phoneNumber').errors?.pattern">
                             Phone Number is required
                         </span>
                         <span class="text-danger" *ngIf="CreateUserWrapper.get('phoneNumber').errors?.pattern">

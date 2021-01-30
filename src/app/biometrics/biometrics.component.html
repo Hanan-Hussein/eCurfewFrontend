@@ -1,13 +1,26 @@
 <div class="page page-core">
     <div class="container w-420 p-35 mt-40 text-center log-form">
       <img src="assets/new-fortis-logo-login.png" style="height:20%;"/>
-      
+
       <section>
         <br>
+
         <h4 class="trynot text-login">Login with Biometrics</h4>
+        <!-- <div class="row"> -->
+          <div class="form-group">
+            <label>Finger Type<span class="my_span"> *</span></label>
+            <select  name="gender" class="form-control" name="gender"  [(ngModel)]="model.fingerType"
+            required>
+           <option *ngFor="let gen of fingerType" value="{{gen.word}}">{{gen.word}}</option>
+          </select>
+          </div>
+          <div class="form-group">
+
         <button class="save-button btn-block" mat-stroked-button (click)="scanFingerPrint()">
             Scan FingerPrint
         </button>
+        </div>
+      <!-- </div> -->
         <form (ngSubmit)="onLoggedin(loginForm)" #loginForm="ngForm" role="form"
               class="form-validation">
           <div class="form-group">
@@ -29,11 +42,11 @@
             <ng-container *ngIf="scanned">
             <img [src]="imageSource" class="responsive">
             <img src="../../assets/checked.png"class="responsive">
-          
+
             </ng-container>
           </div>
           <div class="form-group">
-            
+
             <button [disabled]="!loginForm.form.valid" class="save-button btn-block" mat-stroked-button type="submit">
               Login
             </button>
@@ -60,4 +73,3 @@
       <div class="col-sm-4"></div>
     </div>
   </div>
-  
