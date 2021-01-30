@@ -38,7 +38,7 @@ export class CustomerModel {
   sector:Sectors;
   tapAddressCollection: any;
   uploadRequest:uploadRequest;
-  fingerPrint:Print;
+ // fingerPrint:Print;
 }
 export class Print{
   id:string;

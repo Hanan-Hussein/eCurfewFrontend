@@ -7,6 +7,8 @@ import { DOCUMENT } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Biometrics } from './../entities/login';
+import { Fingers } from '../../Sdk/enums/enums';
+
 
 @Component({
   selector: 'app-biometrics',
@@ -25,6 +27,8 @@ export class BiometricsComponent implements OnInit {
   scanned=false;
   biometrics:Biometrics;
   base64FingerPrint:any;
+  fingerType:any =  [];
+
 
 
   constructor(
@@ -38,6 +42,11 @@ export class BiometricsComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    for (const key in Fingers)
+    {
+        this.fingerType.push({number: key, word: Fingers[key]});
+    }
+    console.log(this.fingerType);
     const inst = this;
   }
 
@@ -63,8 +72,11 @@ export class BiometricsComponent implements OnInit {
     const params = new URLSearchParams();
     params.append('username', this.model.email);
     params.append('fingerPrint', this.base64FingerPrint);
+    params.append('fingerType', this.model.fingerType);
+    console.log("fingerType",this.model.fingerType);
 
-    this.stewardService.sendToken('fortis/rest/v2/oauth/verify-print', {'username':this.model.email,'fingerPrint':this.base64FingerPrint}).subscribe((response: any) => {
+
+    this.stewardService.sendToken('fortis/rest/v2/oauth/verify-print', {'fingerType':this.model.fingerType,'username':this.model.email,'fingerPrint':this.base64FingerPrint}).subscribe((response: any) => {
       console.log(">>>>>>>>>>>>>>>>>>>>>response",response.access_token);
       // if (response.code === 0) {
       //   this.notify.showWarning("Network Error, check Newtork Connection")
