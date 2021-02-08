@@ -46,13 +46,17 @@ export class CustomerComponent implements OnInit {
       title: 'Email Address',
       data: 'emailAddress'
     });
-    this.cols.push({
-      title: 'Occupation',
-      data: 'occupation'
-    });
+    // this.cols.push({
+    //   title: 'Occupation',
+    //   data: 'occupation'
+    // });
     this.cols.push({
       title: 'Action Status',
       data: 'actionStatus'
+    });
+    this.cols.push({
+      title: 'Action',
+      data: 'action'
     });
     this.cols.push({
       title: 'Created Date',

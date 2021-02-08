@@ -11,4 +11,7 @@ export class Users {
     phoneNumber: string;
     gender: string;
     username: string;
+    name:string;
+    login:string;
+    eventTs:Date;
 }

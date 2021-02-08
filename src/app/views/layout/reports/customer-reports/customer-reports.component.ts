@@ -9,7 +9,7 @@ import {DatatableColumns} from "../../../../entities/datatable/datatable-columns
 export class CustomerReportsComponent implements OnInit {
   cols: Array<DatatableColumns>;
   endpoint = 'fortis/rest/v2/entities/fortis_CustomerDetails?view=customerReport&returnCount=true&sort=-createTs';
-  hasCheckBox = false;
+  hasCheckBox = true;
   idColumn = 'id';
   params: Map<any, string>;
   routeView = 'home/reports/audit-logs/{0}/view';
@@ -21,6 +21,11 @@ export class CustomerReportsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cols.push({
+      isCheckBox: true,
+      title: '',
+      data: 'id'
+      });
     this.cols.push({
       title: 'First Name',
       data: 'firstName'

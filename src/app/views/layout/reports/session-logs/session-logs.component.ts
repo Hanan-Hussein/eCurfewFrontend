@@ -9,8 +9,8 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 export class SessionLogsComponent implements OnInit {
 
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/sec$SessionLogEntry?returnCount=true&sort=-finishedTs';
-  hasCheckBox = false;
+  endpoint = 'fortis/rest/v2/entities/sec$SessionLogEntry?returnCount=true&sort=-finishedTs&view=sessionLogEntry-view1';
+  hasCheckBox = true;
   idColumn = 'id';
   params: Map<any, string>;
   routeView = 'home/reports/audit-logs/{0}/view';
@@ -24,17 +24,21 @@ export class SessionLogsComponent implements OnInit {
 
   ngOnInit() {
     this.cols.push({
+      isCheckBox: true,
+      title: '',
+      data: 'id'
+      });
+    this.cols.push({
       title: 'Last Action',
       data: 'lastAction'
     });
-    // this.cols.push({
-    //   title: 'Occurence Time',
-    //   data: 'startedTs',
-    //   isDate: true
-    // });
     this.cols.push({
       title: 'Ip address',
       data: 'address'
+    });
+    this.cols.push({
+      title: 'Username',
+      data: 'user.login'
     });
     this.cols.push({
       title: 'Started Ts',

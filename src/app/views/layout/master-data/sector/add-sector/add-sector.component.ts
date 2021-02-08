@@ -76,7 +76,7 @@ export class AddSectorComponent implements OnInit {
   onCreateForm(createForm: NgForm) {
     const inst = this;
     if (this.isUpdate) {
-      this.stewardService.put('fortis/rest/v2/entities/fortis_Sector/'+this.id, this.model).subscribe((response) => {
+      this.stewardService.put('fortis/rest/v2/update/sector/'+this.id, this.model).subscribe((response) => {
         console.log(response);
         if (response ) {
           inst.notify.showSuccess(response.message);

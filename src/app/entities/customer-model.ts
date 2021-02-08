@@ -38,7 +38,19 @@ export class CustomerModel {
   sector:Sectors;
   tapAddressCollection: any;
   uploadRequest:uploadRequest;
+  rightThumb:string;
+  rightIndex:string;
+  rightMid:string;
+  rightRing:string;
+  rightPinky:string;
+  leftThumb:string;
+  leftIndex:string;
+  leftMid:string;
+  leftRing:string;
+  leftPinky:string;
  // fingerPrint:Print;
+ fingerPrints:any [] = [];
+
 }
 export class Print{
   id:string;

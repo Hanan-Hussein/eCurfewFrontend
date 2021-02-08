@@ -81,20 +81,22 @@ export class BiometricsComponent implements OnInit {
       // if (response.code === 0) {
       //   this.notify.showWarning("Network Error, check Newtork Connection")
       // }
-        if (response.code === 400) {
-          this.notify.showWarning(response.message);
-        } else if (response.code === 401){
-          this.notify.showWarning(response.message);
-        } else {
-
-        }
+        // if (response.code === 400) {
+        //   this.notify.showWarning(response.message);
+        // }
+        //  else if (response.code === 401){
+        //   this.notify.showWarning(response.message);
+        // }
         if (response.access_token) {
             localStorage.setItem('access_token', response.access_token);
             localStorage.setItem('isLoggedin', 'true');
             localStorage.setItem('username', this.model.email);
             this.router.navigate(['home/dashboard/dashboard']);
             this.notify.showSuccess('Authentication was successful');
-          } else {
+          } else if (response.code === 401){
+              this.notify.showWarning(response.message);
+            }
+           else {
             this.notify.showWarning("Bad Finger Print Image or Check internet connection to server");
         }
       },

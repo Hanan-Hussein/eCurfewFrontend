@@ -12,11 +12,11 @@ export class AuditLogsComponent implements OnInit {
 
   cols: Array<DatatableColumns>;
   endpoint = 'fortis/rest/v2/entities/sec$EntityLog/?view=audit-view&returnCount=true&sort=-eventTs';
-  hasCheckBox = false;
+  hasCheckBox = true;
   idColumn = 'id';
   params: Map<any, string>;
-  routeView = 'home/reports/audit-logs/{0}/view';
-
+  routeView = 'home/reports/audit-logs/{0}/view-audit-logs';
+  // audit-logs/:id/view-audit-logs
 
   constructor() {
     this.cols = [];
@@ -25,6 +25,11 @@ export class AuditLogsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cols.push({
+      isCheckBox: true,
+      title: '',
+      data: 'id'
+      });
     this.cols.push({
       title: 'Activity Type',
       data: 'type'
@@ -46,11 +51,11 @@ export class AuditLogsComponent implements OnInit {
     });
 
 
-    // this.cols.push({
-    //   title: 'View More',
-    //   data: 'id',
-    //   isViewMore: true
-    // });
+    this.cols.push({
+      title: 'View More',
+      data: 'id',
+      isViewMore: true
+    });
   }
 
 }

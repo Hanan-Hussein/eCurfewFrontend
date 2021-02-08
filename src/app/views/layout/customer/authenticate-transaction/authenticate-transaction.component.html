@@ -12,14 +12,32 @@
         <!-- <img src="../../assets/finger.jpeg"class="responsive">
         <img src="../../assets/checked.png"class="responsive"> -->
 
+
+
+        </div>
+      <form [formGroup]="authenticateModel" (ngSubmit)="onAuthenticate(createForm)" #createForm="ngForm" role="form">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>Finger Type<span class="my_span"> *</span></label>
+              <select  name="fingerType" class="form-control" name="fingerType" formControlName="fingerType"
+              required>
+             <option *ngFor="let fin of fingerType" value="{{fin.word}}">{{fin.word}}</option>
+            </select>
+
+            <div>
+              <span class="text-danger"
+              *ngIf="authenticateModel.get('fingerType').invalid && authenticateModel.get('fingerType').touched
+              &&authenticateModel.get('fingerType').errors.required">
+          Gender is required
+          </span>
+          </div>
+            </div>
+        </div>
         <ng-container *ngIf="scanned">
           <img [src]="imageSource" class="responsive">
           <img src="../../assets/checked.png"class="responsive">
           <!-- <p>{{fingerprint.message}}</p> -->
           </ng-container>
-
-        </div>
-      <form [formGroup]="authenticateModel" (ngSubmit)="onAuthenticate(createForm)" #createForm="ngForm" role="form">
         <div class="row">
           <div class="form-group col-md-6">
             <label>Natonal Id</label>

@@ -39,6 +39,10 @@ export class WorkgroupsComponent implements OnInit {
       data: 'actionStatus'
     });
     this.cols.push({
+      title: 'Action',
+      data: 'action'
+    });
+    this.cols.push({
       title: 'Created By',
       data: 'createdBy',
     });

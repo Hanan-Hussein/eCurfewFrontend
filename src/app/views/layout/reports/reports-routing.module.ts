@@ -9,6 +9,8 @@ import { ConsumptionReportComponent } from './consumption-report/consumption-rep
 import {AuthenticationReportComponent}from './authentication-report/authentication-report.component';
 import { CustomerReportsComponent } from './customer-reports/customer-reports.component';
 import {UserReportComponent} from './user-report/user-report.component';
+import {ViewAuditLogsComponent} from './audit-logs/view-audit-logs/view-audit-logs.component';
+import { AuthGuard } from '../../../shared/guard';
 
 
 const routes: Routes = [
@@ -22,7 +24,9 @@ const routes: Routes = [
       {path: 'accounting-entries', component:AccountingEntriesComponent},
       {path: 'consumption-reports', component:ConsumptionReportComponent},
       {path:  'customer-authorized-unauthorized-reports',component:CustomerReportsComponent},
-      {path: 'user-authorized-unauthorized-reports',component:UserReportComponent}
+      {path: 'user-authorized-unauthorized-reports',component:UserReportComponent},
+      {path: 'audit-logs/:id/view-audit-logs', component: ViewAuditLogsComponent, canActivate: [AuthGuard]},
+
       ]
   }
 ];

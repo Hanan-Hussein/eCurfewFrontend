@@ -9,7 +9,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 export class AuthenticationReportComponent implements OnInit {
   cols: Array<DatatableColumns>;
   endpoint = 'fortis/rest/v2/entities/fortis_CustomerAuthentication/?view=customerAuthentication-view&returnCount=true&sort=-createTs';
-  hasCheckBox = false;
+  hasCheckBox = true;
   idColumn = 'id';
   params: Map<any, string>;
   routeView = 'home/reports/audit-logs/{0}/view';
@@ -17,10 +17,15 @@ export class AuthenticationReportComponent implements OnInit {
   constructor() {
     this.cols = [];
     this.params = new Map();
-    this.params.set('sort', 'id,desc');
+    this.params.set('sort', 'code,asc');
    }
 
   ngOnInit() {
+    this.cols.push({
+      isCheckBox: true,
+      title: '',
+      data: 'id'
+      });
     this.cols.push({
       title: 'First Name',
       data: 'customer.firstName'

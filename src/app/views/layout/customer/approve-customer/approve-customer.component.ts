@@ -44,6 +44,10 @@ export class ApproveCustomerComponent implements OnInit {
       data: 'emailAddress'
     });
     this.cols.push({
+      title: 'Action',
+      data: 'action'
+    });
+    this.cols.push({
       title: 'Action Status',
       data: 'actionStatus'
     });

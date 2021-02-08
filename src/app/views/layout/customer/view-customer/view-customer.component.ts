@@ -96,7 +96,7 @@ export class ViewCustomerComponent implements OnInit, OnDestroy {
     const params: Map<any, string> = new Map();
     const inst = this;
 
-        this.stewardService.put('fortis/rest/v2/entities/fortis_CustomerDetails/'+this.id ,this.model).subscribe((response) => {
+        this.stewardService.put('fortis/rest/v2/update/customer/'+this.id ,this.model).subscribe((response) => {
           if (response) {
             inst.notify.showSuccess(response.message);
             this.router.navigate(['home/customers/customers']);

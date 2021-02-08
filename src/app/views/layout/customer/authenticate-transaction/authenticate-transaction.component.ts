@@ -9,6 +9,8 @@ import { Notify } from '../../../../shared/class/notify';
 import { StewardService } from '../../../../shared/services/steward/steward.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgForm } from '@angular/forms';
+import { Fingers } from '../../../../../Sdk/enums/enums';
+
 
 @Component({
   selector: 'app-authenticate-transaction',
@@ -25,6 +27,8 @@ export class AuthenticateTransactionComponent implements OnInit {
   scanned=false;
 
   base64FingerPrint:any;
+  fingerType:any =  [];
+
 
   constructor(
     private stewardService: StewardService<any, any>,
@@ -35,14 +39,21 @@ export class AuthenticateTransactionComponent implements OnInit {
     private route: ActivatedRoute) {
     this.model = new AuthenticateModel();
     this.subscription = new Subscription();
+
    }
 
 
   ngOnInit() {
+    for (const key in Fingers)
+    {
+        this.fingerType.push({number: key, word: Fingers[key]});
+    }
+    console.log(this.fingerType);
     this.authenticateModel=this.fb.group({
       idNumber:['',Validators.required],
       fingerPrint:['',Validators.required],
       transactionId:['',Validators.required],
+      fingerType:['',Validators.required]
 
     })
 

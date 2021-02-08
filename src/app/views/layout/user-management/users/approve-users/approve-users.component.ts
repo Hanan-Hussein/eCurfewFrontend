@@ -50,6 +50,10 @@ export class ApproveUsersComponent implements OnInit {
       data: 'nationalId',
     });
     this.cols.push({
+      title: 'Action',
+      data: 'action'
+    });
+    this.cols.push({
       title: 'Status',
       data: 'actionStatus'
     });

@@ -40,11 +40,25 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
 
   // All FingerPrint related stuff
   fingerprint:any;
-  imageSource;
-  scanned=false;
-
+  imageSource;rightThumbSource;rightIndexSource;rightMidSource;rightRingSource;rightPinkySource;
+  leftThumbSource;leftIndexSource;leftMidSource;leftRingSource;leftPinkySource;
+  scanned=false;rightThumbScanned=false;rightIndexScanned=false;rightMidScanned=false;rightRingScanned=false;rightPinkyScanned=false;
+  leftThumbScanned=false;leftIndexScanned=false;leftMidScanned=false;leftRingScanned=false;leftPinkyScanned=false;
   base64FingerPrint:any;
+  right_thumb:any;
+  right_index:any;
+  right_mid:any;
+  right_ring:any;
+  right_pinky:any;
+  left_thumb:any;
+  left_index:any;
+  left_mid:any;
+  left_ring:any;
+  left_pinky:any;
   firstName: any;
+  fingerType:string;
+  prints:any [] = [];
+
 
   constructor(
     private sanitizer:DomSanitizer,
@@ -56,10 +70,6 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute) {
     this.model = new CustomerModel();
     this.subscription = new Subscription();
-
-
-
-
   }
 
   ngOnInit() {
@@ -92,6 +102,16 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
       otherNames: ['',Validators.required],
       dateOfBirth: ['',Validators.required],
       signature: ['',Validators.required],
+      rightThumb:['',Validators.required],
+      rightIndex:['',Validators.required],
+      rightMid:['',Validators.required],
+      rightRing:['',Validators.required],
+      rightPinky:['',Validators.required],
+      leftThumb:['',Validators.required],
+      leftIndex:['',Validators.required],
+      leftMid:['',Validators.required],
+      leftRing:['',Validators.required],
+      leftPinky:['',Validators.required]
 
     });
     this.firstName=this.customerModel.get('firstName');
@@ -148,6 +168,206 @@ export class CreatecustomerComponent implements OnInit, OnDestroy {
         this.base64FingerPrint = response.payload;
         this.customerModel.patchValue({
           base64:this.base64FingerPrint
+        });
+
+        this.notify.showSuccess("Finger print scanned");
+
+      } else {
+        this.notify.showWarning("Make sure the Desktop FingerPrint Scanner is Running");
+      }
+    },
+     error => {
+      this.notify.showWarning("no server");
+    });
+  }
+  rightThumb(){
+    this.stewardService.getFingerPrint('http://localhost:8080/launchmso').subscribe((response) => {
+      if (response.payload) {
+        this.rightThumbScanned=true;
+        this.rightThumbSource =this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/bmp;base64,${response.payload}`);
+        this.right_thumb = response.payload;
+        this.customerModel.patchValue({
+          rightThumb:this.right_thumb
+        });
+
+        this.notify.showSuccess("Finger print scanned");
+
+      } else {
+        this.notify.showWarning("Make sure the Desktop FingerPrint Scanner is Running");
+      }
+    },
+     error => {
+      this.notify.showWarning("no server");
+    });
+  }
+  rightIndex(){
+    this.stewardService.getFingerPrint('http://localhost:8080/launchmso').subscribe((response) => {
+      if (response.payload) {
+        this.rightIndexScanned=true;
+        this.rightIndexSource =this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/bmp;base64,${response.payload}`);
+        this.right_index = response.payload;
+        this.customerModel.patchValue({
+          rightIndex:this.right_index
+        });
+
+        this.notify.showSuccess("Finger print scanned");
+
+      } else {
+        this.notify.showWarning("Make sure the Desktop FingerPrint Scanner is Running");
+      }
+    },
+     error => {
+      this.notify.showWarning("no server");
+    });
+  }
+  rightMid(){
+    this.stewardService.getFingerPrint('http://localhost:8080/launchmso').subscribe((response) => {
+      if (response.payload) {
+        this.rightMidScanned=true;
+        this.rightMidSource =this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/bmp;base64,${response.payload}`);
+        this.right_mid = response.payload;
+        this.customerModel.patchValue({
+          rightMid:this.right_mid
+        });
+
+        this.notify.showSuccess("Finger print scanned");
+
+      } else {
+        this.notify.showWarning("Make sure the Desktop FingerPrint Scanner is Running");
+      }
+    },
+     error => {
+      this.notify.showWarning("no server");
+    });
+  }
+  rightRing(){
+    this.stewardService.getFingerPrint('http://localhost:8080/launchmso').subscribe((response) => {
+      if (response.payload) {
+        this.rightRingScanned=true;
+        this.rightRingSource =this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/bmp;base64,${response.payload}`);
+        this.right_ring = response.payload;
+        this.customerModel.patchValue({
+          rightRing:this.right_ring
+        });
+
+        this.notify.showSuccess("Finger print scanned");
+
+      } else {
+        this.notify.showWarning("Make sure the Desktop FingerPrint Scanner is Running");
+      }
+    },
+     error => {
+      this.notify.showWarning("no server");
+    });
+  }
+  rightPinky(){
+    this.stewardService.getFingerPrint('http://localhost:8080/launchmso').subscribe((response) => {
+      if (response.payload) {
+        this.rightPinkyScanned=true;
+        this.rightPinkySource =this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/bmp;base64,${response.payload}`);
+        this.right_pinky = response.payload;
+        this.customerModel.patchValue({
+          rightPinky:this.right_pinky
+        });
+
+        this.notify.showSuccess("Finger print scanned");
+
+      } else {
+        this.notify.showWarning("Make sure the Desktop FingerPrint Scanner is Running");
+      }
+    },
+     error => {
+      this.notify.showWarning("no server");
+    });
+  }
+  leftThumb(){
+    this.stewardService.getFingerPrint('http://localhost:8080/launchmso').subscribe((response) => {
+      if (response.payload) {
+        this.leftThumbScanned=true;
+        this.leftThumbSource =this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/bmp;base64,${response.payload}`);
+        this.left_thumb = response.payload;
+        this.customerModel.patchValue({
+          leftThumb:this.left_thumb
+        });
+
+        this.notify.showSuccess("Finger print scanned");
+
+      } else {
+        this.notify.showWarning("Make sure the Desktop FingerPrint Scanner is Running");
+      }
+    },
+     error => {
+      this.notify.showWarning("no server");
+    });
+  }
+  leftIndex(){
+    this.stewardService.getFingerPrint('http://localhost:8080/launchmso').subscribe((response) => {
+      if (response.payload) {
+        this.leftIndexScanned=true;
+        this.leftIndexSource =this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/bmp;base64,${response.payload}`);
+        this.left_index = response.payload;
+        this.customerModel.patchValue({
+          leftIndex:this.left_index
+        });
+
+        this.notify.showSuccess("Finger print scanned");
+
+      } else {
+        this.notify.showWarning("Make sure the Desktop FingerPrint Scanner is Running");
+      }
+    },
+     error => {
+      this.notify.showWarning("no server");
+    });
+  }
+  leftMid(){
+    this.stewardService.getFingerPrint('http://localhost:8080/launchmso').subscribe((response) => {
+      if (response.payload) {
+        this.leftMidScanned=true;
+        this.leftMidSource =this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/bmp;base64,${response.payload}`);
+        this.left_mid = response.payload;
+        this.customerModel.patchValue({
+          leftMid:this.left_mid
+        });
+
+        this.notify.showSuccess("Finger print scanned");
+
+      } else {
+        this.notify.showWarning("Make sure the Desktop FingerPrint Scanner is Running");
+      }
+    },
+     error => {
+      this.notify.showWarning("no server");
+    });
+  }
+  leftRing(){
+    this.stewardService.getFingerPrint('http://localhost:8080/launchmso').subscribe((response) => {
+      if (response.payload) {
+        this.leftRingScanned=true;
+        this.leftRingSource =this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/bmp;base64,${response.payload}`);
+        this.left_ring = response.payload;
+        this.customerModel.patchValue({
+          leftRing:this.left_ring
+        });
+
+        this.notify.showSuccess("Finger print scanned");
+
+      } else {
+        this.notify.showWarning("Make sure the Desktop FingerPrint Scanner is Running");
+      }
+    },
+     error => {
+      this.notify.showWarning("no server");
+    });
+  }
+  leftPinky(){
+    this.stewardService.getFingerPrint('http://localhost:8080/launchmso').subscribe((response) => {
+      if (response.payload) {
+        this.leftPinkyScanned=true;
+        this.leftPinkySource =this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/bmp;base64,${response.payload}`);
+        this.left_pinky = response.payload;
+        this.customerModel.patchValue({
+          leftPinky:this.left_pinky
         });
 
         this.notify.showSuccess("Finger print scanned");
@@ -225,14 +445,36 @@ onCreateForm() {
   const formData2=new FormData();
 
 
-  this.model=this.customerModel.get('base64').value;
+// this.model=this.customerModel.get('base64').value;
+ this.model.rightThumb=this.customerModel.get('rightThumb').value;
+ this.model.rightIndex=this.customerModel.get('rightIndex').value;
+ this.model.rightMid=this.customerModel.get('rightMid').value;
+ this.model.rightRing=this.customerModel.get('rightRing').value;
+ this.model.rightPinky=this.customerModel.get('rightPinky').value;
+ this.model.leftThumb=this.customerModel.get('leftThumb').value;
+ this.model.leftIndex=this.customerModel.get('leftIndex').value;
+ this.model.leftMid=this.customerModel.get('leftMid').value;
+ this.model.leftRing=this.customerModel.get('leftRing').value;
+ this.model.leftPinky=this.customerModel.get('leftPinky').value;
 
-  this.stewardService.post('fortis/rest/v2/services/fortis_UploadFileService/UploadFile',{uploadRequest: {"file":this.model}}).subscribe((res3:any)=>
-  {
-    if(res3.id){
-    this.model.uploadRequest.file=res3.id;
-  //  console.log(">>>>>>>>>>fingerprint",res3.data);
-    }
+ this.stewardService.post('fortis/rest/v2/services/fortis_UploadFingerPrintsService/UploadFile',
+ {uploadRequest:
+    {"rightThumbPrint":this.model.rightThumb,
+     "rightIndexPrint":this.model.rightIndex,
+     "rightMidPrint":this.model.rightMid,
+     "rightRingPrint":this.model.rightRing,
+     "rightPinkyPrint":this.model.rightPinky,
+     "leftThumbPrint":this.model.leftThumb,
+     "leftIndexPrint":this.model.leftIndex,
+     "leftMiddlePrint":this.model.leftMid,
+     "leftRingPrint":this.model.leftRing,
+     "leftPinkyPrint":this.model.leftPinky}}).subscribe((res3:any)=>  {
+  //   if(res3.id){
+  //   this.model.uploadRequest.file=res3.id;
+  // //  console.log(">>>>>>>>>>fingerprint",res3.data);
+  //   }
+  this.prints=[];
+
 
   formData.append('file', this.customerModel.get('file').value);
 
@@ -274,6 +516,88 @@ onCreateForm() {
           this.model.sector.id=this.customerModel.value.sectors;
 
           this.model.accountOfficer.id=this.customerModel.value.account_officer;
+          if(res3.leftThumbPrint){
+            this.fingerType="LEFTTHUMB";
+            this.prints.push({
+              "fingerType":this.fingerType,
+              "file":{"id":res3.leftThumbPrint}
+
+            });
+          }
+          if(res3.leftIndexPrint){
+            this.fingerType="LEFTINDEX"
+            this.prints.push({
+              "fingerType":this.fingerType,
+              "file":{"id":res3.leftIndexPrint}
+
+            });
+          }
+          if(res3.leftMiddlePrint){
+            this.fingerType="LEFTMIDDLE";
+            this.prints.push({
+              "fingerType":this.fingerType,
+              "file":{"id":res3.leftMiddlePrint}
+
+            });
+          }
+          if(res3.leftRingPrint){
+            this.fingerType="LEFTRING";
+            this.prints.push({
+              "fingerType":this.fingerType,
+              "file":{"id":res3.leftRingPrint}
+
+            });
+          }
+          if(res3.leftPinkyPrint){
+            this.fingerType="LEFTPINKY";
+            this.prints.push({
+              "fingerType":this.fingerType,
+              "file":{"id":res3.leftPinkyPrint}
+
+            });
+          }
+          if(res3.rightThumbPrint){
+            this.fingerType="RIGHTTHUMB";
+            this.prints.push({
+              "fingerType":this.fingerType,
+              "file":{"id":res3.rightThumbPrint}
+
+            });
+          }
+          if(res3.rightIndexPrint){
+            this.fingerType="RIGHTINDEX"
+            this.prints.push({
+              "fingerType":this.fingerType,
+              "file":{"id":res3.rightIndexPrint}
+
+            });
+          }
+          if(res3.rightMidPrint){
+            this.fingerType="RIGHTMIDDLE"
+            this.prints.push({
+              "fingerType":this.fingerType,
+             "file":{"id":res3.rightMidPrint}
+
+            });
+          }
+          if(res3.rightRingPrint){
+            this.fingerType="RIGHTRING"
+            this.prints.push({
+              "fingerType":this.fingerType,
+             "file":{"id":res3.rightRingPrint}
+
+            });
+          }
+          if(res3.rightPinkyPrint){
+            this.fingerType="RIGHTPINKY"
+            this.prints.push({
+              "fingerType":this.fingerType,
+              "file":{"id":res3.rightPinkyPrint}
+
+            });
+          }
+          this.model.fingerPrints=this.prints;
+
           this.stewardService.post('fortis/rest/v2/services/fortis_CreateCustomerService/CreateCustomer', {"customerDetails":this.model}).subscribe((response:any) => {
 
             if (response.code === 200) {

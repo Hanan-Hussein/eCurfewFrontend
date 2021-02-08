@@ -80,7 +80,7 @@ export class AddIndustryComponent implements OnInit {
     const params: Map<any, string> = new Map();
     const inst = this;
     if (this.isUpdate) {
-      this.stewardService.put('fortis/rest/v2/entities/fortis_Industry/'+this.id, this.model).subscribe((response) => {
+      this.stewardService.put('fortis/rest/v2/update/industry/'+this.id, this.model).subscribe((response) => {
         console.log(response);
         if (response) {
           inst.notify.showSuccess(response.message);

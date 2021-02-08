@@ -78,7 +78,7 @@ export class AddCustomerStatusComponent implements OnInit {
   onCreateForm(createForm: NgForm) {
     const inst = this;
     if (this.isUpdate) {
-      this.stewardService.put('fortis/rest/v2/entities/fortis_CustomerStatus/'+this.id, this.model).subscribe((response) => {
+      this.stewardService.put('fortis/rest/v2/update/customer-status/'+this.id, this.model).subscribe((response) => {
         console.log(response);
         if (response) {
           inst.notify.showSuccess(response.message);

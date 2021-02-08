@@ -40,10 +40,11 @@ import { SessionLogsComponent } from './session-logs/session-logs.component';
 import { AuthenticationReportComponent } from './authentication-report/authentication-report.component';
 import { CustomerReportsComponent } from './customer-reports/customer-reports.component';
 import { UserReportComponent } from './user-report/user-report.component';
+import { ViewAuditLogsComponent } from './audit-logs/view-audit-logs/view-audit-logs.component';
 
 
 @NgModule({
-  declarations: [AuditLogsComponent, IncomeReportsComponent, TopUpRequestsComponent, AccountingEntriesComponent, ConsumptionReportComponent, SessionLogsComponent,AuthenticationReportComponent, CustomerReportsComponent, UserReportComponent],
+  declarations: [AuditLogsComponent, IncomeReportsComponent, TopUpRequestsComponent, AccountingEntriesComponent, ConsumptionReportComponent, SessionLogsComponent,AuthenticationReportComponent, CustomerReportsComponent, UserReportComponent, ViewAuditLogsComponent],
   imports: [
     CommonModule,
     ReportsRoutingModule,

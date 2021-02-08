@@ -204,7 +204,7 @@ export class ViewUserComponent implements OnInit, OnDestroy {
 
     const params: Map<any, string> = new Map();
 
-        this.stewardService.put('fortis/rest/v2/entities/fortis_FortisUser/'+this.id ,this.model).subscribe((response) => {
+        this.stewardService.put('fortis/rest/v2/update/user/'+this.id ,this.model).subscribe((response) => {
           if (response) {
             inst.notify.showSuccess(response.message);
             form.resetForm();

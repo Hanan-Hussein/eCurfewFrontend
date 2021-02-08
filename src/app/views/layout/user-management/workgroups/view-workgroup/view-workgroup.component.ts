@@ -195,9 +195,9 @@ console.log("array",this.arraryofCheckedroles);
     if (this.model.workgroupRoles.length < 1) {
       inst.notify.showWarning('You have not selected any role yet');
     } else {
-      this.stewardService.put('fortis/rest/v2/entities/fortis_WorkGroups/'+this.id, this.model).subscribe((response) => {
+      this.stewardService.put('fortis/rest/v2/update/workGroup/'+this.id, this.model).subscribe((response) => {
         console.log('response', response);
-        if (response) {
+        if (response.code===200) {
           inst.notify.showSuccess(response.message);
           form.resetForm();
           inst.router.navigate(['/home/user-management/workgroups']);

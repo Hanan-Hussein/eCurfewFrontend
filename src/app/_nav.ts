@@ -1,14 +1,14 @@
 import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
-  {
-    name: 'DASHBOARD',
-    url: '/home/dashboard/dashboard',
-    // icon: 'fa fa-th-large'
-  },
-  {
-    divider: true,
-  },
+  // {
+  //   name: 'DASHBOARD',
+  //   url: '/home/dashboard/dashboard',
+  //   // icon: 'fa fa-th-large'
+  // },
+  // {
+  //   divider: true,
+  // },
   {
     name: 'USER MANAGEMENT',
     url: '/home/user-management',

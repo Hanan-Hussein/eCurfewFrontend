@@ -57,10 +57,10 @@ export class VerifyotpComponent implements OnInit {
             this.notify.showWarning(response.message);
           } else {
             if (response.access_token !== null) {
-              
+
               localStorage.setItem('access_token', response.access_token);
               localStorage.setItem('isLoggedin', 'true');
-              this.router.navigate(['home/dashboard/dashboard']);
+              this.router.navigate(['/home/customers/customers']);
               this.notify.showSuccess('Authentication was successful');
             } else {
               this.notify.showWarning(response.message);
