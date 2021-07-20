@@ -370,7 +370,7 @@ export class StewardService<T, E> {
           header: this.getHeaders('X-Total-Count'),
           // params: this.parseDataTableParams(dTParams, httpParams),
           // set response to get all  response headers
-          observe:'response' as 'body',
+          observe: 'response' as 'body',
 
 
         };
@@ -386,7 +386,7 @@ export class StewardService<T, E> {
             // pagination working with cuba backend
             // Get keys from  reponse headers
             const myKeys =  resp.headers.keys();
-            const myheaders = myKeys.map((key)=>resp.headers.get(key));
+            const myheaders = myKeys.map((key) => resp.headers.get(key));
             const total = resp.headers.get('x-total-count');
 
           callback({

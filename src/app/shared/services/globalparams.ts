@@ -6,8 +6,8 @@ import {Injectable} from '@angular/core';
 export class GlobalParams {
 
   // baseUrl = 'http://localhost:8069/api/v1/';
-  baseUrl = 'http://41.215.130.247:6160/';
-  // baseUrl = 'http://localhost:8080/';
+  // baseUrl = 'http://41.215.130.247:6160/';
+  baseUrl = 'http://localhost:8080/';
   // baseUrl = 'http://192.168.1.128:6160/';
   // baseUrl = 'http://197.248.113.67:6160/';
 

@@ -48,7 +48,7 @@ export class VerifyotpComponent implements OnInit {
     const corId = localStorage.getItem('correlationId');
     this.otps.correlationId = corId;
     this.stewardService
-      .sendToken('fortis/rest/v2/oauth/verify-token', this.otps)
+      .sendToken('app/rest/v2/oauth/verify-token', this.otps)
       .subscribe(
         (response) => {
           if (response.code === 401) {
@@ -60,7 +60,8 @@ export class VerifyotpComponent implements OnInit {
 
               localStorage.setItem('access_token', response.access_token);
               localStorage.setItem('isLoggedin', 'true');
-              this.router.navigate(['/home/customers/customers']);
+              // this.router.navigate(['/home/customers/customers']);
+              this.router.navigate(['/home/master-data/police-station']);
               this.notify.showSuccess('Authentication was successful');
             } else {
               this.notify.showWarning(response.message);

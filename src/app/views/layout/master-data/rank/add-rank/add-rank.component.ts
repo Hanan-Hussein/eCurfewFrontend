@@ -1,34 +1,30 @@
-import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit, Output} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {StewardService} from '../../../../../shared/services/steward/steward.service';
 import {Notify} from '../../../../../shared/class/notify';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {IndustryModel} from '../../../../../entities/industry-model';
-import { Output } from '@angular/core';
-
-
+import { RankModel} from '../../../../../entities/rank';
 @Component({
-  selector: 'app-add-industry',
-  templateUrl: './add-industry.component.html',
-  styleUrls: ['./add-industry.component.scss']
+  selector: 'app-add-rank',
+  templateUrl: './add-rank.component.html',
+  styleUrls: ['./add-rank.component.scss']
 })
-export class AddIndustryComponent implements OnInit {
+export class AddRankComponent implements OnInit {
 
-  model: IndustryModel;
+  model: RankModel;
   subscription: Subscription;
   isUpdate: boolean;
   isReadOnly = false;
   disabled = false;
   isView = false;
   @Output() id: string;
-
   constructor(
     private stewardService: StewardService<any, any>,
     private notify: Notify,
     protected router: Router,
     private route: ActivatedRoute) {
-    this.model = new IndustryModel();
+    this.model = new RankModel();
     this.subscription = new Subscription();
   }
   ngOnInit() {
@@ -45,9 +41,10 @@ export class AddIndustryComponent implements OnInit {
   private fetchData(id: number) {
     const inst = this;
     inst.subscription.add(
-      this.stewardService.getMasterData('fortis/rest/v2/entities/fortis_Industry/' + id).subscribe((response) => {
+      this.stewardService.getMasterData('app/rest/v2/entities/ecurfew_Rank/' + id).subscribe((response) => {
         if (response) {
-          this.model.code = response.code;
+          this.model.rankName = response.rankName;
+          this.model.rankCode = response.rankCode;
           this.model.description = response.description;
           this.id = response.id;
 
@@ -81,11 +78,11 @@ export class AddIndustryComponent implements OnInit {
     const params: Map<any, string> = new Map();
     const inst = this;
     if (this.isUpdate) {
-      this.stewardService.put('fortis/rest/v2/update/industry/' + this.id, this.model).subscribe((response) => {
+      this.stewardService.put('app/rest/v2/update/station/' + this.id, this.model).subscribe((response) => {
         console.log(response);
         if (response) {
           inst.notify.showSuccess(response.message);
-          this.router.navigate(['home/master-data/industry']);
+          this.router.navigate(['home/master-data/police-station']);
         } else {
           inst.notify.showWarning(response.message);
         }
@@ -94,11 +91,11 @@ export class AddIndustryComponent implements OnInit {
         inst.notify.showWarning(error.error.message);
       });
     } else {
-      this.stewardService.post('fortis/rest/v2/services/fortis_MessageService/messageIndustry', {user: this.model}).subscribe((response) => {
+      this.stewardService.post('app/rest/v2/services/ecurfew_CreateMasterDataService/createRank', {rank: this.model}).subscribe((response) => {
         console.log(response);
         if (response.code === 200) {
           inst.notify.showSuccess(response.message);
-          this.router.navigate(['home/master-data/industry']);
+          this.router.navigate(['home/master-data/rank']);
         } else {
           inst.notify.showWarning(response.message);
         }
@@ -109,6 +106,5 @@ export class AddIndustryComponent implements OnInit {
     }
 
   }
-
 
 }

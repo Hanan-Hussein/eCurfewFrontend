@@ -44,13 +44,13 @@ export class LoginComponent implements OnInit {
     params.append('password', this.model.password);
     // params.append('grant_type', 'password'); // oauth/token // process-login
 
-    this.stewardService.sendToken('fortis/rest/v2/oauth/send-token', this.login).subscribe((response: any) => {
+    this.stewardService.sendToken('app/rest/v2/oauth/send-token', this.login).subscribe((response: any) => {
 
       if (response.code === 400) {
         this.notify.showWarning(response.message);
       } else if (response.code === 401){
         this.notify.showWarning(response.message);
-      }else if(response.code === 410){
+      }else if (response.code === 410){
         this.router.navigate(['first-change']);
       } else {
         if (response.correlationId.length !== 0) {

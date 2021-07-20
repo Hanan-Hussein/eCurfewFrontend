@@ -1,9 +1,16 @@
 export class MasterDataResponseWrapper<T> {
-  code:string;
-  description:string;
+  code: string;
+  description: string;
   data: T;
   id: any;
-  message:string;
+  message: string;
+  stationCode: string;
+  nameOfStation: string;
+  county: string;
+  location: string;
+  headOfStation: string;
+  rankName: string;
+  rankCode: string;
 
 
 }

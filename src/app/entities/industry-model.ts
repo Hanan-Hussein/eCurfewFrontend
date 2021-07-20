@@ -1,5 +1,5 @@
 export class IndustryModel {
-  description:string;
+  description: string;
   name: string;
   code: string;
   id: number;

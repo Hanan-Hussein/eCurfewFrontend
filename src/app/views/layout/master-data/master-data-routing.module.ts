@@ -10,7 +10,7 @@ import {ApproveCurrencyComponent} from './currency/approve-currency/approve-curr
 import {IndustryComponent} from './industry/industry.component';
 import {AddIndustryComponent} from './industry/add-industry/add-industry.component';
 import {ApproveIndustryComponent} from './industry/approve-industry/approve-industry.component';
-import {SectorComponent}from './sector/sector.component';
+import {SectorComponent} from './sector/sector.component';
 import {AddSectorComponent} from './sector/add-sector/add-sector.component';
 import {ApproveSectorComponent} from './sector/approve-sector/approve-sector.component'
 import {CustomerStatusComponent} from './customer-status/customer-status.component';
@@ -19,7 +19,10 @@ import {ApproveCustomerStatusComponent} from './customer-status/approve-customer
 import {AccountOfficerComponent} from './account-officer/account-officer.component';
 import {AddAccountOfficerComponent} from './account-officer/add-account-officer/add-account-officer.component';
 import {ApproveAccountOfficerComponent} from './account-officer/approve-account-officer/approve-account-officer.component';
-
+import { PoliceStationComponent } from './police-station/police-station.component';
+import { AddPoliceStationComponent } from './police-station/add-police-station/add-police-station.component';
+import { RankComponent } from './rank/rank.component';
+import { AddRankComponent } from './rank/add-rank/add-rank.component';
 import { from } from 'rxjs';
 
 const routes: Routes = [
@@ -65,8 +68,17 @@ const routes: Routes = [
     data: {title: 'View Industry'},
     canActivate: [AuthGuard]
   },
-
+  {path: 'police-station', component: PoliceStationComponent, data: {title: 'PoliceStation'}, canActivate: [AuthGuard]},
+  {path: 'add-police-station', component: AddPoliceStationComponent, data: {title: 'Add Police Station'}, canActivate: [AuthGuard]},
+  {
+    path: 'police-station/:id/view-police-station',
+    component: AddPoliceStationComponent,
+    data: {title: 'View Police Statiom'},
+    canActivate: [AuthGuard]
+  },
   {path: 'sector', component: SectorComponent, data: {title: 'Sectors'}, canActivate: [AuthGuard]},
+  {path: 'rank', component: RankComponent, data: {title: 'Rank'}, canActivate: [AuthGuard]},
+  {path: 'add-rank', component: AddRankComponent, data: {title: 'Add Rank'}, canActivate: [AuthGuard]},
   {path: 'add-sector', component: AddSectorComponent, data: {title: 'Add Sectors'}, canActivate: [AuthGuard]},
 
   {

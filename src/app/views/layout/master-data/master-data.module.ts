@@ -22,10 +22,14 @@ import { AddSectorComponent } from './sector/add-sector/add-sector.component';
 import { ApproveSectorComponent } from './sector/approve-sector/approve-sector.component';
 import { AddAccountOfficerComponent } from './account-officer/add-account-officer/add-account-officer.component';
 import { ApproveAccountOfficerComponent } from './account-officer/approve-account-officer/approve-account-officer.component';
+import { PoliceStationComponent } from './police-station/police-station.component';
+import { RankComponent } from './rank/rank.component';
+import { AddPoliceStationComponent } from './police-station/add-police-station/add-police-station.component';
+import { AddRankComponent } from './rank/add-rank/add-rank.component';
 
 
 @NgModule({
-  declarations: [CountriesComponent, CurrencyComponent, AddCountryComponent, ApproveCountryComponent,  AddCurrencyComponent, ApproveCurrencyComponent, IndustryComponent, CustomerStatusComponent, SectorComponent, AccountOfficerComponent, AddIndustryComponent, ApproveIndustryComponent, AddCustomerStatusComponent, ApproveCustomerStatusComponent, AddSectorComponent, ApproveSectorComponent, AddAccountOfficerComponent, ApproveAccountOfficerComponent],
+  declarations: [CountriesComponent, CurrencyComponent, AddCountryComponent, ApproveCountryComponent,  AddCurrencyComponent, ApproveCurrencyComponent, IndustryComponent, CustomerStatusComponent, SectorComponent, AccountOfficerComponent, AddIndustryComponent, ApproveIndustryComponent, AddCustomerStatusComponent, ApproveCustomerStatusComponent, AddSectorComponent, ApproveSectorComponent, AddAccountOfficerComponent, ApproveAccountOfficerComponent, PoliceStationComponent, RankComponent, AddPoliceStationComponent, AddRankComponent],
   imports: [
     CommonModule,
     UtilModule,

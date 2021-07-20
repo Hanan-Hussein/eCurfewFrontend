@@ -1,0 +1,28 @@
+<div class="page">
+    <section class="tile">
+    <div class="info-title">
+    <h2>Police Station</h2>
+    </div>
+    <div class="tile-body">
+    <app-functionality-buttons [addLabel]="'Add Police Station'"
+    [addLink]="'home/master-data/add-police-station'"
+    [deleteLabel]="'Delete'"
+    [approveLink]="'home/master-data/approve-industry'"
+    [endpoint]="'fortis/rest/v2/services/fortis_DeleteMasterDataService/DeleteIndustry'"></app-functionality-buttons>
+    <app-custom-datatable
+    [endpoint]="endpoint"
+    [routeView]="routeView"
+    [hasCheckBox]="hasCheckBox"
+    [cols]="cols"
+    [idColumn]="idColumn"
+    [params]="params"
+    [hasShowEntries]="true"
+    [fileName]="'Industry'"
+    [canExport]="true"
+    [filterParams]="''"
+    [isFilterPresent]="true"
+    ></app-custom-datatable>
+    </div>
+    </section>
+    </div>
+  
