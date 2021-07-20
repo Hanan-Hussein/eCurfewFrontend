@@ -1,7 +1,7 @@
 
-## Fortis UI
+## eCurfew UI
 
-Fortis gateway UI is built on top of Bootstrap 4 and supports popular frameworks.
+eCyrfew gateway UI is built on top of Bootstrap 4 and supports popular frameworks.
 
 #### Prerequisites
 Before you begin, make sure your development environment includes `Node.js®` and an `npm` package manager.
