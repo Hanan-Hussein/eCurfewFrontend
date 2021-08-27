@@ -14,6 +14,7 @@ const routes: Routes = [
   {path: 'reports', loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule)},
   {path: 'customers', loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule)},
   {path: 'master-data', loadChildren: () => import('./master-data/master-data.module').then(m => m.MasterDataModule)},
+  {path: 'police', loadChildren: () => import('./police-officer/police-officer.module').then(m => m.PoliceOfficerModule)},
   {
     path: 'system-config',
     loadChildren: () => import('./system-config/system-config.module').then(m => m.SystemConfigModule)

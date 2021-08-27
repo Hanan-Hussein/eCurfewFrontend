@@ -4,15 +4,15 @@ import {StewardService} from '../../../../../shared/services/steward/steward.ser
 import {Notify} from '../../../../../shared/class/notify';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import { RankModel} from '../../../../../entities/rank';
+import { CategoryModel} from '../../../../../entities/category';
 @Component({
-  selector: 'app-add-rank',
-  templateUrl: './add-rank.component.html',
-  styleUrls: ['./add-rank.component.scss']
+  selector: 'app-add-category',
+  templateUrl: './add-category.component.html',
+  styleUrls: ['./add-category.component.scss']
 })
-export class AddRankComponent implements OnInit {
+export class AddCategoryComponent implements OnInit {
 
-  model: RankModel;
+  model: CategoryModel;
   subscription: Subscription;
   isUpdate: boolean;
   isReadOnly = false;
@@ -24,7 +24,7 @@ export class AddRankComponent implements OnInit {
     private notify: Notify,
     protected router: Router,
     private route: ActivatedRoute) {
-    this.model = new RankModel();
+    this.model = new CategoryModel();
     this.subscription = new Subscription();
   }
   ngOnInit() {
@@ -41,10 +41,10 @@ export class AddRankComponent implements OnInit {
   private fetchData(id: number) {
     const inst = this;
     inst.subscription.add(
-      this.stewardService.getMasterData('app/rest/v2/entities/ecurfew_Rank/' + id).subscribe((response) => {
+      this.stewardService.getMasterData('app/rest/v2/entities/ecurfew_Category/' + id).subscribe((response) => {
         if (response) {
-          this.model.rankName = response.rankName;
-          this.model.rankCode = response.rankCode;
+          this.model.name = response.name;
+          this.model.categoryCode = response.categoryCode;
           this.model.description = response.description;
           this.id = response.id;
 
@@ -78,11 +78,11 @@ export class AddRankComponent implements OnInit {
     const params: Map<any, string> = new Map();
     const inst = this;
     if (this.isUpdate) {
-      this.stewardService.put('app/rest/v2/update/rank/' + this.id, this.model).subscribe((response) => {
+      this.stewardService.put('app/rest/v2/update/category/' + this.id, this.model).subscribe((response) => {
         console.log(response);
         if (response) {
           inst.notify.showSuccess(response.message);
-          this.router.navigate(['home/master-data/rank']);
+          this.router.navigate(['home/master-data/category']);
         } else {
           inst.notify.showWarning(response.message);
         }
@@ -91,11 +91,11 @@ export class AddRankComponent implements OnInit {
         inst.notify.showWarning(error.error.message);
       });
     } else {
-      this.stewardService.post('app/rest/v2/services/ecurfew_CreateMasterDataService/createRank', {rank: this.model}).subscribe((response) => {
+      this.stewardService.post('app/rest/v2/services/ecurfew_CreateMasterDataService/createCategory', {category: this.model}).subscribe((response) => {
         console.log(response);
         if (response.code === 200) {
           inst.notify.showSuccess(response.message);
-          this.router.navigate(['home/master-data/rank']);
+          this.router.navigate(['home/master-data/category']);
         } else {
           inst.notify.showWarning(response.message);
         }

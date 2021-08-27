@@ -11,7 +11,7 @@ import {DatatableColumns} from '../../../../entities/datatable/datatable-columns
 export class AuditLogsComponent implements OnInit {
 
   cols: Array<DatatableColumns>;
-  endpoint = 'fortis/rest/v2/entities/sec$EntityLog/?view=audit-view&returnCount=true&sort=-eventTs';
+  endpoint = 'app/rest/v2/entities/sec$EntityLog/?view=audit-view&returnCount=true&sort=-eventTs';
   hasCheckBox = true;
   idColumn = 'id';
   params: Map<any, string>;

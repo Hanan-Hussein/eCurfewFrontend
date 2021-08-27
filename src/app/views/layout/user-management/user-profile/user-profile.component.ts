@@ -34,23 +34,23 @@ export class UserProfileComponent implements OnInit {
             oldPass: ['', Validators.compose([Validators.required])],
             newPassword: ['', Validators.compose([Validators.required])],
             confirmPassword: ['', Validators.compose([Validators.required])],
-        }, {validator: matchingPasswords('newPassword','confirmPassword')});
+        }, {validator: matchingPasswords('newPassword', 'confirmPassword')});
 
 
 
       }
     changePass(): void {
         const inst = this;
-        console.log('>>>>>>>>>>>>>>',this.profileForm.value);
-        console.log(">---------------------.",this.change)
-        this.change.changePasswordWrapper=this.profileForm.value;
+        console.log('>>>>>>>>>>>>>>', this.profileForm.value);
+        console.log('>---------------------.', this.change);
+        this.change.changePasswordWrapper = this.profileForm.value;
 
-        this.change.changePasswordWrapper.oldPass=this.profileForm.value.oldPass;
-        this.change.changePasswordWrapper.newPassword=this.profileForm.value.newPassword;
+        this.change.changePasswordWrapper.oldPass = this.profileForm.value.oldPass;
+        this.change.changePasswordWrapper.newPassword = this.profileForm.value.newPassword;
         // console.log(this.change.changePasswordWrapper.oldPass=this.profileForm.value.oldPass);
 
 
-        this.stewardService.post('fortis/rest/v2/services/fortis_ChangePasswordService/ChangePassword',  this.change).subscribe((response) => {
+        this.stewardService.post('app/rest/v2/services/ecurfew_ChangePasswordService/ChangePassword',  this.change).subscribe((response) => {
             if (response.code === 200) {
                 inst.notify.showSuccess(response.message);
                 // form.resetForm();

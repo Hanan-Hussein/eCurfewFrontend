@@ -11,6 +11,8 @@ export class MasterDataResponseWrapper<T> {
   headOfStation: string;
   rankName: string;
   rankCode: string;
+  name: string;
+  categoryCode: string;
 
 
 }
