@@ -37,14 +37,14 @@ export class ViewUserComponent implements OnInit, OnDestroy {
   isReadOnly = true;
   disabled = true;
   isUpdate: boolean;
-  workgroupid:string;
-  workGroup=[];
+  workgroupid: string;
+  workGroup = [];
   form: FormGroup;
   @Output() id: string;
   subscription: Subscription;
-  responseData={};
+  responseData = {};
   checkedRoles: any [] = [];
-  arraryofCheckedroles=[];
+  arraryofCheckedroles = [];
 
 
 
@@ -58,31 +58,26 @@ export class ViewUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const params: Map<any, string> = new Map();
+    // const params: Map<any, string> = new Map();
     const inst = this;
-    // this.stewardService.get('workgroup', params).subscribe((response) => {
-    //   if (response.code === 200) {
-    //     inst.systemRoles = response.data.content;
+    // this.stewardService.get('fortis/rest/v2/entities/fortis_WorkGroups/search?filter=%7B%22conditions%22%3A%20%5B%7B%22property%22%3A%20%22actionStatus%22%2C%22operator%22%3A%20%22%3D%22%2C%22value%22%3A%20%22APPROVED%22%20%7D%5D%7D&returnCount=true', params).subscribe((response: any) => {
+    //   if (response) {
+    //     // tslint:disable-next-line: no-shadowed-variable
+    //     response.forEach( response => {
+    //               // console.log(">>>>>>>>>>>",response);
+    //       // console.log("response id",response.id);
+    //               inst.workgroupid = response.id;
+
+    //     });
+    //     inst.systemRoles = response;
+
     //   } else {
     //     inst.notify.showWarning(response.message);
     //   }
     // });
-    this.stewardService.get('fortis/rest/v2/entities/fortis_WorkGroups/search?filter=%7B%22conditions%22%3A%20%5B%7B%22property%22%3A%20%22actionStatus%22%2C%22operator%22%3A%20%22%3D%22%2C%22value%22%3A%20%22APPROVED%22%20%7D%5D%7D&returnCount=true', params).subscribe((response:any) => {
-      if (response) {
-        response.forEach(response => {
-                  // console.log(">>>>>>>>>>>",response);
-          // console.log("response id",response.id);
-                  inst.workgroupid=response.id;
 
-        });
-        inst.systemRoles = response;
-
-      } else {
-        inst.notify.showWarning(response.message);
-      }
-    });
-
-    this.route.params.subscribe(params => {
+    // tslint:disable-next-line: no-shadowed-variable
+    this.route.params.subscribe (params => {
       if (params['id'] != null) {
         this.fetchUser(params['id']);
       }
@@ -102,35 +97,36 @@ export class ViewUserComponent implements OnInit, OnDestroy {
 
   fetchUser(id: number) {
     const params: Map<any, string> = new Map();
-        params.set('view', 'workgroup-view');
+        params.set('view', 'systemUser-view');
     const inst = this;
     inst.subscription.add(
-      this.stewardService.get('fortis/rest/v2/entities/fortis_FortisUser/' + id, params).subscribe((response) => {
+      this.stewardService.get('app/rest/v2/entities/ecurfew_SystemUser/' + id, params).subscribe((response) => {
         if (response) {
-          console.log("response",response);
-          console.log("response id",response.id);
-          console.log("response email",response.email);
+          console.log('response', response);
+          console.log('response id', response.id);
+          console.log('response email', response.email);
         //  console.log("response workGroup",response.workGroups);
-          this.workGroup=response.workGroups;
-          // console.log(",,,,",this.workGroup);
-          this.systemRoles.forEach(roles=>{
-            this.workGroup.forEach(resp => {
-              if(roles.id===resp.id){
-                roles.checked=true;
-              }
-              // console.log(",,,",resp.name);
 
-            });
+          // this.workGroup = response.workGroups;
+          // // console.log(",,,,",this.workGroup);
+          // this.systemRoles.forEach(roles => {
+          //   this.workGroup.forEach(resp => {
+          //     if ( roles.id === resp.id){
+          //       roles.checked = true;
+          //     }
+          //     // console.log(",,,",resp.name);
 
-          });
+          //   });
+
+          // });
 
 
-          this.model.email=response.email;
-          this.model.firstName=response.firstName;
-          this.model.lastName=response.lastName;
-          this.model.phoneNumber=response.phoneNumber;
-          this.model.nationalId=response.nationalId;
-          this.model.position=response.position;
+          this.model.email = response.email;
+          this.model.firstName = response.firstName;
+          this.model.lastName = response.lastName;
+          this.model.phoneNumber = response.phoneNumber;
+          this.model.nationalId = response.nationalId;
+          this.model.position = response.position;
 
 
           // console.log(this.responseData);
@@ -145,27 +141,6 @@ export class ViewUserComponent implements OnInit, OnDestroy {
         }
       })
     );
-    // inst.subscription.add(
-    //   this.stewardService.get('workgroups/' + id, params).subscribe((response) => {
-    //     // console.log(response);
-    //     if (response.code === 200) {
-    //       const data = response.data;
-    //       // console.log('Data:', data);
-    //       data.forEach(workgroup => {
-    //         this.systemRoles.map(mp => {
-    //           if (mp.groupId === workgroup.groupId) {
-    //             mp.checked = true;
-    //           }
-    //         });
-
-    //       });
-
-    //     } else {
-    //       inst.notify.showWarning(response.message);
-    //     }
-    //   })
-    // );
-
   }
 
   enableUpdate() {
@@ -179,32 +154,29 @@ export class ViewUserComponent implements OnInit, OnDestroy {
   }
 
   onUpdate(form: NgForm) {
-    this.systemRoles.forEach(res => {
-      if (res.checked) {
-        this.checkedRoles.push(res.id);
-      }
-    });
-    for (let index = 0; index < this.checkedRoles.length; index++) {
-      const element = this.checkedRoles[index];
+    // this.systemRoles.forEach(res => {
+    //   if (res.checked) {
+    //     this.checkedRoles.push(res.id);
+    //   }
+    // });
+    // for (let index = 0; index < this.checkedRoles.length; index++) {
+    //   const element = this.checkedRoles[index];
 
-      this.arraryofCheckedroles.push({
-        "id":element
+    //   this.arraryofCheckedroles.push({
+    //     'id': element
 
-      })
+    //   });
 
-    }
-    console.log("array",this.arraryofCheckedroles);
+    // }
+    // console.log('array', this.arraryofCheckedroles);
 
-        this.model.workGroups = this.arraryofCheckedroles;
-    //this.model.workGroups = this.checkedRoles;
+    //     this.model.workGroups = this.arraryofCheckedroles;
 
-   // this.model.workgroup_id = this.workgroups;
-   // this.model.fullName = this.firstName + ' ' + this.lastName;
     const inst = this;
 
-    const params: Map<any, string> = new Map();
+    // const params: Map<any, string> = new Map();
 
-        this.stewardService.put('fortis/rest/v2/update/user/'+this.id ,this.model).subscribe((response) => {
+        this.stewardService.put('app/rest/v2/update/user/' + this.id , this.model).subscribe((response) => {
           if (response) {
             inst.notify.showSuccess(response.message);
             form.resetForm();

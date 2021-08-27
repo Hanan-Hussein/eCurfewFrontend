@@ -1,0 +1,163 @@
+<div class="page">
+    <section class="tile">
+      <div class="info-title">
+        <app-back-component></app-back-component>
+        <h2>Police Officer</h2>
+      </div>
+      <div class="tile-body">
+        <form [formGroup]="CreatePoliceWrapper" (ngSubmit)="onCreatePoliceOfficer(createForm)" #createForm="ngForm" role="form">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>Gender<span class="my_span"> *</span></label>
+                <select  name="gender" class="form-control" name="gender" formControlName="gender"
+                required>
+               <option *ngFor="let gen of gender" value="{{gen.word}}">{{gen.word}}</option>
+              </select>
+  
+              <div>
+                <span class="text-danger"
+                *ngIf="CreatePoliceWrapper.get('gender').invalid && CreatePoliceWrapper.get('gender').touched
+                &&CreatePoliceWrapper.get('gender').errors.required">
+            Gender is required
+            </span>
+            </div>
+              </div>
+          </div>
+          <h5 style="color: blue;">User Bio Data</h5>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>First Name<span class="my_span"> *</span></label>
+              <input type="text" name="firstName" formControlName="firstName" class="form-control" required="required" >
+              <div>
+                <span class="text-danger"
+                *ngIf="CreatePoliceWrapper.get('firstName').invalid && CreatePoliceWrapper.get('firstName').touched
+                &&CreatePoliceWrapper.get('firstName').errors.required">
+             First Name is required
+          </span>
+          <span class="text-danger" *ngIf="CreatePoliceWrapper.get('firstName').errors?.pattern">
+            Customer Name must be a valid name with at least 3 characters</span>
+  
+          </div>
+            </div>
+  
+            <div class="form-group col-md-6">
+              <label>Last Name<span class="my_span"> *</span> </label>
+              <input type="text" name="lastName" formControlName="lastName" class="form-control" required >
+                    <div>
+                      <span class="text-danger"
+                      *ngIf="CreatePoliceWrapper.get('lastName').invalid && CreatePoliceWrapper.get('lastName').touched
+                      &&CreatePoliceWrapper.get('lastName').errors.required">
+                  Last Name is required
+                </span>
+                <span class="text-danger" *ngIf="CreatePoliceWrapper.get('lastName').errors?.pattern">
+                  Last Name must be a valid name with at least 3 characters</span>
+  
+                </div>
+            </div>
+  
+            <div class="form-group col-md-6">
+              <label>National Id <span class="my_span"> *</span> </label>
+              <input type="text"
+                     name="national_id" formControlName="nationalId" class="form-control" pattern="^[0-9]+" required>
+                            <div>
+                              <span class="text-danger"
+                              *ngIf="CreatePoliceWrapper.get('nationalId').invalid && CreatePoliceWrapper.get('nationalId').touched
+                              &&CreatePoliceWrapper.get('nationalId').errors.required">
+                          National ID is required
+                        </span>
+                        <span class="text-danger" *ngIf="CreatePoliceWrapper.get('nationalId').hasError('pattern')">
+                          National Id must be a valid with numbers only </span>
+  
+                        </div>
+  
+            </div>
+                <div class="form-group col-md-6">
+                    <label>Rank</label>
+                    <select formControlName="rank"  name="rank" placeholder="Rank"  class="form-control " required>
+                        <option *ngFor="let ra of ranks" value="{{ra.id}}">{{ra.rankName}}</option>
+                    </select>
+                    <div>
+                        <span class="text-danger"
+                        *ngIf="CreatePoliceWrapper.get('rank').invalid && CreatePoliceWrapper.get('rank').touched
+                        &&CreatePoliceWrapper.get('rank').errors.required">
+                    Rank is required
+                    </span>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Service Number<span class="my_span"> *</span> </label>
+                    <input type="text" name="serviceNumber" formControlName="serviceNumber" class="form-control" required >
+                          <div>
+                            <span class="text-danger"
+                            *ngIf="CreatePoliceWrapper.get('serviceNumber').invalid && CreatePoliceWrapper.get('serviceNumber').touched
+                            &&CreatePoliceWrapper.get('serviceNumber').errors.required">
+                        Service Number is required
+                      </span>
+                      <span class="text-danger" *ngIf="CreatePoliceWrapper.get('serviceNumber').errors?.pattern">
+                        Service Number must be a valid name with at least 3 characters</span>
+        
+                      </div>
+                  </div>
+                <div class="form-group col-md-6">
+                    <label>Police Station Assigned</label>
+                    <select formControlName="policeStationAssigned"  name="policeStationAssigned" placeholder="Police Station Assigned"  class="form-control " required>
+                        <option *ngFor="let police of policeStation" value="{{police.id}}">{{police.nameOfStation}}</option>
+                    </select>
+                    <div>
+                        <span class="text-danger"
+                        *ngIf="CreatePoliceWrapper.get('policeStationAssigned').invalid && CreatePoliceWrapper.get('policeStationAssigned').touched
+                        &&CreatePoliceWrapper.get('policeStationAssigned').errors.required">
+                    Police Station Assigned is required
+                    </span>
+                    </div>
+                </div>
+          </div>
+          <h5 style="padding-top: 13px; color: blue;">Contact Details</h5>
+  
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>Email Address<span class="my_span"> *</span></label>
+              <input type="text" formControlName="email" type="email" name="email" class="form-control" required
+                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" email>
+                     <div *ngIf="email.hasError('pattern')" class="text-danger">Invalid email</div>
+                            <div>
+                              <span class="text-danger"
+                              *ngIf="CreatePoliceWrapper.get('email').invalid && CreatePoliceWrapper.get('email').touched
+                              &&CreatePoliceWrapper.get('email').errors.required">
+                          Email is required
+                        </span>
+                        <span class="text-danger" *ngIf="CreatePoliceWrapper.get('email').errors?.pattern">
+                          Email must be a valid </span>
+  
+                        </div>
+  
+            </div>
+  
+            <div class="form-group col-md-6">
+              <label>Phone Number<span class="my_span"> *</span></label>
+              <input type="tel"   placeholder="254700000000" formControlName="phoneNumber"
+                     name="msisdn" class="form-control" pattern="^[0-9]+" required >
+                              <div>
+                                <span class="text-danger"
+                                *ngIf="CreatePoliceWrapper.get('phoneNumber').invalid && CreatePoliceWrapper.get('phoneNumber').touched
+                                ">
+                              Phone Number is required
+                          </span>
+                          <span class="text-danger" *ngIf="CreatePoliceWrapper.get('phoneNumber').errors?.pattern">
+                            Phone Number must be a valid</span>
+  
+                          </div>
+  
+            </div>
+            <div class="col-md-12 pull-right">
+              <button style="margin:5px;"  type="submit" mat-stroked-button
+                      class="save-button pull-right" >Save
+              </button>
+            </div>
+            </div>
+        </form>
+      </div>
+    </section>
+  </div>
+  
+  

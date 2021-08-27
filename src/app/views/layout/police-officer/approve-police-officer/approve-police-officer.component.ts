@@ -1,15 +1,13 @@
-import {DatatableColumns} from '../../../../../entities/datatable/datatable-columns';
+import { DatatableColumns } from '../../../../entities/datatable/datatable-columns';
 import {Component, OnInit} from '@angular/core';
-
-
 @Component({
-  selector: 'app-approve-users',
-  templateUrl: './approve-users.component.html',
-  styleUrls: ['./approve-users.component.scss']
+  selector: 'app-approve-police-officer',
+  templateUrl: './approve-police-officer.component.html',
+  styleUrls: ['./approve-police-officer.component.scss']
 })
-export class ApproveUsersComponent implements OnInit {
+export class ApprovePoliceOfficerComponent implements OnInit {
   cols: Array<DatatableColumns>;
-  endpoint = 'app/rest/v2/entities/ecurfew_SystemUser/search?filter=%7B%22conditions%22%3A%20%5B%7B%22property%22%3A%20%22actionStatus%22%2C%22operator%22%3A%20%22%3D%22%2C%22value%22%3A%20%22UNAPPROVED%22%20%7D%5D%7D&returnCount=true&view=systemUser-view&sort=-createTs';
+  endpoint = 'app/rest/v2/entities/ecurfew_PoliceOfficer/search?filter=%7B%22conditions%22%3A%20%5B%7B%22property%22%3A%20%22actionStatus%22%2C%22operator%22%3A%20%22%3D%22%2C%22value%22%3A%20%22UNAPPROVED%22%20%7D%5D%7D&returnCount=true&view=policeOfficer-view&sort=-createTs';
   hasCheckBox = true;
   idColumn = 'id';
   params: Map<any, string>;
@@ -21,7 +19,6 @@ export class ApproveUsersComponent implements OnInit {
     this.params.set('sort', 'id');
     // this.params.set('actionStatus', 'Unapproved');
   }
-
   ngOnInit() {
     this.cols.push({
       isCheckBox: true,
@@ -44,17 +41,24 @@ export class ApproveUsersComponent implements OnInit {
       title: 'Phone Number',
       data: 'phoneNumber'
     });
-
+    this.cols.push({
+      title: 'Service Number',
+      data: 'serviceNumber'
+    });
     this.cols.push({
       title: 'National Id',
-      data: 'nationalId',
+      data: 'nationalId'
+    });
+    this.cols.push({
+      title: 'Rank',
+      data: 'rank.rankName'
     });
     this.cols.push({
       title: 'Action',
       data: 'action'
     });
     this.cols.push({
-      title: 'Status',
+      title: 'Action Status',
       data: 'actionStatus'
     });
     this.cols.push({

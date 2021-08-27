@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {DatatableColumns} from '../../../../entities/datatable/datatable-columns';
 @Component({
-  selector: 'app-rank',
-  templateUrl: './rank.component.html',
-  styleUrls: ['./rank.component.scss']
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.scss']
 })
-export class RankComponent implements OnInit {
+export class CategoryComponent implements OnInit {
+
   cols: Array<DatatableColumns>;
-  endpoint = 'app/rest/v2/entities/ecurfew_Rank?returnCount=true&view=rank-view&sort=-createTs';
-  routeView = '/home/master-data/rank/{0}/view-rank';
+  endpoint = 'app/rest/v2/entities/ecurfew_Category?returnCount=true&view=category-view&sort=-createTs';
+  routeView = 'home/master-data/category/{0}/view-category';
   hasCheckBox = true;
   idColumn = 'id';
   params: Map<any, string>;
@@ -24,12 +25,12 @@ export class RankComponent implements OnInit {
       data: 'id'
       });
       this.cols.push({
-      title: 'Rank Code',
-      data: 'rankCode'
-      });
+        title: 'Category Code',
+        data: 'categoryCode'
+        });
       this.cols.push({
-      title: 'Rank Name',
-      data: 'rankName'
+      title: 'Category Name',
+      data: 'name'
       });
       this.cols.push({
         title: 'Description',
@@ -46,5 +47,4 @@ export class RankComponent implements OnInit {
       isViewMore: true,
       });
       }
-
-}
+    }

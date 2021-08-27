@@ -21,7 +21,8 @@ export class FirstChangeComponent implements OnInit {
   public form: FormGroup;
   confirmPassword: string;
 
-  constructor(private router: Router, public snackBar: MatSnackBar, private stewardService: StewardService<any, any>, private formBuilder: FormBuilder) {
+  constructor(private router: Router, public snackBar: MatSnackBar,   
+    private stewardService: StewardService<any, any>, private formBuilder: FormBuilder) {
     this.model = new ChangepassWrapper();
   }
 
@@ -36,8 +37,9 @@ export class FirstChangeComponent implements OnInit {
 
   changePass() {
 
-    this.stewardService.postNoToken('fortis/rest/v2/firstTimeChangePassword/change-pass', this.model).subscribe(response => {
+    this.stewardService.postNoToken('app/rest/v2/firstTimeChangePassword/change-pass', this.model).subscribe(response => {
       if (response.code === 200) {
+        // this.notify.show(this.message);
         this.router.navigate(['/login']);
       } else {
         this.snackBar.open(response.message, 'Notification', {

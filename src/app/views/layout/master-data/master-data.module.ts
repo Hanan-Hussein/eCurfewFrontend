@@ -26,10 +26,12 @@ import { PoliceStationComponent } from './police-station/police-station.componen
 import { RankComponent } from './rank/rank.component';
 import { AddPoliceStationComponent } from './police-station/add-police-station/add-police-station.component';
 import { AddRankComponent } from './rank/add-rank/add-rank.component';
+import { CategoryComponent } from './category/category.component';
+import { AddCategoryComponent } from './category/add-category/add-category.component';
 
 
 @NgModule({
-  declarations: [CountriesComponent, CurrencyComponent, AddCountryComponent, ApproveCountryComponent,  AddCurrencyComponent, ApproveCurrencyComponent, IndustryComponent, CustomerStatusComponent, SectorComponent, AccountOfficerComponent, AddIndustryComponent, ApproveIndustryComponent, AddCustomerStatusComponent, ApproveCustomerStatusComponent, AddSectorComponent, ApproveSectorComponent, AddAccountOfficerComponent, ApproveAccountOfficerComponent, PoliceStationComponent, RankComponent, AddPoliceStationComponent, AddRankComponent],
+  declarations: [CountriesComponent, CurrencyComponent, AddCountryComponent, ApproveCountryComponent,  AddCurrencyComponent, ApproveCurrencyComponent, IndustryComponent, CustomerStatusComponent, SectorComponent, AccountOfficerComponent, AddIndustryComponent, ApproveIndustryComponent, AddCustomerStatusComponent, ApproveCustomerStatusComponent, AddSectorComponent, ApproveSectorComponent, AddAccountOfficerComponent, ApproveAccountOfficerComponent, PoliceStationComponent, RankComponent, AddPoliceStationComponent, AddRankComponent, CategoryComponent, AddCategoryComponent],
   imports: [
     CommonModule,
     UtilModule,

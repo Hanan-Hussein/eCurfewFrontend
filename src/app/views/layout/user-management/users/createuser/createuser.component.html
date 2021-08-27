@@ -5,134 +5,6 @@
       <h2>User</h2>
     </div>
     <div class="tile-body">
-<!-- <form> -->
-  <div class="row">
-
-        <!-- <button style="margin:5px;"  type="submit" mat-stroked-button
-        class="save-button pull-right" >Save
-</button> -->
-      <div class="form-group  col-lg-2">
-        <button style="margin:5px;" class="save-button btn-block" mat-stroked-button (click)="rightThumb()">
-           Right Thumb
-        </button>
-        <!-- <img src="../../assets/finger.jpeg"class="responsive">
-        <img src="../../assets/checked.png"class="responsive"> -->
-
-        <ng-container *ngIf="rightThumbScanned">
-          <img [src]="rightThumbSource" class="responsive">
-          <img src="../../assets/checked.png"class="responsive">
-
-          </ng-container>
-
-    </div>
-
-      <div class=" form-group  col-lg-2">
-        <button style="margin:5px;" class="save-button btn-block" mat-stroked-button (click)="rightIndex()">
-           Right index
-        </button>
-        <ng-container *ngIf="rightIndexScanned">
-          <img [src]="rightIndexSource" class="responsive">
-          <img src="../../assets/checked.png"class="responsive">
-
-          </ng-container>
-        </div>
-          <div class=" form-group  col-lg-2">
-            <button style="margin:5px;" class="save-button btn-block" mat-stroked-button (click)="rightMid()">
-                Right Mid-Finger
-            </button>
-            <ng-container *ngIf="rightMidScanned">
-              <img [src]="rightMidSource" class="responsive">
-              <img src="../../assets/checked.png"class="responsive">
-
-              </ng-container>
-          </div>
-            <div class=" form-group  col-lg-2">
-              <button style="margin:5px;" class="save-button btn-block" mat-stroked-button (click)="rightRing()">
-                Right Ring_Finger
-              </button>
-              <ng-container *ngIf="rightRingScanned">
-                <img [src]="rightRingSource" class="responsive">
-                <img src="../../assets/checked.png"class="responsive">
-
-                </ng-container>
-            </div>
-        <div class=" form-group  col-lg-2">
-          <button style="margin:5px;" class="save-button btn-block" mat-stroked-button (click)="rightPinky()">
-            Right Pinky Finger
-          </button>
-          <ng-container *ngIf="rightPinkyScanned">
-            <img [src]="rightPinkySource" class="responsive">
-            <img src="../../assets/checked.png"class="responsive">
-
-            </ng-container>
-        </div>
-  </div>
-  <div class="row">
-    <div class=" form-group  col-lg-2">
-      <button style="margin:5px;" class="save-button btn-block" mat-stroked-button (click)="leftThumb()">
-        Left Thumb
-      </button>
-      <ng-container *ngIf="leftThumbScanned">
-        <img [src]="leftThumbSource" class="responsive">
-        <img src="../../assets/checked.png"class="responsive">
-
-        </ng-container>
-    </div>
-    <div class=" form-group  col-lg-2">
-      <button style="margin:5px;" class="save-button btn-block" mat-stroked-button (click)="leftIndex()">
-        Left Index
-      </button>
-      <ng-container *ngIf="leftIndexScanned">
-        <img [src]="leftIndexSource" class="responsive">
-        <img src="../../assets/checked.png"class="responsive">
-
-        </ng-container>
-    </div>
-    <div class=" form-group  col-lg-2">
-      <button style="margin:5px;" class="save-button btn-block" mat-stroked-button (click)="leftMid()">
-        Left Mid-Finger
-      </button>
-      <ng-container *ngIf="leftMidScanned">
-        <img [src]="leftMidSource" class="responsive">
-        <img src="../../assets/checked.png"class="responsive">
-
-        </ng-container>
-    </div>
-    <div class=" form-group  col-lg-2">
-      <button style="margin:5px;" class="save-button btn-block" mat-stroked-button (click)="leftRing()">
-        Left Ring_Finger
-      </button>
-      <ng-container *ngIf="leftRingScanned">
-        <img [src]="leftRingSource" class="responsive">
-        <img src="../../assets/checked.png"class="responsive">
-
-        </ng-container>
-    </div>
-    <div class=" form-group  col-lg-2">
-      <button style="margin:5px;" class="save-button btn-block" mat-stroked-button (click)="leftPinky()">
-        Left Pinky_Finger
-      </button>
-      <ng-container *ngIf="leftPinkyScanned">
-        <img [src]="leftPinkySource" class="responsive">
-        <img src="../../assets/checked.png"class="responsive">
-
-        </ng-container>
-    </div>
-  </div>
-    <!-- <div class="row">
-      <div class="form-group col-sm-2">
-        <button style="margin:5px;" class="save-button btn-block" mat-stroked-button (click)="scanFingerPrint()">
-            Scan FingerPrint
-        </button>
-        <ng-container *ngIf="scanned">
-          <img [src]="imageSource" class="responsive">
-          <img src="../../assets/checked.png"class="responsive">
-
-          </ng-container>
-
-      </div>
-    </div> -->
-    <!-- </form> -->
       <form [formGroup]="CreateUserWrapper" (ngSubmit)="onCreateUser(createForm)" #createForm="ngForm" role="form">
         <div class="row">
           <div class="form-group col-md-6">
@@ -254,13 +126,18 @@
                         </div>
 
           </div>
-          <div class="form-group col-md-6">
+          <div class="col-md-12 pull-right">
+            <button style="margin:5px;"  type="submit" mat-stroked-button
+                    class="save-button pull-right" >Save
+            </button>
+          </div>
+          <!-- <div class="form-group col-md-6">
             <label>Profile Picture</label>
             <input type="file" class="form-control"(change)="fileChange($event)" #fileInput  accept=" .png , .jpg , .gif" required ="required" name="file">
-            </div>
+            </div> -->
           </div>
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-lg-12">
                 <div class="card mb-3">
                   <div class="card-header tile-header bg-slategray">User Workgroups</div>
@@ -283,7 +160,7 @@
                     class="save-button pull-right" >Save
             </button>
           </div>
-        </div>
+        </div> -->
 
       </form>
     </div>

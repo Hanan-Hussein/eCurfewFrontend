@@ -1,0 +1,28 @@
+<div class="page">
+    <section class="tile">
+    <div class="info-title">
+    <h2>Categories</h2>
+    </div>
+    <div class="tile-body">
+    <app-functionality-buttons [addLabel]="'Add Category'"
+    [addLink]="'home/master-data/add-category'"
+    [deleteLabel]="'Delete'"
+    [approveLink]="'home/master-data/approve-industry'"
+    [endpoint]="'fortis/rest/v2/services/fortis_DeleteMasterDataService/DeleteIndustry'"></app-functionality-buttons>
+    <app-custom-datatable
+    [endpoint]="endpoint"
+    [routeView]="routeView"
+    [hasCheckBox]="hasCheckBox"
+    [cols]="cols"
+    [idColumn]="idColumn"
+    [params]="params"
+    [hasShowEntries]="true"
+    [fileName]="'Categories'"
+    [canExport]="true"
+    [filterParams]="''"
+    [isFilterPresent]="true"
+    ></app-custom-datatable>
+    </div>
+    </section>
+    </div>
+  

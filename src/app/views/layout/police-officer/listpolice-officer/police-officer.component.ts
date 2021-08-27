@@ -2,20 +2,19 @@ import {Component, OnInit, inject} from '@angular/core';
 import {NgModule} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {NgForm} from '@angular/forms';
-// import {StewardService} from '../shared/services/steward/steward.service';
-import {DatatableColumns} from '../../../../../entities/datatable/datatable-columns';
-// import { StewardService } from 'src/app/shared/services/steward/steward.service';
-import {StewardService} from '../../../../../shared/services/steward/steward.service';
-@Component({
-  selector: 'app-listusers',
-  templateUrl: './listusers.component.html',
-  styleUrls: ['./listusers.component.scss'],
+import {DatatableColumns} from '../../../../entities/datatable/datatable-columns';
+import {StewardService} from '../../../../shared/services/steward/steward.service';
 
+@Component({
+  selector: 'app-police-officer',
+  templateUrl: './police-officer.component.html',
+  styleUrls: ['./police-officer.component.scss']
 })
-export class ListusersComponent implements OnInit {
+export class PoliceOfficerComponent implements OnInit {
+
   model: any = {};
   cols: Array<DatatableColumns>;
-  endpoint = 'app/rest/v2/entities/ecurfew_SystemUser/search?filter=%7B%22conditions%22%3A%20%5B%7B%22property%22%3A%20%22active%22%2C%22operator%22%3A%20%22%3D%22%2C%22value%22%3A%20true%7D%5D%7D&returnCount=true&view=systemUser-view&sort=-createTs';
+  endpoint = 'app/rest/v2/entities/ecurfew_PoliceOfficer/search?filter=%7B%22conditions%22%3A%20%5B%7B%22property%22%3A%20%22active%22%2C%22operator%22%3A%20%22%3D%22%2C%22value%22%3A%20true%7D%5D%7D&returnCount=true&view=policeOfficer-view&sort=-createTs';
   hasCheckBox = true;
   idColumn = 'id';
   params: Map<any, string>;
@@ -51,6 +50,18 @@ export class ListusersComponent implements OnInit {
     this.cols.push({
       title: 'Phone Number',
       data: 'phoneNumber'
+    });
+    this.cols.push({
+      title: 'Service Number',
+      data: 'serviceNumber'
+    });
+    this.cols.push({
+      title: 'National Id',
+      data: 'nationalId'
+    });
+    this.cols.push({
+      title: 'Rank',
+      data: 'rank.rankName'
     });
     this.cols.push({
       title: 'Action',

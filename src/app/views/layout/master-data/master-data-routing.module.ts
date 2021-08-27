@@ -23,6 +23,9 @@ import { PoliceStationComponent } from './police-station/police-station.componen
 import { AddPoliceStationComponent } from './police-station/add-police-station/add-police-station.component';
 import { RankComponent } from './rank/rank.component';
 import { AddRankComponent } from './rank/add-rank/add-rank.component';
+import { CategoryComponent } from './category/category.component';
+import { AddCategoryComponent } from './category/add-category/add-category.component';
+
 import { from } from 'rxjs';
 
 const routes: Routes = [
@@ -73,12 +76,26 @@ const routes: Routes = [
   {
     path: 'police-station/:id/view-police-station',
     component: AddPoliceStationComponent,
-    data: {title: 'View Police Statiom'},
+    data: {title: 'View Police Station'},
     canActivate: [AuthGuard]
   },
   {path: 'sector', component: SectorComponent, data: {title: 'Sectors'}, canActivate: [AuthGuard]},
   {path: 'rank', component: RankComponent, data: {title: 'Rank'}, canActivate: [AuthGuard]},
   {path: 'add-rank', component: AddRankComponent, data: {title: 'Add Rank'}, canActivate: [AuthGuard]},
+  {
+    path: 'rank/:id/view-rank',
+    component: AddRankComponent,
+    data: {title: 'Rank'},
+    canActivate: [AuthGuard]
+  },
+  {path: 'category', component: CategoryComponent, data: {title: 'Category'}, canActivate: [AuthGuard]},
+  {path: 'add-category', component: AddCategoryComponent, data: {title: 'Add Category'}, canActivate: [AuthGuard]},
+  {
+    path: 'category/:id/view-category',
+    component: AddCategoryComponent,
+    data: {title: 'category'},
+    canActivate: [AuthGuard]
+  },
   {path: 'add-sector', component: AddSectorComponent, data: {title: 'Add Sectors'}, canActivate: [AuthGuard]},
 
   {
