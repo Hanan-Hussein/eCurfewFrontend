@@ -5,7 +5,7 @@ import {UtilModule} from './util/util.module';
 import { MatNativeDateModule } from '@angular/material/core';
 import { UserManagementModule } from './user-management/user-management.module';
 @NgModule({
-  declarations: [ ],
+  declarations: [],
   imports: [
     CommonModule,
     LayoutRoutingModule,

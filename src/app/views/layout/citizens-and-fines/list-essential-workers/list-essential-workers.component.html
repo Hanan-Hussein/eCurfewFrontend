@@ -2,22 +2,22 @@
     <div class="page page-dashboard">
       <section class="tile">
         <div class="info-title">
-          <h2>Police Officers</h2>
+          <h2>Essential Workers</h2>
         </div>
         <div class="tile-body">
-          <app-functionality-buttons [addLabel]="'New Police Officer'"
-                                     [addLink]="'home/police/create-police-officer'"
+          <app-functionality-buttons [addLabel]="'New Essential Workers'"
+                                     [addLink]="'home/citizens/create-essential-workers'"
                                      [approveLinkLabel]="'Approve'"
                                      [approveLink]="'home/police/approve-police-officer'"
-                                     [deleteLabel]="'Disable Police Officer'"
-                                     [endpoint]="'app/rest/v2/services/ecurfew_DisablePoliceOfficerService/disablePoliceOfficer'"></app-functionality-buttons>
+                                     [deleteLabel]="'Delete Essential Workers'"
+                                     [endpoint]="'app/rest/v2/services/ecurfew_DeleteEssentialWorkersService/deleteEssentialWorker'"></app-functionality-buttons>
           <app-custom-datatable
             [endpoint]="endpoint"
             [hasCheckBox]="hasCheckBox"
             [cols]="cols"
             [idColumn]="idColumn"
             [hasShowEntries]="true"
-            [fileName]="'Police Officers'"
+            [fileName]="'Essential Workers'"
             [canExport]="true"
             [filterParams]="'Full Name, Phone Number, Email'"
             [isFilterPresent]="true"

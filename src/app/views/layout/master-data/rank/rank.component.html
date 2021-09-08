@@ -8,7 +8,7 @@
     [addLink]="'home/master-data/add-rank'"
     [deleteLabel]="'Delete'"
     [approveLink]="'home/master-data/approve-industry'"
-    [endpoint]="'fortis/rest/v2/services/fortis_DeleteMasterDataService/DeleteIndustry'"></app-functionality-buttons>
+    [endpoint]="'app/rest/v2/services/ecurfew_DeleteMasterDataService/DeleteRank'"></app-functionality-buttons>
     <app-custom-datatable
     [endpoint]="endpoint"
     [routeView]="routeView"
@@ -17,7 +17,7 @@
     [idColumn]="idColumn"
     [params]="params"
     [hasShowEntries]="true"
-    [fileName]="'Industry'"
+    [fileName]="'Ranks'"
     [canExport]="true"
     [filterParams]="''"
     [isFilterPresent]="true"

@@ -15,6 +15,8 @@ const routes: Routes = [
   {path: 'customers', loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule)},
   {path: 'master-data', loadChildren: () => import('./master-data/master-data.module').then(m => m.MasterDataModule)},
   {path: 'police', loadChildren: () => import('./police-officer/police-officer.module').then(m => m.PoliceOfficerModule)},
+  {path: 'citizens', loadChildren: () => import('./citizens-and-fines/citizen-fines.modules').then(m => m.CitizenFinesModule)},
+
   {
     path: 'system-config',
     loadChildren: () => import('./system-config/system-config.module').then(m => m.SystemConfigModule)

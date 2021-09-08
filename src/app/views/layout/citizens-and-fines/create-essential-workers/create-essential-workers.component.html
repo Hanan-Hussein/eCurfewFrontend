@@ -1,0 +1,130 @@
+<div class="page">
+    <section class="tile">
+      <div class="info-title">
+        <app-back-component></app-back-component>
+        <h2>Essential Worker</h2>
+      </div>
+      <div class="tile-body">
+        <form [formGroup]="CreateEssentialWorkerWrapper" (ngSubmit)="onCreateEssentialWorker(createForm)" #createForm="ngForm" role="form">    
+         <!-- <h5 style="color: blue;">User Bio Data</h5> -->
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>First Name<span class="my_span"> *</span></label>
+              <input type="text" name="firstName" formControlName="firstName" class="form-control" required="required" >
+              <div>
+                <span class="text-danger"
+                *ngIf="CreateEssentialWorkerWrapper.get('firstName').invalid && CreateEssentialWorkerWrapper.get('firstName').touched
+                &&CreateEssentialWorkerWrapper.get('firstName').errors.required">
+             First Name is required
+          </span>
+          <span class="text-danger" *ngIf="CreateEssentialWorkerWrapper.get('firstName').errors?.pattern">
+            Customer Name must be a valid name with at least 3 characters</span>
+  
+          </div>
+            </div>
+  
+            <div class="form-group col-md-6">
+              <label>Last Name<span class="my_span"> *</span> </label>
+              <input type="text" name="lastName" formControlName="lastName" class="form-control" required >
+                    <div>
+                      <span class="text-danger"
+                      *ngIf="CreateEssentialWorkerWrapper.get('lastName').invalid && CreateEssentialWorkerWrapper.get('lastName').touched
+                      &&CreateEssentialWorkerWrapper.get('lastName').errors.required">
+                  Last Name is required
+                </span>
+                <span class="text-danger" *ngIf="CreateEssentialWorkerWrapper.get('lastName').errors?.pattern">
+                  Last Name must be a valid name with at least 3 characters</span>
+  
+                </div>
+            </div>
+  
+            <div class="form-group col-md-6">
+              <label>National Id <span class="my_span"> *</span> </label>
+              <input type="text"
+                     name="national_id" formControlName="nationalId" class="form-control" pattern="^[0-9]+" required>
+                            <div>
+                              <span class="text-danger"
+                              *ngIf="CreateEssentialWorkerWrapper.get('nationalId').invalid && CreateEssentialWorkerWrapper.get('nationalId').touched
+                              &&CreateEssentialWorkerWrapper.get('nationalId').errors.required">
+                          National ID is required
+                        </span>
+                        <span class="text-danger" *ngIf="CreateEssentialWorkerWrapper.get('nationalId').hasError('pattern')">
+                          National Id must be a valid with numbers only </span>
+  
+                        </div>
+  
+            </div> 
+            <div class="form-group col-md-6">
+                <label>Phone Number<span class="my_span"> *</span></label>
+                <input type="tel"   placeholder="254700000000" formControlName="phoneNumber"
+                       name="msisdn" class="form-control" pattern="^[0-9]+" required >
+                                <div>
+                                  <span class="text-danger"
+                                  *ngIf="CreateEssentialWorkerWrapper.get('phoneNumber').invalid && CreateEssentialWorkerWrapper.get('phoneNumber').touched
+                                  ">
+                                Phone Number is required
+                            </span>
+                            <span class="text-danger" *ngIf="CreateEssentialWorkerWrapper.get('phoneNumber').errors?.pattern">
+                              Phone Number must be a valid</span>
+    
+                            </div>
+    
+              </div>
+            <div class="form-group col-md-6">
+                <label>Email Address<span class="my_span"> *</span></label>
+                <input type="text" formControlName="email" type="email" name="email" class="form-control" required
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" email>
+                       <div *ngIf="email.hasError('pattern')" class="text-danger">Invalid email</div>
+                              <div>
+                                <span class="text-danger"
+                                *ngIf="CreateEssentialWorkerWrapper.get('email').invalid && CreateEssentialWorkerWrapper.get('email').touched
+                                &&CreateEssentialWorkerWrapper.get('email').errors.required">
+                            Email is required
+                          </span>
+                          <span class="text-danger" *ngIf="CreateEssentialWorkerWrapper.get('email').errors?.pattern">
+                            Email must be a valid </span>
+    
+                          </div>
+    
+              </div>
+              <div class="form-group col-md-6">
+                <label>Employee Number<span class="my_span"> *</span> </label>
+                <input type="text" name="employeeNumber" formControlName="employeeNumber" class="form-control" required >
+                      <div>
+                        <span class="text-danger"
+                        *ngIf="CreateEssentialWorkerWrapper.get('employeeNumber').invalid && CreateEssentialWorkerWrapper.get('employeeNumber').touched
+                        &&CreateEssentialWorkerWrapper.get('employeeNumber').errors.required">
+                    Service Number is required
+                  </span>
+                  <span class="text-danger" *ngIf="CreateEssentialWorkerWrapper.get('employeeNumber').errors?.pattern">
+                    Employee Number must be a valid name with at least 3 characters</span>
+    
+                  </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label>Category</label>
+                <select formControlName="category"  name="category" placeholder="Category"  class="form-control " required>
+                    <option *ngFor="let cat of categories" value="{{cat.id}}">{{cat.name}}</option>
+                </select>
+                <div>
+                    <span class="text-danger"
+                    *ngIf="CreateEssentialWorkerWrapper.get('category').invalid && CreateEssentialWorkerWrapper.get('category').touched
+                    &&CreateEssentialWorkerWrapper.get('category').errors.required">
+                Essential Worker is required
+                </span>
+                </div>
+            </div>
+              <div class="col-md-12 pull-right">
+                <button style="margin:5px;"  type="submit" mat-stroked-button
+                        class="save-button pull-right" >Save
+                </button>
+              </div>
+          </div>
+  
+        
+        </form>
+      </div>
+    </section>
+  </div>
+  
+  

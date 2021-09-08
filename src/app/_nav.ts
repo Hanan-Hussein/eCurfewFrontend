@@ -10,46 +10,7 @@ export const navItems: INavData[] = [
   //   divider: true,
   // },
   {
-    name: 'USER MANAGEMENT',
-    url: '/home/user-management',
-    // icon: 'fa fa-users',
-    children: [
-      // {
-      //   name: 'Roles',
-      //   url: '/home/user-management/roles',
-      //   // icon: 'fa fa-caret-right'
-      // },
-      {
-        name: 'Workgroups',
-        url: '/home/user-management/workgroups',
-        // icon: 'fa fa-caret-right'
-      },
-      {
-        name: 'Users',
-        url: '/home/user-management/users',
-        // icon: 'fa fa-caret-right'
-      },
-      {
-        name: 'Change Password',
-        url: '/home/user-management/user/profile',
-        // icon: 'fa fa-user'
-      },
-      {
-        name: 'User Profile',
-        url: '/home/user-management/profile'
-      },
-      {
-        name: 'Locked Users',
-        url: '/home/user-management/user/locked-users',
-        // icon: 'fa fa-user'
-      },
-    ],
-  },
-  {
-    divider: true,
-  },
-  {
-    name: 'Master Data',
+    name: 'MASTER DATA',
     url: '/home/master-data',
     // icon: 'fa fa-users',
     children: [
@@ -76,10 +37,51 @@ export const navItems: INavData[] = [
     ],
   },
   {
+    name: 'USER MANAGEMENT',
+    url: '/home/user-management',
+    // icon: 'fa fa-users',
+    children: [
+      // {
+      //   name: 'Roles',
+      //   url: '/home/user-management/roles',
+      //   // icon: 'fa fa-caret-right'
+      // },
+      {
+        name: 'Workgroups',
+        url: '/home/user-management/workgroups',
+        // icon: 'fa fa-caret-right'
+      },
+
+      {
+        name: 'Users',
+        url: '/home/user-management/users',
+        // icon: 'fa fa-caret-right'
+      },
+      {
+        name: 'Change Password',
+        url: '/home/user-management/user/profile',
+        // icon: 'fa fa-user'
+      },
+      {
+        name: 'User Profile',
+        url: '/home/user-management/profile'
+      },
+      {
+        name: 'Locked Users',
+        url: '/home/user-management/user/locked-users',
+        // icon: 'fa fa-user'
+      },
+    ],
+  },
+  {
+    divider: true,
+  },
+
+  {
     divider: true,
   },
   {
-    name: 'Police',
+    name: 'POLICE',
     url: '/home/police',
     // icon: 'fa fa-users',
     children: [
@@ -93,26 +95,21 @@ export const navItems: INavData[] = [
       }
     ],
   },
-  // {
-  //   name: 'CUSTOMERS',
-  //   url: '/home/customers',
-  //   // icon: 'fa fa-building',
-  //   children: [
-  //     {
-  //       name: 'customers',
-  //       url: '/home/customers/customers',
-  //       // icon: 'fa fa-caret-right'
-  //     },
-  //     {
-  //       name: 'Authenticate Transaction',
-  //       url: '/home/customers/authenticate-transaction',
-  //       // icon: 'fa fa-caret-right'
-  //     },
-  //   ],
-  // },
-  // {
-  //   divider: true,
-  // },
+  {
+    name: 'CITIZENS AND FINES',
+    url: '/home/citizens',
+    // icon: 'fa fa-building',
+    children: [
+      {
+        name: 'Essential Workers',
+        url: '/home/citizens/essential-workers',
+        // icon: 'fa fa-caret-right'
+      },
+    ],
+  },
+  {
+    divider: true,
+  },
   {
     name: 'REPORTS',
     url: '/home/reports',

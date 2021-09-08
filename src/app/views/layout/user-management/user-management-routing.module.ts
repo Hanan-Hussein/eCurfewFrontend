@@ -34,7 +34,7 @@ const routes: Routes = [
       {path: 'workgroups/approve-workgroup', component: ApproveWorkgroupsComponent, canActivate: [AuthGuard]},
       {path: 'users/approve-user', component: ApproveUsersComponent, canActivate: [AuthGuard]},
       {path: 'user/profile', component: UserProfileComponent, canActivate: [AuthGuard]},
-      {path: 'profile',component:ProfileComponent,canActivate:[AuthGuard]},
+      {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
       {path: 'user/locked-users', component: LockedUsersComponent, canActivate: [AuthGuard]},
     ]
   }

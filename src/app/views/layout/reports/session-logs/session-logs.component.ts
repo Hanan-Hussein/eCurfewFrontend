@@ -49,6 +49,7 @@ export class SessionLogsComponent implements OnInit {
     this.cols.push({
       title: 'Finished Ts',
       data: 'finishedTs',
+      isDate: true,
     });
     // this.cols.push({
     //   title: 'Client Info',
